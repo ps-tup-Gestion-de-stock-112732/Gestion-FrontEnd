@@ -1,5 +1,5 @@
 export interface Usuario {
-  idusuario: number,
+  idusuario?: number,
   nombre: string,
   apellido: string,
   idempresa: number,
@@ -8,7 +8,7 @@ export interface Usuario {
   password: string,
   telefono: number,
   idrol: number,
-  estado: number,
+  estado?: number,
   idarea?: number,
   iddireccion?: number
 }

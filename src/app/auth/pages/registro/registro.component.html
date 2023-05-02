@@ -2,29 +2,155 @@
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center" style="height: 100vh">
         
-        <div class="col-md-6">
+        <div class="col-md-10">
 
             <div class="card text-dark">
-                <div class="card-body text-center">
-                    <form class="form-signin">
-                        <img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-                        <h1 class="h3 mb-3 font-weight-normal text-center">Registro</h1>
-                        <label for="inputEmail" class="sr-only">Email</label>
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-                        <br>
-                        <label for="inputPassword" class="sr-only">Password</label>
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                        <br>
-                        <div class="row d-flex px-3">
-                            <div class="btn btn btn-primary ml-auto" type="submit">Crear cuenta</div>
-                        </div>
-                        
-                        <p class="mt-5 mb-3">Si ya te encuentras registrado puedes iniciar sesión</p>
-                        <div class="row d-flex px-3">
-                            <div class="btn btn btn-light mx-auto" routerLink="/auth/login">Log in</div>
+                <div class="card-body">
+                    <form [formGroup]="formularioAlta">
+                        <div class="text-center">
+                            <img class="mb-4 text-center" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                            <h1 class="h3 mb-3 font-weight-normal text-center">Registro</h1>
                         </div>
 
-                        <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+                        <br>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="nombre" placeholder="nombre" formControlName="nombre">
+                                    
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="nro_documento" placeholder="nro. documento" formControlName="nro_documento">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="idempresa">empresa:</label>
+                                    <select class="custom-select" formControlName="idempresa">
+                                        <option *ngFor="let empresa of empresas" [value]="empresa.idempresa">{{empresa.nombre}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" *ngIf="idrol == 5">
+                                    <label for="idarea">area:</label>
+                                    <select class="custom-select" formControlName="idarea">
+                                        <option *ngFor="let area of areas" [value]="area.idarea">{{area.nombre}}</option>
+                                    </select>
+                                </div>
+
+                                <div *ngIf="idrol == 5">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="idpais">pais:</label>
+                                                <select class="custom-select" formControlName="idpais">
+                                                    <option *ngFor="let pais of paises" [value]="pais.idpais" idpais="pais.idpais">{{pais.nombre}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="idprovincia">provincia:</label>
+                                                <select class="custom-select" formControlName="idprovincia">
+                                                    <option *ngFor="let provincia of provincias" [value]="provincia.idprovincia" idprovincia="provincia.idprovincia">{{provincia.nombre}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="apellido" placeholder="apellido" formControlName="apellido">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="telefono" placeholder="telefono" formControlName="telefono">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="idrol">rol:</label>
+                                    <select class="custom-select" formControlName="idrol">
+                                        <option *ngFor="let rol of roles" [value]="rol.idrol">{{rol.nombre}}</option>
+                                    </select>
+                                </div>
+
+                                <div *ngIf="idrol == 5">
+                                    <label>direccion:</label>
+                                    <div class="row">
+                                    
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="calle" placeholder="calle" formControlName="calle">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="altura" placeholder="altura" formControlName="altura">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div *ngIf="idrol == 5">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="idlocalidad">localidad:</label>
+                                                <select class="custom-select" formControlName="idlocalidad">
+                                                    <option *ngFor="let localidad of localidades" [value]="localidad.idlocalidad" idlocalidad="localidad.idlocalidad">{{localidad.nombre}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="idbarrio">barrio:</label>
+                                                <select class="custom-select" formControlName="idbarrio">
+                                                    <option *ngFor="let barrio of barrios" [value]="barrio.idbarrio" idbarrio="barrio.idbarrio">{{barrio.nombre}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <hr>
+                        
+                        <p>ingrese un email y contraseña para su nueva cuenta:</p>
+
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" placeholder="email" formControlName="email">
+                            
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" placeholder="password" formControlName="password">
+                        </div>
+
+                        <div class="text-center">
+                            <p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p>
+                        </div>
+                        
+                        <div class="row d-flex px-3">
+                            <button class="btn btn btn-primary ml-auto" type="submit" (click)="guardar()">Crear cuenta</button>
+                        </div>
+                        
+                        <p class="mt-5 mb-3 text-center">Si ya te encuentras registrado puedes iniciar sesión</p>
+                        <div class="row d-flex px-3">
+                            <button class="btn btn-light mx-auto" type="button" routerLink="/auth/login">Log in</button>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+                        </div>
+                        
                     </form>
                 </div>
             </div>

@@ -1,67 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-
-import { Login } from 'src/app/interfaces/login';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit, OnDestroy{
 
-  formulario : FormGroup;
+  formularioLogin : FormGroup;
 
-  private subscription = new Subscription();
+  mensajeError: String = "";
 
-  login: Login
+  private suscripcion = new Subscription();
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder,
-    private authService: AuthService
-  ) {}
+    private fb: FormBuilder,
+    private srv: AuthService,) {
+
+      this.formularioLogin = this.fb.group({
+
+        email: [, Validators.required], 
+        password: [, Validators.required]
+  
+      })
+
+  }
 
   ngOnInit(): void {
-    
-    this.formulario = this.formBuilder.group({
+  }
 
-      email: [, Validators.required], 
-      password: [, Validators.required]
-
-    })
-
+  ngOnDestroy() {
+    this.suscripcion.unsubscribe();
   }
 
   onLogin() {
 
-    this.login.email = this.formulario.value.email
-    this.login.password = this.formulario.value.password
+    if (this.formularioLogin.invalid) {
+      this.mostrarMsjError('Formulario Invalido');
+    } else {
+      const login = this.formularioLogin.value;
 
-    if (this.formulario.valid) {
-      this.subscription.add(
-        this.authService.login(this.login).subscribe({
-          next: () => {
-            this.irAListado();
+      this.suscripcion.add(
+        this.srv.autenticar(login.email, login.password).subscribe({
+          next: (data:any) => {
+            this.srv.loginUser(data); // guarda el usuario y token en el localStorage
+
+            setTimeout(()=>{
+              this.router.navigate(['pages/dashboard']);
+            },100);
+            
           },
-          error: () => {
-            alert('error al iniciar sesion');
-          },
+          error: (err) => {
+            this.mostrarMsjError(err.error.message);
+          }
         })
-      );
+      )
     }
   }
 
-  cancelar() {
-    this.irAListado();
+  mostrarMsjError(error: String) {
+    this.mensajeError = error;
+    setTimeout(() => {
+      this.mensajeError = '';
+    }, 2000);
   }
-
-  private irAListado() {
-    this.router.navigate(['']);
-  }
+  
 
 }
 

@@ -1,10 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Login } from '../interfaces/login';
-import { ResponseApi } from '../interfaces/response-api';
-import { Usuario } from '../interfaces/usuario';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -16,27 +13,48 @@ const httpOption = {
   providedIn: 'root',
 })
 export class AuthService {
-  url: string = environment.baseUrl+'api/auth/login';
+  url: string = environment.baseUrl+'api/auth/';
 
-  private usuarioSubject: BehaviorSubject<Usuario>;
+  constructor(private http: HttpClient) {}
 
-  constructor(private _http: HttpClient) {}
-
-  login(login: Login): Observable<ResponseApi> {
-    return this._http.post<ResponseApi>(this.url, login, httpOption).pipe(
-      map((res) => {
-        if (res) {
-          const usuario: Usuario = res.value.usuario;
-          localStorage.setItem('usuario', JSON.stringify(usuario));
-          this.usuarioSubject.next(usuario);
-        }
-        return res;
-      })
-    );
+  autenticar(email: String, password: String): Observable<any> {
+    return this.http.post<any>(this.url + 'login', {
+      "email": email,
+      "password": password
+    })
   }
 
-  logout() {
-    localStorage.removeItem('usuario');
-    this.usuarioSubject.next(null!);
+  public loginUser(data: any){
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', data.result[0]);
   }
+
+  public isLoggedIn(){
+    let tokenStr = localStorage.getItem('token');
+    if(tokenStr == undefined || tokenStr == '' || tokenStr == null){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  public logout(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    return true;
+  }
+
+  public getToken(){
+    return localStorage.getItem('token');
+  }
+
+  public getUser(){
+    let userStr = localStorage.getItem('user');
+    if(userStr != null){
+      return JSON.parse(userStr);
+    }else{
+      this.logout;
+    }
+  }
+
 }
