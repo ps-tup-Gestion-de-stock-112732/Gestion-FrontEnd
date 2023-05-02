@@ -4,5 +4,6 @@ export interface Empresa {
     telefono: number,
     cuit: number,
     iddireccion: number,
-    estado: number
+    estado: number,
+    tipoempresa: number
   }

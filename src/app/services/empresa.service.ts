@@ -12,7 +12,9 @@ export class EmpresaService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerEmpresas(): Observable<any> {
-    return this.http.get<any>(this.url + 'empresas')
+  obtenerEmpresas(tipoempresa: Number): Observable<any> {
+    return this.http.post<any>(this.url + 'empresas/all', {
+      "tipoempresa": tipoempresa
+    })
   }
 }
