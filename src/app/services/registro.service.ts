@@ -13,7 +13,21 @@ export class RegistroService {
 
   constructor(private http: HttpClient) { }
 
-  registrar(usuario: Usuario): Observable<any> {
+  registrarEmpleado(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(this.url + 'empleados', {
+      "nombre": usuario.nombre,
+      "apellido": usuario.apellido,
+      "idempresa": usuario.idempresa,
+      "nro_documento": usuario.nro_documento,
+      "email": usuario.email,
+      "password": usuario.password,
+      "telefono": usuario.telefono,
+      "idarea": usuario.idarea,
+      "iddireccion": usuario.iddireccion,
+    })
+  }
+
+  registrarUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<any>(this.url + 'usuarios', {
       "nombre": usuario.nombre,
       "apellido": usuario.apellido,

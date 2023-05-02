@@ -71,24 +71,27 @@ export class RegistroComponent implements OnInit, OnDestroy{
         idpais: [""],
         idprovincia: [""],
         idlocalidad: [""],
-        idbarrio: [""]
+        idbarrio: [""],
+        iddireccion: [""],
       }
     )
   }
 
   ngOnInit(): void {
-    this.suscripcion.add(this.srvEmpresa.obtenerEmpresas().subscribe({
-      next: (empresas) =>{
-        this.empresas = empresas
+    
+
+    this.suscripcion.add(this.srvAreas.obtenerAreas().subscribe({
+      next: (areas) =>{
+        this.areas = areas
       },
       error: (err) => {
         this.mostrarMsjError(err.error.message);
       }
     }))
 
-    this.suscripcion.add(this.srvAreas.obtenerAreas().subscribe({
-      next: (areas) =>{
-        this.areas = areas
+    this.suscripcion.add(this.srvRol.obtenerRoles().subscribe({
+      next: (roles) =>{
+        this.roles = roles
       },
       error: (err) => {
         this.mostrarMsjError(err.error.message);
@@ -100,18 +103,21 @@ export class RegistroComponent implements OnInit, OnDestroy{
       this.formularioAlta.controls['idrol'].valueChanges.subscribe({
         next: (valor) =>{
           this.idrol = valor
+          let tipoempresa: Number = 1
+          if (this.idrol == 4) {
+            tipoempresa = 2
+          }
+          this.suscripcion.add(this.srvEmpresa.obtenerEmpresas(tipoempresa).subscribe({
+            next: (empresas) =>{
+              this.empresas = empresas
+            },
+            error: (err) => {
+              this.mostrarMsjError(err.error.message);
+            }
+          }))
         }
       })
     )
-
-    this.suscripcion.add(this.srvRol.obtenerRoles().subscribe({
-      next: (roles) =>{
-        this.roles = roles
-      },
-      error: (err) => {
-        this.mostrarMsjError(err.error.message);
-      }
-    }))
 
     this.suscripcion.add(this.srvDireccion.obtenerPaises().subscribe({
       next: (paises) =>{
@@ -193,29 +199,59 @@ export class RegistroComponent implements OnInit, OnDestroy{
       this.mostrarMsjError('Formulario Invalido');
     } else {
       
-      const direccion: Direccion = {
-        "calle": this.formularioAlta.value.calle,
-        "altura": this.formularioAlta.value.altura,
-        "idbarrio": this.formularioAlta.value.idbarrio
-      }
-      
       if(this.idrol == 5){
+
+        const direccion: Direccion = {
+          "calle": this.formularioAlta.value.calle,
+          "altura": this.formularioAlta.value.altura,
+          "idbarrio": this.formularioAlta.value.idbarrio
+        }
+
         this.suscripcion.add(this.srvDireccion.guardarDireccion(direccion).subscribe({
-          next: ()=>{
-            this.guardarUsuario()
+          next: (direccion)=>{
+            this.guardarEmpleado(direccion.iddireccion)
           },
           error: (err) => {
             this.mostrarMsjError(err.error.message);
           }
         }))
+        
       }else{
         this.guardarUsuario()
       }
     }
   }
 
+  guardarEmpleado(iddireccion: number){
+
+    this.formularioAlta.value.iddireccion = iddireccion
+
+    this.srv.registrarEmpleado(this.formularioAlta.value).subscribe({
+      next: () => {
+        Swal.fire({
+          title: 'Usuario registrado con exito',
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#007bff'
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+            setTimeout(()=>{
+              this.router.navigate(['pages/dashboard']);
+            },100);
+            
+          }
+        })
+      },
+      error: (err) => {
+        this.mostrarMsjError(err.error.message);
+      }
+    })
+  }
+
   guardarUsuario(){
-    this.srv.registrar(this.formularioAlta.value).subscribe({
+
+    this.srv.registrarUsuario(this.formularioAlta.value).subscribe({
       next: () => {
         Swal.fire({
           title: 'Usuario registrado con exito',

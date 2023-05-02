@@ -9,6 +9,6 @@ export interface Usuario {
   telefono: number,
   idrol: number,
   estado?: number,
-  idarea?: number,
-  iddireccion?: number
+  idarea: number,
+  iddireccion: number
 }
