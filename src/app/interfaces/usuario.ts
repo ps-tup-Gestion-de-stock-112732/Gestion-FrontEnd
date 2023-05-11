@@ -10,5 +10,6 @@ export interface Usuario {
   idrol: number,
   estado?: number,
   idarea: number,
-  iddireccion: number
+  iddireccion: number,
+  esAdmin: number
 }

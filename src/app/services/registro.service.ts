@@ -31,7 +31,6 @@ export class RegistroService {
     return this.http.post<any>(this.url + 'usuarios', {
       "nombre": usuario.nombre,
       "apellido": usuario.apellido,
-      "idempresa": usuario.idempresa,
       "nro_documento": usuario.nro_documento,
       "email": usuario.email,
       "password": usuario.password,

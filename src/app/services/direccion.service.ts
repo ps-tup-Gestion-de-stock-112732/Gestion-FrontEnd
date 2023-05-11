@@ -13,6 +13,10 @@ export class DireccionService {
 
   constructor(private http: HttpClient) { }
 
+  obtenerDireccion(iddireccion: Number): Observable<any> {
+    return this.http.get<any>(this.url + 'direcciones/'+ iddireccion)
+  }
+
   obtenerPaises(): Observable<any> {
     return this.http.get<any>(this.url + 'direcciones/paises')
   }
@@ -39,7 +43,23 @@ export class DireccionService {
     return this.http.post<any>(this.url + 'direcciones', {
       "calle": direccion.calle,
       "altura": direccion.altura,
-      "idbarrio": direccion.idbarrio
+      "idbarrio": direccion.barrio.idbarrio
     })
+  }
+
+  obtenerPais(idpais: Number): Observable<any> {
+    return this.http.get<any>(this.url + 'direcciones/paises/'+ idpais)
+  }
+
+  obtenerProvincia(idprovincia: Number): Observable<any> {
+    return this.http.get<any>(this.url + 'direcciones/provincias/' + idprovincia)
+  }
+
+  obtenerLocalidad(idlocalidad: Number): Observable<any> {
+    return this.http.get<any>(this.url + 'direcciones/localidades/' + idlocalidad)
+  }
+
+  obtenerBarrio(idbarrio: Number): Observable<any> {
+    return this.http.get<any>(this.url + 'direcciones/barrios/' + idbarrio)
   }
 }

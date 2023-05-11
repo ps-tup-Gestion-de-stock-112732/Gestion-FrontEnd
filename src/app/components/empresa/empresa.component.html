@@ -1,0 +1,17 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Empresa</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a routerLink="/pages/dashboard">Home</a></li>
+             <li class="breadcrumb-item">Components</li>
+             <li class="breadcrumb-item active">Empresa</li>
+          </ol>
+       </nav>
+    </div>
+
+    <app-crear-empresa *ngIf="mostrar" (cambioMostrar)="mostrar = $event" [mostrar]="mostrar"></app-crear-empresa>
+    <app-modificar-empresa *ngIf="empresa.idempresa"></app-modificar-empresa>
+    <app-lista-empresas *ngIf="!empresa.idempresa && !mostrar" (cambioMostrar)="mostrar = $event" [usuario]="usuario"></app-lista-empresas>
+    
+ </main>

@@ -17,4 +17,15 @@ export class EmpresaService {
       "tipoempresa": tipoempresa
     })
   }
+
+  obtenerEmpresa(id: Number): Observable<any> {
+    return this.http.get<any>(this.url + 'empresas/' + id)
+  }
+
+  obtenerEmpresasXNombre(nombre: string, tipoempresa: Number): Observable<any> {
+    return this.http.post<any>(this.url + 'empresas/nombre',{
+      'nombre': nombre,
+      'tipoempresa': tipoempresa
+    })
+  }
 }
