@@ -1,0 +1,47 @@
+<main>
+    <div class="container">
+       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+          <div class="container">
+             <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                   <div class="d-flex justify-content-center py-4"> <a routerLink="/" class="logo d-flex align-items-center w-auto"> <img src="assets/img/logo.png" alt=""> <span class="d-none d-lg-block">Gestión</span> </a></div>
+                   <div class="card mb-3">
+                      <div class="card-body">
+                         <div class="pt-4 pb-2">
+                            <h5 class="card-title text-center pb-0 fs-4">Ingrese a su cuenta</h5>
+                            <br>
+                            <p class="text-center small">Ingrese su email y contraseña para ingresar</p>
+                         </div>
+                         <form [formGroup]="formularioLogin" class="row g-3">
+                            <div class="col-12">
+                              <div class="form-group">
+                                 <input type="email" class="form-control" id="email" placeholder="email" formControlName="email">
+                             </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group">
+                                 <input type="password" class="form-control" id="password" placeholder="contraseña" formControlName="password">
+                             </div>
+                            </div>
+
+                            <div class="text-center"><p *ngFor="let err of mensajeErrores" id="msgError" class="form-text" style="color: tomato;">{{err}}</p></div>
+
+                            <div class="text-center"><p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p></div>
+                            
+                            <div class="col-12"> 
+                              <button class="btn btn btn-primary w-100" type="submit" (click)="onLogin()">Ingresar</button>
+                           </div>
+                           
+                           <div class="col-12 my-4 d-flex px-3">
+                              <p class="small mb-0 mx-auto">No tienes una cuenta? <a routerLink="/pages-register">Crear una cuenta</a></p>
+                           </div>
+                         </form>
+                      </div>
+                   </div>
+                   <p class="text-muted">&copy; Gestión 2023</p>
+                </div>
+             </div>
+          </div>
+       </section>
+    </div>
+ </main>
