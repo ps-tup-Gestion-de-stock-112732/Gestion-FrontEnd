@@ -3,8 +3,15 @@ import { Localidad } from "./localidad";
 import { Pais } from "./pais";
 import { Provincia } from "./provincia";
 
+export interface ResumeDireccion {
+  iddireccion?: number,
+  calle: string,
+  altura: number,
+  idbarrio: number
+}
+
 export interface Direccion {
-    iddireccion: number,
+    iddireccion?: number,
     calle: string,
     altura: number,
     idbarrio: number,

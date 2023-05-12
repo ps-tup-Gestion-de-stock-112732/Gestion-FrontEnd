@@ -7,6 +7,14 @@ export interface FetchAllEmpresaResponse{
   results: Empresa[]
 }
 
+export interface ResumeEmpresa {
+  idempresa?: number,
+  nombre: string,
+  telefono: number,
+  cuit: number,
+  iddireccion: number
+}
+
 export interface Empresa {
     idempresa: number,
     nombre: string,

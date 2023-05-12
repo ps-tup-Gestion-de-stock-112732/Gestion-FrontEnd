@@ -17,7 +17,14 @@ export class UsuarioService {
     return this.http.get<any>(this.url + 'usuarios/' + idusuario)
   }
 
-  updateUsuario(usuario: Usuario): Observable<any> {
-    return this.http.put<any>(this.url + 'usuarios/' + usuario.idusuario, usuario)
+  updateUsuarioEmpresa(usuario: Usuario): Observable<any> {
+    return this.http.patch<any>(this.url + 'usuarios/' + usuario.idusuario, {
+      idempresa: usuario.idempresa,
+      esAdmin: usuario.esAdmin
+    })
+  }
+
+  desvincularEmpresa(idusuario: Number): Observable<any> {
+    return this.http.put<any>(this.url + 'usuarios/desvincular/' + idusuario, {})
   }
 }

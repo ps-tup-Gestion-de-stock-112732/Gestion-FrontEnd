@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Empresa, ResumeEmpresa } from '../interfaces/empresa';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,17 @@ export class EmpresaService {
       'nombre': nombre,
       'tipoempresa': tipoempresa
     })
+  }
+
+  registrarEmpresa(empresa: ResumeEmpresa): Observable<any> {
+    return this.http.post<any>(this.url + 'empresas/', empresa)
+  }
+
+  actualizarEmpresa(empresa: ResumeEmpresa): Observable<any> {
+    return this.http.patch<any>(this.url + 'empresas/' + empresa.idempresa, empresa)
+  }
+
+  bajaEmpresa(idempresa: Number): Observable<any> {
+    return this.http.put<any>(this.url + 'empresas/delete/' + idempresa, {})
   }
 }
