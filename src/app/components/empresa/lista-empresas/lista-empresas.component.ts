@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Direccion } from 'src/app/interfaces/direccion';
 import { Empresa } from 'src/app/interfaces/empresa';
@@ -7,6 +9,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-empresas',
@@ -32,6 +35,7 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private srvEmpresa: EmpresaService,
     private srvDireccion: DireccionService,
     private srvUsuario: UsuarioService
@@ -134,15 +138,49 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
 
   selectEmpresa(idempresa: number){
     this.usuario.idempresa = idempresa
-    this.suscripcion.add(
-      this.srvUsuario.updateUsuario(this.usuario).subscribe({
-        next:(usr) => {
-          if (usr) {
-            console.log('usuario actualizado');
-          }
-        },
-      })
-    )
+    this.usuario.esAdmin = 0
+
+    Swal.fire({
+      title: '¿Desea asociar esta empresa a su cuenta?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.suscripcion.add(
+          this.srvUsuario.updateUsuarioEmpresa(this.usuario).subscribe({
+            next:(usr) => {
+
+              if (usr) {
+                Swal.fire({
+                  title: 'Usuario actualizado con éxito',
+                  icon: 'success',
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: '#007bff'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+
+                    let currentUrl = this.router.url;
+                    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                      this.router.navigate([currentUrl]);
+                    });
+        
+                  }
+                })
+              }
+            },error: (err) => {
+              Swal.fire({
+                title: '¡No se pudo actualizar la empresa!',
+                icon: 'error'
+              })
+            }
+          })
+        )
+      }
+    })
   }
 
   mostrarMsjError(error: String) {

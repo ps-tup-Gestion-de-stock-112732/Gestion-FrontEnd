@@ -2,12 +2,13 @@
     <div class="row justify-content-center">
        <div class="col-lg-12">
           <div class="card">
+            <div class="card-header mx-5 mt-3">
+               <div class="card'title">Registrar Empresa:</div>
+            </div>
              <div class="card-body mx-5">
                <form [formGroup]="formularioAlta" class="row g-3 mt-4" novalidate>
-                  <h4>Registrar Empresa:</h4>
-
-                  <div class="row">
-                     <div class="col-md-6 mt-3">
+                  <div class="row mt-3">
+                     <div class="col-md-4">
                         <div class="form-group">
                            <label for="nombre" class="form-label">Nombre</label>
                            <input type="text" class="form-control" id="nombre" formControlName="nombre">
@@ -16,39 +17,7 @@
                           </span>
                        </div>
                      </div>
-                     <div class="col-md-6 mt-3">
-                        <div class="form-group">
-                           <label for="apellido" class="form-label">Apellido</label>
-                           <input type="text" class="form-control" id="apellido" formControlName="apellido">
-                           <span *ngIf="formularioAlta.controls['apellido'].touched && formularioAlta.get('apellido')?.hasError('required')" style="color: red;" role="alert">
-                              Apellido es requerido
-                          </span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-md-6 mt-3">
-                        <div class="form-group">
-                           <label for="email" class="form-label">Email</label>
-                           <input type="email" class="form-control" id="email" formControlName="email">
-                           <span *ngIf="formularioAlta.controls['email'].touched && formularioAlta.get('email')?.hasError('required')" style="color: red;" role="alert">
-                              Email es requerido
-                          </span>
-                        </div>
-                     </div>
-                     <div class="col-md-6 mt-3">
-                        <div class="form-group">
-                           <label for="password" class="form-label">Contraseña</label>
-                           <input type="password" class="form-control" id="password" formControlName="password">
-                           <span *ngIf="formularioAlta.controls['password'].touched && formularioAlta.get('password')?.hasError('required')" style="color: red;" role="alert">
-                              Contraseña es requerida
-                          </span>
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="row">
-                     <div class="col-md-6 mt-3">
+                     <div class="col-md-4">
                         <div class="form-group">
                            <label for="telefono" class="form-label">Teléfono</label>
                            <input type="number" class="form-control" id="telefono" formControlName="telefono">
@@ -57,27 +26,92 @@
                           </span>
                        </div>
                      </div>
-                     <div class="col-md-6 mt-3">
+                     <div class="col-md-4">
                         <div class="form-group">
-                           <label for="nro_documento" class="form-label">Número de documento</label>
-                           <input type="number" class="form-control" id="nro_documento" formControlName="nro_documento">
-                           <span *ngIf="formularioAlta.controls['nro_documento'].touched && formularioAlta.get('nro_documento')?.hasError('required')" style="color: red;" role="alert">
-                              Número de documento es requerido
+                           <label for="cuit" class="form-label">CUIT</label>
+                           <input type="number" class="form-control" id="cuit" formControlName="cuit">
+                           <span *ngIf="formularioAlta.controls['cuit'].touched && formularioAlta.get('cuit')?.hasError('required')" style="color: red;" role="alert">
+                              CUIT es requerido
                           </span>
                         </div>
                      </div>
                   </div>
-                       
-                  <div class="row">
-                     <div class="col-md-6 mt-3">
-                        <div class="form-group">
-                           <label for="idrol">Seleccione un rol</label>
-                           <select class="form-control mt-2" formControlName="idrol">
-                              <option *ngFor="let rol of roles" [value]="rol.idrol">{{rol.nombre}}</option>
-                           </select>
+
+                  <div class="direccion">
+                     <div class="card-header mx-5">
+                        <div class="card'title">Dirección de la empresa:</div>
+                     </div>
+                     <br>
+                     <div class="row mx-5">
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="calle" class="form-label">Calle</label>
+                              <input type="text" class="form-control" id="calle" formControlName="calle">
+                              <span *ngIf="formularioAlta.controls['calle'].touched && formularioAlta.get('calle')?.hasError('required')" style="color: red;" role="alert">
+                                 Calle es inválida
+                             </span>
+                          </div>
                         </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="altura" class="form-label">Altura</label>
+                              <input type="number" class="form-control" id="altura" formControlName="altura">
+                              <span *ngIf="formularioAlta.controls['altura'].touched && formularioAlta.get('altura')?.hasError('required')" style="color: red;" role="alert">
+                                 Altura es inválida
+                             </span>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idpais" class="form-label">País:</label>
+                               <select class="form-control" formControlName="idpais">
+                                   <option *ngFor="let pais of paises" [value]="pais.idpais" idpais="pais.idpais">{{pais.nombre}}</option>
+                               </select>
+                               <span *ngIf="formularioAlta.controls['idpais'].touched && formularioAlta.get('idpais')?.hasError('required')" style="color: red;" role="alert">
+                                 País es inválido
+                             </span>
+                           </div>
+                       </div>
+                     </div>
+                          
+                     <div class="row mx-5 my-3">
+                       <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idprovincia" class="form-label">Provincia:</label>
+                               <select class="form-control" formControlName="idprovincia">
+                                   <option *ngFor="let provincia of provincias" [value]="provincia.idprovincia" idprovincia="provincia.idprovincia">{{provincia.nombre}}</option>
+                               </select>
+                               <span *ngIf="formularioAlta.controls['idprovincia'].touched && formularioAlta.get('idprovincia')?.hasError('required')" style="color: red;" role="alert">
+                                 Provincia es inválida
+                             </span>
+                           </div>
+                       </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idlocalidad" class="form-label">Localidad:</label>
+                               <select class="form-control" formControlName="idlocalidad">
+                                   <option *ngFor="let localidad of localidades" [value]="localidad.idlocalidad" idlocalidad="localidad.idlocalidad">{{localidad.nombre}}</option>
+                               </select>
+                               <span *ngIf="formularioAlta.controls['idlocalidad'].touched && formularioAlta.get('idlocalidad')?.hasError('required')" style="color: red;" role="alert">
+                                 Localidad es inválida
+                             </span>
+                           </div>
+                       </div>
+                       <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idbarrio" class="form-label">Barrio:</label>
+                               <select class="form-control" formControlName="idbarrio">
+                                   <option *ngFor="let barrio of barrios" [value]="barrio.idbarrio" idbarrio="barrio.idbarrio">{{barrio.nombre}}</option>
+                               </select>
+                               <span *ngIf="formularioAlta.controls['idbarrio'].touched && formularioAlta.get('idbarrio')?.hasError('required')" style="color: red;" role="alert">
+                                 Barrio es inválido
+                             </span>
+                           </div>
+                       </div>
                      </div>
                   </div>
+
+                  
 
                   <div class="text-center">
                      <p *ngFor="let err of mensajeErrores" id="msgError" class="form-text" style="color: tomato;">{{err}}</p>
@@ -88,7 +122,7 @@
                   </div>
                    
                   <div class="row justify-content-center">
-                     <div class="col-sm-3">
+                     <div class="text-center">
                         <button class="btn btn-primary m-2" type="submit" (click)="guardar()">Crear empresa</button>
                         <button class="btn btn-dark m-2" type="submit" (click)="cancelar()">Cancelar</button>
                      </div>

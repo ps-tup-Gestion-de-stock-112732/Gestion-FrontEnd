@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Direccion } from '../interfaces/direccion';
+import { Direccion, ResumeDireccion } from '../interfaces/direccion';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +44,22 @@ export class DireccionService {
       "calle": direccion.calle,
       "altura": direccion.altura,
       "idbarrio": direccion.barrio.idbarrio
+    })
+  }
+
+  guardarDireccionEmpresa(direccion: ResumeDireccion): Observable<any> {
+    return this.http.post<any>(this.url + 'direcciones', {
+      "calle": direccion.calle,
+      "altura": direccion.altura,
+      "idbarrio": direccion.idbarrio
+    })
+  }
+
+  actualizarDireccionEmpresa(direccion: ResumeDireccion): Observable<any> {
+    return this.http.patch<any>(this.url + 'direcciones/' + direccion.iddireccion, {
+      "calle": direccion.calle,
+      "altura": direccion.altura,
+      "idbarrio": direccion.idbarrio
     })
   }
 

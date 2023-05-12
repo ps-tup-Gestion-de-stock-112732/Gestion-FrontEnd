@@ -2,8 +2,135 @@
     <div class="row justify-content-center">
        <div class="col-lg-12">
           <div class="card">
-             <div class="card-body">
-                <p>modificar-empresa works!</p>
+            <div class="card-header mx-5 mt-3">
+               <div class="card'title" *ngIf="usuario.esAdmin == 1">Modificar Empresa: <button class="btn btn-danger btn-sm m-2" type="submit" (click)="baja()">Baja</button></div>
+               <div class="card'title" *ngIf="usuario.esAdmin != 1">Datos de la Empresa: <button class="btn btn-danger btn-sm m-2" type="submit" (click)="desvincular()">Desvincular</button></div>
+            </div>
+             <div class="card-body mx-5">
+               <form [formGroup]="formularioModificacion" class="row g-3 mt-4" novalidate>
+                  <div class="row mt-3">
+                     <div class="col-md-4">
+                        <div class="form-group">
+                           <label for="nombre" class="form-label">Nombre</label>
+                           <input type="text" class="form-control" id="nombre" formControlName="nombre">
+                           <span *ngIf="formularioModificacion.controls['nombre'].touched && formularioModificacion.get('nombre')?.hasError('required')" style="color: red;" role="alert">
+                              Nombre es inválido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="form-group">
+                           <label for="telefono" class="form-label">Teléfono</label>
+                           <input type="number" class="form-control" id="telefono" formControlName="telefono">
+                           <span *ngIf="formularioModificacion.controls['telefono'].touched && formularioModificacion.get('telefono')?.hasError('required')" style="color: red;" role="alert">
+                              Teléfono es requerido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="form-group">
+                           <label for="cuit" class="form-label">CUIT</label>
+                           <input type="number" class="form-control" id="cuit" formControlName="cuit">
+                           <span *ngIf="formularioModificacion.controls['cuit'].touched && formularioModificacion.get('cuit')?.hasError('required')" style="color: red;" role="alert">
+                              CUIT es requerido
+                          </span>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="direccion">
+                     <div class="card-header mx-5">
+                        <div class="card'title">Dirección de la empresa:</div>
+                     </div>
+                     <br>
+                     <div class="row mx-5">
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="calle" class="form-label">Calle</label>
+                              <input type="text" class="form-control" id="calle" formControlName="calle">
+                              <span *ngIf="formularioModificacion.controls['calle'].touched && formularioModificacion.get('calle')?.hasError('required')" style="color: red;" role="alert">
+                                 Calle es inválida
+                             </span>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="altura" class="form-label">Altura</label>
+                              <input type="number" class="form-control" id="altura" formControlName="altura">
+                              <span *ngIf="formularioModificacion.controls['altura'].touched && formularioModificacion.get('altura')?.hasError('required')" style="color: red;" role="alert">
+                                 Altura es inválida
+                             </span>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idpais" class="form-label">País:</label>
+                               <select class="form-control" formControlName="idpais">
+                                   <option *ngFor="let pais of paises" [value]="pais.idpais" idpais="pais.idpais">{{pais.nombre}}</option>
+                               </select>
+                               <span *ngIf="formularioModificacion.controls['idpais'].touched && formularioModificacion.get('idpais')?.hasError('required')" style="color: red;" role="alert">
+                                 País es inválido
+                             </span>
+                           </div>
+                       </div>
+                     </div>
+                          
+                     <div class="row mx-5 my-3">
+                       <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idprovincia" class="form-label">Provincia:</label>
+                               <select class="form-control" formControlName="idprovincia">
+                                   <option *ngFor="let provincia of provincias" [value]="provincia.idprovincia" idprovincia="provincia.idprovincia">{{provincia.nombre}}</option>
+                               </select>
+                               <span *ngIf="formularioModificacion.controls['idprovincia'].touched && formularioModificacion.get('idprovincia')?.hasError('required')" style="color: red;" role="alert">
+                                 Provincia es inválida
+                             </span>
+                           </div>
+                       </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idlocalidad" class="form-label">Localidad:</label>
+                               <select class="form-control" formControlName="idlocalidad">
+                                   <option *ngFor="let localidad of localidades" [value]="localidad.idlocalidad" idlocalidad="localidad.idlocalidad">{{localidad.nombre}}</option>
+                               </select>
+                               <span *ngIf="formularioModificacion.controls['idlocalidad'].touched && formularioModificacion.get('idlocalidad')?.hasError('required')" style="color: red;" role="alert">
+                                 Localidad es inválida
+                             </span>
+                           </div>
+                       </div>
+                       <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idbarrio" class="form-label">Barrio:</label>
+                               <select class="form-control" formControlName="idbarrio">
+                                   <option *ngFor="let barrio of barrios" [value]="barrio.idbarrio" idbarrio="barrio.idbarrio">{{barrio.nombre}}</option>
+                               </select>
+                               <span *ngIf="formularioModificacion.controls['idbarrio'].touched && formularioModificacion.get('idbarrio')?.hasError('required')" style="color: red;" role="alert">
+                                 Barrio es inválido
+                             </span>
+                           </div>
+                       </div>
+                     </div>
+                  </div>
+
+                  
+
+                  <div class="text-center">
+                     <p *ngFor="let err of mensajeErrores" id="msgError" class="form-text" style="color: tomato;">{{err}}</p>
+                  </div>
+
+                  <div class="text-center">
+                     <p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p>
+                  </div>
+                   
+                  <div class="row justify-content-center" *ngIf="usuario.esAdmin == 1">
+                     <div class="text-center">
+                        <button class="btn btn-primary m-2" type="submit" (click)="actualizar()">Actualizar</button>
+                        <button class="btn btn-dark m-2" type="submit" (click)="cancelar()">Cancelar</button>
+                     </div>
+                  </div>
+                   
+                </form>
+
              </div>
           </div>
        </div>

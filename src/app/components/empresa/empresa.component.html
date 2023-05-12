@@ -10,8 +10,8 @@
        </nav>
     </div>
 
-    <app-crear-empresa *ngIf="mostrar" (cambioMostrar)="mostrar = $event" [mostrar]="mostrar"></app-crear-empresa>
-    <app-modificar-empresa *ngIf="empresa.idempresa"></app-modificar-empresa>
-    <app-lista-empresas *ngIf="!empresa.idempresa && !mostrar" (cambioMostrar)="mostrar = $event" [usuario]="usuario"></app-lista-empresas>
+    <app-crear-empresa *ngIf="mostrar" (cambioMostrar)="mostrar = $event" [mostrar]="mostrar" [usuario]="usuario"></app-crear-empresa>
+    <app-modificar-empresa *ngIf="empresa.idempresa && empresa.estado == 1" [usuario]="usuario"></app-modificar-empresa>
+    <app-lista-empresas *ngIf="(!empresa.idempresa || empresa.estado == 0) && !mostrar" (cambioMostrar)="mostrar = $event" [usuario]="usuario"></app-lista-empresas>
     
  </main>
