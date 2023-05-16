@@ -62,12 +62,13 @@ export class ModificarEmpresaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.usuario.esAdmin != 1) this.formularioModificacion.disable();
-
     this.suscripcion.add(
       this.srvEmpresa.obtenerEmpresa(this.usuario.idempresa).subscribe({
         next:(empresa) => {
           this.empresa = empresa
+
+          if(this.usuario.idusuario != this.empresa.idadmin) this.formularioModificacion.disable();
+
           this.srvDireccion.obtenerDireccion(empresa.iddireccion).subscribe({
             next:(direccion) =>{
               this.srvDireccion.obtenerBarrio(direccion.idbarrio).subscribe({
@@ -210,7 +211,8 @@ export class ModificarEmpresaComponent implements OnInit {
       'nombre': this.formularioModificacion.value.nombre,
       'telefono': this.formularioModificacion.value.telefono,
       'cuit': this.formularioModificacion.value.cuit,
-      'iddireccion': iddireccion
+      'iddireccion': iddireccion,
+      'idadmin': this.usuario.idusuario
     }
 
     this.srvEmpresa.actualizarEmpresa(empresa).subscribe({
@@ -258,22 +260,31 @@ export class ModificarEmpresaComponent implements OnInit {
 
         this.suscripcion.add(this.srvEmpresa.bajaEmpresa(this.empresa.idempresa).subscribe({
           next: (e)=>{
+
             if (e) {
-              Swal.fire({
-                title: 'Empresa eliminada con éxito',
-                icon: 'success',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#007bff'
-              }).then((result) => {
-                if (result.isConfirmed) {
-      
-                  let currentUrl = this.router.url;
-                  this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                    this.router.navigate([currentUrl]);
-                  });
-      
+              this.suscripcion.add(this.srv.desvincularEmpresa(this.usuario.idusuario).subscribe({
+                next: (usr)=>{
+
+                  if (usr) {
+                    Swal.fire({
+                      title: 'Empresa eliminada con éxito',
+                      icon: 'success',
+                      confirmButtonText: 'Aceptar',
+                      confirmButtonColor: '#007bff'
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+            
+                        let currentUrl = this.router.url;
+                        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                          this.router.navigate([currentUrl]);
+                        });
+            
+                      }
+                    })
+                  }
                 }
               })
+              )
             }
           },
           error: (err) => {

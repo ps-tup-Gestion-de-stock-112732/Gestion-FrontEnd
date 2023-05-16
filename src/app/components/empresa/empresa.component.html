@@ -1,17 +1,18 @@
-<main id="main" class="main">
-    <div class="pagetitle">
-       <h1>Empresa</h1>
-       <nav>
-          <ol class="breadcrumb">
-             <li class="breadcrumb-item"><a routerLink="/pages/dashboard">Home</a></li>
-             <li class="breadcrumb-item">Components</li>
-             <li class="breadcrumb-item active">Empresa</li>
-          </ol>
-       </nav>
+<section class="section" *ngIf="usuario.idempresa">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body mx-5 mt-3">
+               <div class="d-flex card'title">
+                    <button class="btn btn-primary ms-auto" [routerLink]="['/pages/empresa/areas', usuario.idempresa]">Administar áreas</button>
+                </div>
+            </div>
+          </div>
+       </div>
     </div>
+ </section>
 
-    <app-crear-empresa *ngIf="mostrar" (cambioMostrar)="mostrar = $event" [mostrar]="mostrar" [usuario]="usuario"></app-crear-empresa>
-    <app-modificar-empresa *ngIf="empresa.idempresa && empresa.estado == 1" [usuario]="usuario"></app-modificar-empresa>
-    <app-lista-empresas *ngIf="(!empresa.idempresa || empresa.estado == 0) && !mostrar" (cambioMostrar)="mostrar = $event" [usuario]="usuario"></app-lista-empresas>
-    
- </main>
+
+<app-crear-empresa *ngIf="mostrar" (cambioMostrar)="mostrar = $event" [mostrar]="mostrar" [usuario]="usuario"></app-crear-empresa>
+<app-modificar-empresa *ngIf="empresa.idempresa && empresa.estado == 1" [usuario]="usuario"></app-modificar-empresa>
+<app-lista-empresas *ngIf="(!empresa.idempresa || empresa.estado == 0) && !mostrar" (cambioMostrar)="mostrar = $event" [usuario]="usuario"></app-lista-empresas>

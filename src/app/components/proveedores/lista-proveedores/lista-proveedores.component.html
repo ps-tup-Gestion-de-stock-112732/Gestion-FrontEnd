@@ -1,0 +1,55 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header mx-5 my-4">
+                <div class="card'title">Listado de Proveedores:</div>
+            </div>
+            <div class="card-body mx-5 my-4">
+               
+               <form [formGroup]="formularioBusqueda" class="row g-3">
+                  <div class="input-group mb-4">
+                     <input type="search" class="form-control" placeholder="Búsqueda de empresas" formControlName="busqueda">
+                     <div class="input-group-append">
+                       <button class="btn btn-outline-secondary" type="button" id="buscar" (click)="buscar()">Buscar</button>
+                     </div>
+                  </div>
+               </form>
+               
+               <div class="text-center"><p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p></div>
+
+               <div class="">
+                  <table class="table">
+                     <thead>
+                       <tr>
+                         <th scope="col">Código</th>
+                         <th scope="col">Nombre</th>
+                         <th scope="col">Teléfono</th>
+                         <th scope="col">CUIT</th>
+                         <th scope="col">Dirección</th>
+                         <th scope="col">Acción</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr *ngFor="let e of proveedores | paginate: { itemsPerPage: 10, currentPage: p }">
+                         <th>{{e.idempresa}}</th>
+                         <td>{{e.nombre}}</td>
+                         <td>{{e.telefono}}</td>
+                         <td>{{e.cuit}}</td>
+                         <td>{{e.direccion}}</td>
+                         <td><button class="btn btn-primary btn-sm" (click)="selectProveedor(e.idempresa)">Enviar solicitud</button></td>
+                       </tr>
+                     </tbody>
+                   </table>
+               </div>
+               
+               <div class="d-flex justify-content-center">
+                  <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+               </div>
+               
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+

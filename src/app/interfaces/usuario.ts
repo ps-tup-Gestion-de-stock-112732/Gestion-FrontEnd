@@ -1,3 +1,13 @@
+export interface ResumeUsuario {
+  idusuario?: number,
+  nombre: string,
+  apellido: string,
+  nro_documento: number,
+  email: string,
+  telefono: number,
+  idarea: number
+}
+
 export interface Usuario {
   idusuario: number,
   nombre: string,
@@ -11,5 +21,6 @@ export interface Usuario {
   estado?: number,
   idarea: number,
   iddireccion: number,
-  esAdmin: number
+  direccion: string,
+  area: string
 }

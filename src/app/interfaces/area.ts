@@ -1,4 +1,5 @@
 export interface Area {
     idarea: number,
-    nombre: string
+    nombre: string,
+    idempresa: number
   }
