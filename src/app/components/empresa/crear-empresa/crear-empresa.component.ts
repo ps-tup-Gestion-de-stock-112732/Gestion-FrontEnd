@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
   templateUrl: './crear-empresa.component.html',
   styleUrls: ['./crear-empresa.component.css']
 })
-export class CrearEmpresaComponent implements OnInit {
+export class CrearEmpresaComponent implements OnInit, OnDestroy {
 
   private suscripcion = new Subscription();
 
@@ -67,7 +67,15 @@ export class CrearEmpresaComponent implements OnInit {
     )
   }
 
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe()
+  }
+
   ngOnInit(): void {
+    this.completarListas()
+  }
+
+  completarListas(){
     this.suscripcion.add(this.srvDireccion.obtenerPaises().subscribe({
       next: (paises) =>{
         this.paises = paises
@@ -132,21 +140,26 @@ export class CrearEmpresaComponent implements OnInit {
     if (this.formularioAlta.invalid) {
       this.mostrarMsjError('Formulario Invalido');
     } else {
-      
-      let direccion: ResumeDireccion = {
-        "calle": this.formularioAlta.value.calle,
-        "altura": this.formularioAlta.value.altura,
-        "idbarrio": this.formularioAlta.value.idbarrio
+
+      try {
+        let direccion: ResumeDireccion = {
+          "calle": this.formularioAlta.value.calle,
+          "altura": this.formularioAlta.value.altura,
+          "idbarrio": this.formularioAlta.value.idbarrio
+        }
+  
+        this.suscripcion.add(this.srvDireccion.guardarDireccionEmpresa(direccion).subscribe({
+          next: (direccion)=>{
+            this.guardarEmpresa(direccion.iddireccion)
+          },
+          error: (err) => {
+            this.mostrarMsjError(err.error.message);
+          }
+        }))
+      } catch (error) {
+        console.log(error);
       }
 
-      this.suscripcion.add(this.srvDireccion.guardarDireccionEmpresa(direccion).subscribe({
-        next: (direccion)=>{
-          this.guardarEmpresa(direccion.iddireccion)
-        },
-        error: (err) => {
-          this.mostrarMsjError(err.error.message);
-        }
-      }))
     }
   }
 
@@ -157,7 +170,8 @@ export class CrearEmpresaComponent implements OnInit {
       'nombre': this.formularioAlta.value.nombre,
       'telefono': this.formularioAlta.value.telefono,
       'cuit': this.formularioAlta.value.cuit,
-      'iddireccion': iddireccion
+      'iddireccion': iddireccion,
+      'idadmin': this.usuario.idusuario
     }
 
     Swal.fire({
@@ -171,13 +185,13 @@ export class CrearEmpresaComponent implements OnInit {
     }).then((result) => {
 
       if (result.isConfirmed) {
+
         this.srvEmpresa.registrarEmpresa(empresa).subscribe({
           next: (empresaResponse) => {
 
             if (empresaResponse) {
 
               this.usuario.idempresa = empresaResponse.idempresa
-              this.usuario.esAdmin = 1
 
               this.srv.updateUsuarioEmpresa(this.usuario).subscribe({
                 next:(value) => {

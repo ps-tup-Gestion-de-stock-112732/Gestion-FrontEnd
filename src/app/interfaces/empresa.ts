@@ -12,7 +12,8 @@ export interface ResumeEmpresa {
   nombre: string,
   telefono: number,
   cuit: number,
-  iddireccion: number
+  iddireccion: number,
+  idadmin: number
 }
 
 export interface Empresa {
@@ -24,4 +25,5 @@ export interface Empresa {
     direccion: string,
     estado: number,
     tipoempresa: number
+    idadmin: number
   }

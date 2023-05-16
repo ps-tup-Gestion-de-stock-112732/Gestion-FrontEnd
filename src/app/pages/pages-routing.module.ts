@@ -28,18 +28,11 @@ import { PagesContactComponent } from './pages-contact/pages-contact.component';
 import { PagesFaqComponent } from './pages-faq/pages-faq.component';
 import { UsersProfileComponent } from './users-profile/users-profile.component';
 import { MainComponent } from './main/main.component';
-import { EmpresaComponent } from '../components/empresa/empresa.component';
-import { EmpleadosComponent } from '../components/empleados/empleados.component';
-import { ProveedoresComponent } from '../components/proveedores/proveedores.component';
-import { HasRoleGuard } from '../security/has-role.guard';
 
 const routes: Routes = [
   {
     path: '', component: MainComponent, children: [
       { path: 'dashboard', component: DashboardComponent },
-      //{ path: 'empresa', component: EmpresaComponent, canActivate: [HasRoleGuard], data: {allowedRoles: [1]} },
-      { path: 'empleados', component: EmpleadosComponent },
-      { path: 'proveedores', component: ProveedoresComponent },
       { path: 'breadcrumbs', component: BreadcrumbsComponent },
       { path: 'buttons', component: ButtonsComponent },
       { path: 'cards', component: CardsComponent },
@@ -66,6 +59,9 @@ const routes: Routes = [
       { path: 'pages-faq', component: PagesFaqComponent },
       { path: 'user-profile', component: UsersProfileComponent },
       { path: 'empresa', loadChildren: () => import('../components/empresa/empresa.module').then(x => x.EmpresaModule), canLoad: [AuthGuard] },
+      { path: 'empleados', loadChildren: () => import('../components/empleados/empleados.module').then(x => x.EmpleadosModule), canLoad: [AuthGuard] },
+      { path: 'proveedores', loadChildren: () => import('../components/proveedores/proveedores.module').then(x => x.ProveedoresModule), canLoad: [AuthGuard] },
+      { path: 'proveedor', loadChildren: () => import('../components/proveedor/proveedor.module').then(x => x.ProveedorModule), canLoad: [AuthGuard] }
     ]
   }
 ];

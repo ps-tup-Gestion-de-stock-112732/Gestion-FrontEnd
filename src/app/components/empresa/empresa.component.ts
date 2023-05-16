@@ -26,11 +26,11 @@ export class EmpresaComponent implements OnInit, OnDestroy {
   constructor(
     private srv: AuthService,
     private srvUsuario: UsuarioService,
-    private srvEmpresa: EmpresaService,
-    private router: Router
+    private srvEmpresa: EmpresaService
   ) { }
 
   ngOnInit(): void {
+    
     let usr = this.srv.getUser()
     this.idusuario = usr.idusuario
 
@@ -44,11 +44,8 @@ export class EmpresaComponent implements OnInit, OnDestroy {
             this.srvEmpresa.obtenerEmpresa(this.usuario.idempresa).subscribe({
               next: (empr)=>{
                 this.empresa = empr
-                this.router.navigate(['/pages/empresa/modificar'])
               }
             })
-          }else{
-            this.router.navigate(['/pages/empresa/lista'])
           }
 
         },

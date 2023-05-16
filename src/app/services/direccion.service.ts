@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Direccion, ResumeDireccion } from '../interfaces/direccion';
+import { VariableBinding } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +40,21 @@ export class DireccionService {
     })
   }
 
-  guardarDireccion(direccion: Direccion): Observable<any> {
+  obtenerBarriosAll(): Observable<any> {
+    return this.http.get<any>(this.url + 'direcciones/barrios/all')
+  }
+
+  obtenerBarriosXNombre(nombre: string): Observable<any> {
+    return this.http.post<any>(this.url + 'direcciones/barrios/nombre', {
+      "nombre": nombre
+    })
+  }
+
+  guardarDireccionEmpleado(direccion: ResumeDireccion): Observable<any> {
     return this.http.post<any>(this.url + 'direcciones', {
       "calle": direccion.calle,
       "altura": direccion.altura,
-      "idbarrio": direccion.barrio.idbarrio
+      "idbarrio": direccion.idbarrio
     })
   }
 
@@ -56,6 +67,14 @@ export class DireccionService {
   }
 
   actualizarDireccionEmpresa(direccion: ResumeDireccion): Observable<any> {
+    return this.http.patch<any>(this.url + 'direcciones/' + direccion.iddireccion, {
+      "calle": direccion.calle,
+      "altura": direccion.altura,
+      "idbarrio": direccion.idbarrio
+    })
+  }
+
+  actualizarDireccionEmpleado(direccion: ResumeDireccion): Observable<any> {
     return this.http.patch<any>(this.url + 'direcciones/' + direccion.iddireccion, {
       "calle": direccion.calle,
       "altura": direccion.altura,

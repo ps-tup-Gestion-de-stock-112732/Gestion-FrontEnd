@@ -15,4 +15,8 @@ export class RolService {
   obtenerRoles(): Observable<any> {
     return this.http.get<any>(this.url + 'roles')
   }
+
+  obtenerRol(idrol: Number): Observable<any> {
+    return this.http.post<any>(this.url + 'roles/'+ idrol, {})
+  }
 }

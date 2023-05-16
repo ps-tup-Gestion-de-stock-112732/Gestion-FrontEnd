@@ -1,1 +1,4 @@
-<p>empleados works!</p>
+
+
+<app-crear-empleados *ngIf="mostrar" (cambioMostrar)="mostrar = $event" [mostrar]="mostrar" [usuario]="usuario"></app-crear-empleados>
+<app-lista-empleados *ngIf="!mostrar" (cambioMostrar)="mostrar = $event" [empresa]="empresa"></app-lista-empleados>

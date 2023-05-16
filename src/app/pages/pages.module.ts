@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MainComponent } from './main/main.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BreadcrumbsComponent } from '../components/breadcrumbs/breadcrumbs.component';
 import { ButtonsComponent } from '../components/buttons/buttons.component';
 import { CardsComponent } from '../components/cards/cards.component';
@@ -34,9 +34,6 @@ import { PagesBlankComponent } from './pages-blank/pages-blank.component';
 import { PagesContactComponent } from './pages-contact/pages-contact.component';
 import { PagesFaqComponent } from './pages-faq/pages-faq.component';
 import { UsersProfileComponent } from './users-profile/users-profile.component';
-import { EmpleadosComponent } from '../components/empleados/empleados.component';
-import { EmpresaComponent } from '../components/empresa/empresa.component';
-import { ProveedoresComponent } from '../components/proveedores/proveedores.component';
 
 
 @NgModule({
@@ -70,9 +67,7 @@ import { ProveedoresComponent } from '../components/proveedores/proveedores.comp
     UsersProfileComponent,
     PagesFaqComponent,
     PagesContactComponent,
-    PagesBlankComponent,
-    EmpleadosComponent,
-    ProveedoresComponent
+    PagesBlankComponent
   ],
   imports: [
     CommonModule,

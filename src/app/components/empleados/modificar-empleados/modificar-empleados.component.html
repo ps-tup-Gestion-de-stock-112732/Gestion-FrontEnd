@@ -1,0 +1,188 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex mx-5 mt-3">
+               <div class="card'title">Modificar Empleado:</div>
+            </div>
+
+            <router-outlet class="card mb-0"></router-outlet>
+
+             <div class="card-body mx-5">
+               <form [formGroup]="formulario" class="row g-3 mt-4" novalidate>
+                  <div class="row">
+                     <div class="col-md-4 mt-2">
+                        <div class="form-group">
+                           <label for="nombre" class="form-label">Nombre</label>
+                           <input type="text" class="form-control" id="nombre" formControlName="nombre">
+                           <span *ngIf="formulario.controls['nombre'].touched && formulario.get('nombre')?.hasError('required')" style="color: red;" role="alert">
+                                Nombre es inválido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-4 mt-2">
+                        <div class="form-group">
+                           <label for="apellido" class="form-label">Apellido</label>
+                           <input type="text" class="form-control" id="apellido" formControlName="apellido">
+                           <span *ngIf="formulario.controls['apellido'].touched && formulario.get('apellido')?.hasError('required')" style="color: red;" role="alert">
+                                Apellido es inválido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-4 mt-2">
+                        <div class="form-group">
+                           <label for="telefono" class="form-label">Teléfono</label>
+                           <input type="number" class="form-control" id="telefono" formControlName="telefono">
+                           <span *ngIf="formulario.controls['telefono'].touched && formulario.get('telefono')?.hasError('required')" style="color: red;" role="alert">
+                                Teléfono es requerido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-4 mt-2">
+                        <div class="form-group">
+                           <label for="nro_documento" class="form-label">Número documento</label>
+                           <input type="number" class="form-control" id="nro_documento" formControlName="nro_documento">
+                           <span *ngIf="formulario.controls['nro_documento'].touched && formulario.get('nro_documento')?.hasError('required')" style="color: red;" role="alert">
+                                Documento es requerido
+                          </span>
+                        </div>
+                     </div>
+                     
+
+                     <div class="col-md-4 mt-2">
+                        <div class="form-group">
+                           <label for="idarea" class="form-label">Seleccione un área</label>
+                           <select class="form-control" formControlName="idarea">
+                              <option *ngFor="let area of areas" [value]="area.idarea">{{area.nombre}}</option>
+                           </select>
+                           <span *ngIf="formulario.controls['idarea'].touched && formulario.get('idarea')?.hasError('required')" style="color: red;" role="alert">
+                              Área es requerido
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="direccion">
+                     <div class="card-header mx-5">
+                        <div class="card'title">Dirección del empleado:</div>
+                     </div>
+                     <br>
+                     <div class="row mx-5">
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="calle" class="form-label">Calle</label>
+                              <input type="text" class="form-control" id="calle" formControlName="calle">
+                              <span *ngIf="formulario.controls['calle'].touched && formulario.get('calle')?.hasError('required')" style="color: red;" role="alert">
+                                 Calle es inválida
+                             </span>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label for="altura" class="form-label">Altura</label>
+                              <input type="number" class="form-control" id="altura" formControlName="altura">
+                              <span *ngIf="formulario.controls['altura'].touched && formulario.get('altura')?.hasError('required')" style="color: red;" role="alert">
+                                 Altura es inválida
+                             </span>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idpais" class="form-label">País:</label>
+                               <select class="form-control" formControlName="idpais">
+                                   <option *ngFor="let pais of paises" [value]="pais.idpais" idpais="pais.idpais">{{pais.nombre}}</option>
+                               </select>
+                               <span *ngIf="formulario.controls['idpais'].touched && formulario.get('idpais')?.hasError('required')" style="color: red;" role="alert">
+                                 País es inválido
+                             </span>
+                           </div>
+                       </div>
+                     </div>
+                          
+                     <div class="row mx-5 my-3">
+                       <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idprovincia" class="form-label">Provincia:</label>
+                               <select class="form-control" formControlName="idprovincia">
+                                   <option *ngFor="let provincia of provincias" [value]="provincia.idprovincia" idprovincia="provincia.idprovincia">{{provincia.nombre}}</option>
+                               </select>
+                               <span *ngIf="formulario.controls['idprovincia'].touched && formulario.get('idprovincia')?.hasError('required')" style="color: red;" role="alert">
+                                 Provincia es inválida
+                             </span>
+                           </div>
+                       </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idlocalidad" class="form-label">Localidad:</label>
+                               <select class="form-control" formControlName="idlocalidad">
+                                   <option *ngFor="let localidad of localidades" [value]="localidad.idlocalidad" idlocalidad="localidad.idlocalidad">{{localidad.nombre}}</option>
+                               </select>
+                               <span *ngIf="formulario.controls['idlocalidad'].touched && formulario.get('idlocalidad')?.hasError('required')" style="color: red;" role="alert">
+                                 Localidad es inválida
+                             </span>
+                           </div>
+                       </div>
+                       <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="idbarrio" class="form-label">Barrio:</label>
+                               <select class="form-control" formControlName="idbarrio">
+                                   <option *ngFor="let barrio of barrios" [value]="barrio.idbarrio" idbarrio="barrio.idbarrio">{{barrio.nombre}}</option>
+                               </select>
+                               <span *ngIf="formulario.controls['idbarrio'].touched && formulario.get('idbarrio')?.hasError('required')" style="color: red;" role="alert">
+                                 Barrio es inválido
+                             </span>
+                           </div>
+                       </div>
+                     </div>
+                  </div>
+
+                  <div class="credenciales">
+                     <div class="card-header mx-5">
+                        <div class="card'title">Credenciales del empleado:</div>
+                     </div>
+                     <br>
+                     <div class="row mx-5">
+                        <div class="col-md-6 mt-2">
+                           <div class="form-group">
+                              <label for="email" class="form-label">Email</label>
+                              <input type="email" class="form-control" id="email" formControlName="email">
+                              <span *ngIf="formulario.controls['email'].touched && formulario.get('email')?.hasError('required')" style="color: red;" role="alert">
+                                   Email es requerido
+                             </span>
+                           </div>
+                        </div>
+   
+                        <div class="col-md-6 mt-2">
+                           <div class="form-group">
+                              <label for="password" class="form-label">Contraseña</label>
+                              <input type="password" class="form-control" id="password" formControlName="password">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="text-center">
+                     <p *ngFor="let err of mensajeErrores" id="msgError" class="form-text" style="color: tomato;">{{err}}</p>
+                  </div>
+
+                  <div class="text-center">
+                     <p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p>
+                  </div>
+                   
+                  <div class="row justify-content-center">
+                     <div class="text-center">
+                        <button class="btn btn-primary m-2" type="submit" (click)="actualizar()">Actualizar empleado</button>
+                        <button class="btn btn-dark m-2" type="submit" (click)="cancelar()">Cancelar</button>
+                     </div>
+                  </div>
+                 
+                   
+                </form>
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+
+

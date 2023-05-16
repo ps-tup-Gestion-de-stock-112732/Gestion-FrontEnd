@@ -85,7 +85,6 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
           this.srvDireccion.obtenerBarrio(dire.idbarrio).subscribe({
             next:(barrio) =>{
               dire.barrio = barrio
-              //console.log(this.direccion);//
   
               this.srvDireccion.obtenerLocalidad(dire.barrio.idlocalidad).subscribe({
                 next:(localidad) =>{
@@ -137,9 +136,7 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
   }
 
   selectEmpresa(idempresa: number){
-    this.usuario.idempresa = idempresa
-    this.usuario.esAdmin = 0
-
+    
     Swal.fire({
       title: '¿Desea asociar esta empresa a su cuenta?',
       icon: 'question',
@@ -150,6 +147,9 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
+
+        this.usuario.idempresa = idempresa
+
         this.suscripcion.add(
           this.srvUsuario.updateUsuarioEmpresa(this.usuario).subscribe({
             next:(usr) => {

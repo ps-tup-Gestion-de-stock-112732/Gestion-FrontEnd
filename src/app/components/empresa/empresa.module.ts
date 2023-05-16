@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EmpresaComponent } from './empresa.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ContenedorEmpresaComponent } from './contenedor-empresa/contenedor-empresa.component';
+import { AreasEmpresaComponent } from './areas-empresa/areas-empresa.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     EmpresaComponent,
     ListaEmpresasComponent,
     CrearEmpresaComponent,
-    ModificarEmpresaComponent
+    ModificarEmpresaComponent,
+    ContenedorEmpresaComponent,
+    AreasEmpresaComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,48 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex mx-5 mt-3">
+               <div class="card'title">Carga Masiva:</div>
+               <div class="ms-auto">
+                  <a class="btn btn-sm btn-dark m-1" href="../../../../assets/files/empleados.xlsx" download="empleados.xlsx">Descargar template</a>
+                  <button class="btn btn-sm btn-dark m-1" [routerLink]="['/pages/empleados/areas', usuario.idempresa]">Ver áreas</button>
+                  <button class="btn btn-sm btn-dark m-1" [routerLink]="['/pages/empleados/barrios']">Ver barrios</button>
+               </div>
+            </div>
+
+             <div class="card-body mx-5">
+
+               <div class="row mx-5 justify-content-center mt-5 mb-4">
+                  <div class="col-md-6 mt-2 text-center">
+                     <form [formGroup]="formulario" class="row g-3" novalidate>
+                        <div class="form-group">
+                           <input type="file" class="form-control" id="archivo" formControlName="archivo" (change)="obtenerArchivo($event)">
+                           <span *ngIf="formulario.controls['archivo'].touched && formulario.get('archivo')?.hasError('required')" style="color: red;" role="alert">
+                              Archivo es requerido
+                          </span>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+               
+               <div class="text-center">
+                  <p *ngFor="let err of mensajeErrores" id="msgError" class="form-text" style="color: tomato;">{{err}}</p>
+               </div>
+
+               <div class="text-center">
+                  <p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p>
+               </div>
+                
+               <div class="row justify-content-center">
+                  <div class="text-center">
+                     <button class="btn btn-primary m-2" type="submit" (click)="cargar()">Cargar empleados</button>
+                     <button class="btn btn-dark m-2" type="submit" (click)="cancelar()">Cancelar</button>
+                  </div>
+               </div>
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>

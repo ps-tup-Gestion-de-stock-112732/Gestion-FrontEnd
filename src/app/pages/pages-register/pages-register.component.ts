@@ -94,7 +94,7 @@ export class PagesRegisterComponent implements OnInit, OnDestroy{
           if (result.isConfirmed) {
 
             setTimeout(()=>{
-              this.router.navigate(['/pages/dashboard']);
+              this.router.navigate(['/pages-login']);
             },100);
             
           }
