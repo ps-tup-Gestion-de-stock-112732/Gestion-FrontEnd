@@ -277,7 +277,7 @@ export class ModificarProveedorComponent implements OnInit , OnDestroy {
           next: (e)=>{
 
             if (e) {
-              this.suscripcion.add(this.srvUsuario.desvincularEmpresa(this.usuario.idusuario).subscribe({
+              this.suscripcion.add(this.srvUsuario.desvincularProveedor(this.usuario.idusuario).subscribe({
                 next: (usr)=>{
 
                   if (usr) {
@@ -328,7 +328,7 @@ export class ModificarProveedorComponent implements OnInit , OnDestroy {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.suscripcion.add(this.srvUsuario.desvincularEmpresa(this.usuario.idusuario).subscribe({
+        this.suscripcion.add(this.srvUsuario.desvincularProveedor(this.usuario.idusuario).subscribe({
           next: (usr)=>{
             if (usr) {
               Swal.fire({
