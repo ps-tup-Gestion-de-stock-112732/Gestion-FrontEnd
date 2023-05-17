@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
   templateUrl: './modificar-empresa.component.html',
   styleUrls: ['./modificar-empresa.component.css']
 })
-export class ModificarEmpresaComponent implements OnInit {
+export class ModificarEmpresaComponent implements OnInit, OnDestroy {
 
   @Input() usuario: Usuario = {} as Usuario
   
@@ -58,6 +58,9 @@ export class ModificarEmpresaComponent implements OnInit {
         iddireccion: [""],
       }
     )
+  }
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe()
   }
 
   ngOnInit(): void {
