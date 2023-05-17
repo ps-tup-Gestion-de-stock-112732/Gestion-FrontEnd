@@ -42,6 +42,10 @@ export class EmpresaService {
     return this.http.put<any>(this.url + 'empresas/delete/' + idempresa, {})
   }
 
+  bajaProveedor(idempresa: Number): Observable<any> {
+    return this.http.put<any>(this.url + 'proveedores/delete/' + idempresa, {})
+  }
+
   obtenerProveedores(tipoempresa: Number): Observable<any> {
     return this.http.post<any>(this.url + 'proveedores/all', {
       "tipoempresa": tipoempresa
@@ -57,6 +61,10 @@ export class EmpresaService {
 
   registrarProveedor(proveedor: ResumeEmpresa): Observable<any> {
     return this.http.post<any>(this.url + 'proveedores/', proveedor)
+  }
+
+  actualizarProveedor(empresa: ResumeEmpresa): Observable<any> {
+    return this.http.patch<any>(this.url + 'proveedores/' + empresa.idempresa, empresa)
   }
 
 }
