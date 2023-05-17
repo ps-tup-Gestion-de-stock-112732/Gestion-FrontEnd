@@ -86,7 +86,7 @@ export class ListaProductoComponent implements OnInit, OnDestroy {
     )
   }
 
-  elimarProducto(idempleado: number){
+  elimarProducto(codigo: number){
 
     Swal.fire({
       title: '¿Desea dar de baja este producto?',
@@ -100,7 +100,7 @@ export class ListaProductoComponent implements OnInit, OnDestroy {
 
       if (result.isConfirmed) {
         this.suscripcion.add(
-          this.srvUsuario.bajaEmpleado(idempleado).subscribe({
+          this.srvProducto.bajaProducto(codigo).subscribe({
             next:(value) => {
 
               Swal.fire({
@@ -118,7 +118,7 @@ export class ListaProductoComponent implements OnInit, OnDestroy {
             },
             error: (err) => {
               Swal.fire({
-                title: '¡No se pudo dar de baja el producto.!',
+                title: '¡No se pudo dar de baja el producto!',
                 icon: 'error'
               })
             }
