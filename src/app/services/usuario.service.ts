@@ -72,4 +72,8 @@ export class UsuarioService {
   sendFile(body: FormData): Observable<any> {
     return this.http.post<any>(this.url + 'empleados/upload', body)
   }
+
+  desvincularProveedor(idusuario: Number): Observable<any> {
+    return this.http.put<any>(this.url + 'proveedores/desvincular/' + idusuario, {})
+  }
 }

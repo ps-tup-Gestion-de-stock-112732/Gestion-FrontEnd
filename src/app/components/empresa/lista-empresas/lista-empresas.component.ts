@@ -156,7 +156,7 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
 
               if (usr) {
                 Swal.fire({
-                  title: 'Usuario actualizado con éxito',
+                  title: 'Cuenta actualizada con éxito',
                   icon: 'success',
                   confirmButtonText: 'Aceptar',
                   confirmButtonColor: '#007bff'
