@@ -13,7 +13,24 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
+  obtenerProductos(idProveedor: number): Observable<any> {
+    return this.http.post<any>(this.url + 'producto/all',{
+      'idProveedor': idProveedor
+    })
+  }
+
+  obtenerProductosXNombre(nombreProducto: string, idProveedor: number): Observable<any> {
+    return this.http.post<any>(this.url + 'producto/nombre',{
+      'nombreProducto': nombreProducto,
+      'idProveedor': idProveedor
+    })
+  }
+
   registrarProducto(producto: Producto): Observable<any> {
     return this.http.post<any>(this.url + 'producto/', producto)
   }
+
+  /* bajaProducto(codigo: Number): Observable<any> {
+    return this.http.put<any>(this.url + 'producto/delete/' + codigo, {})
+  } */
 }
