@@ -49,11 +49,13 @@ export class ListaProveedoresComponent implements OnInit, OnDestroy {
   obtenerProveedoresAll(){
     this.suscripcion.add(
       this.srvProveedor.obtenerProveedores(2).subscribe({
-        next: (proveedores)=>{
+        next:(proveedores) =>{
 
           this.obtenerDireccion(proveedores)
           
-
+        },
+        error:(err) => {
+          this.proveedores = []
         }
       })
     )
@@ -110,10 +112,13 @@ export class ListaProveedoresComponent implements OnInit, OnDestroy {
       this.suscripcion.add(
         this.srvProveedor.obtenerProveedoresXNombre(this.formularioBusqueda.value.busqueda, 2).subscribe({
           next:(proveedores) =>{
-            this.proveedores = proveedores
 
-            this.obtenerDireccion(this.proveedores)
+            this.obtenerDireccion(proveedores)
+            
           },
+          error:(err) => {
+            this.proveedores = []
+          }
         })
       )
     }

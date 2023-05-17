@@ -18,38 +18,46 @@
                
                <div class="text-center"><p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p></div>
 
-               <div class="">
-                  <table class="table">
-                     <thead>
-                       <tr>
-                         <th scope="col">Nombre</th>
-                         <th scope="col">Documento</th>
-                         <th scope="col">Email</th>
-                         <th scope="col">Teléfono</th>
-                         <th scope="col">Área</th>
-                         <th scope="col">Acción</th>
-                       </tr>
-                     </thead>
-                     <tbody>
-                       <tr *ngFor="let e of empleados | paginate: { itemsPerPage: 10, currentPage: p }">
-                         <td>{{e.nombre+ ' '+e.apellido}}</td>
-                         <td>{{e.nro_documento}}</td>
-                         <td>{{e.email}}</td>
-                         <td>{{e.telefono}}</td>
-                         <td>{{e.area}}</td>
-                         <td>
-                           <button class="btn btn-primary btn-sm mx-1" [routerLink]="['/pages/empleados/modificar', e.idusuario]"> <i class="bi bi-pencil-square"></i></button>
-                           <button class="btn btn-danger btn-sm mx-1" (click)="elimarEmpleado(e.idusuario)"> <i class="bi bi-trash"></i></button>
-                        </td>
-                       </tr>
-                     </tbody>
-                   </table>
+               <div *ngIf="empleados.length != 0">
+                  <div class="form">
+                     <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Área</th>
+                            <th scope="col">Acción</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let e of empleados | paginate: { itemsPerPage: 10, currentPage: p }">
+                            <td>{{e.nombre+ ' '+e.apellido}}</td>
+                            <td>{{e.nro_documento}}</td>
+                            <td>{{e.email}}</td>
+                            <td>{{e.telefono}}</td>
+                            <td>{{e.area}}</td>
+                            <td>
+                              <button class="btn btn-primary btn-sm mx-1" [routerLink]="['/pages/empleados/modificar', e.idusuario]"> <i class="bi bi-pencil-square"></i></button>
+                              <button class="btn btn-danger btn-sm mx-1" (click)="elimarEmpleado(e.idusuario)"> <i class="bi bi-trash"></i></button>
+                           </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  
+                  <div class="d-flex justify-content-center">
+                     <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                  </div>
                </div>
                
-               <div class="d-flex justify-content-center">
-                  <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+               <div class="row justify-content-center" *ngIf="empleados.length == 0">
+                  <div class="col-md-6 text-center">
+                     <p>No se encontraron resultados ...</p>
+                  </div>
                </div>
-               
+
              </div>
           </div>
        </div>
