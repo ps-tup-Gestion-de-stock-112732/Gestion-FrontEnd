@@ -32,9 +32,9 @@ export class MainProductoComponent implements OnInit, OnDestroy {
           this.usuario = usuario
 
           if (this.usuario.idempresa) {
-            this.router.navigate(['pages/producto/crear'])
+            this.router.navigate(['pages/producto/lista'])
           }else{
-            //this.router.navigate(['pages/proveedor/lista'])
+            this.router.navigate(['pages/producto/redirect'])
           }
         },
       })

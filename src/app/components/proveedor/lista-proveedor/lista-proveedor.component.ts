@@ -50,11 +50,11 @@ export class ListaProveedorComponent implements OnInit, OnDestroy {
       this.srvUsuario.obtenerUsuario(usr.idusuario).subscribe({
         next:(usuario) => {
           this.usuario = usuario
+
+          this.obtenerProveedoresAll()
         }
       })
     )
-
-    this.obtenerProveedoresAll()
 
   }
 
