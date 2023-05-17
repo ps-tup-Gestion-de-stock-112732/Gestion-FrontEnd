@@ -30,7 +30,7 @@ export class ProductoService {
     return this.http.post<any>(this.url + 'producto/', producto)
   }
 
-  /* bajaProducto(codigo: Number): Observable<any> {
+  bajaProducto(codigo: Number): Observable<any> {
     return this.http.put<any>(this.url + 'producto/delete/' + codigo, {})
-  } */
+  }
 }
