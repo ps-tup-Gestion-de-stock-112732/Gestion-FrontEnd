@@ -61,7 +61,8 @@ const routes: Routes = [
       { path: 'empresa', loadChildren: () => import('../components/empresa/empresa.module').then(x => x.EmpresaModule), canLoad: [AuthGuard] },
       { path: 'empleados', loadChildren: () => import('../components/empleados/empleados.module').then(x => x.EmpleadosModule), canLoad: [AuthGuard] },
       { path: 'proveedores', loadChildren: () => import('../components/proveedores/proveedores.module').then(x => x.ProveedoresModule), canLoad: [AuthGuard] },
-      { path: 'proveedor', loadChildren: () => import('../components/proveedor/proveedor.module').then(x => x.ProveedorModule), canLoad: [AuthGuard] }
+      { path: 'proveedor', loadChildren: () => import('../components/proveedor/proveedor.module').then(x => x.ProveedorModule), canLoad: [AuthGuard] },
+      { path: 'producto', loadChildren: () => import('../components/producto/producto.module').then(x => x.ProductoModule), canLoad: [AuthGuard] }
     ]
   }
 ];

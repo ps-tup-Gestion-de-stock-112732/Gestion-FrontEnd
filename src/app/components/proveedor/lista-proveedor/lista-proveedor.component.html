@@ -20,33 +20,41 @@
                
                <div class="text-center"><p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p></div>
 
-               <div class="">
-                  <table class="table">
-                     <thead>
-                       <tr>
-                         <th scope="col">Código</th>
-                         <th scope="col">Nombre</th>
-                         <th scope="col">Teléfono</th>
-                         <th scope="col">CUIT</th>
-                         <th scope="col">Dirección</th>
-                         <th scope="col">Acción</th>
-                       </tr>
-                     </thead>
-                     <tbody>
-                       <tr *ngFor="let e of proveedores | paginate: { itemsPerPage: 10, currentPage: p }">
-                         <th>{{e.idempresa}}</th>
-                         <td>{{e.nombre}}</td>
-                         <td>{{e.telefono}}</td>
-                         <td>{{e.cuit}}</td>
-                         <td>{{e.direccion}}</td>
-                         <td><button class="btn btn-primary btn-sm" (click)="selectProveedor(e.idempresa)">Seleccionar</button></td>
-                       </tr>
-                     </tbody>
-                   </table>
+               <div *ngIf="proveedores.length != 0">
+                  <div class="form">
+                     <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">CUIT</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Acción</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let e of proveedores | paginate: { itemsPerPage: 10, currentPage: p }">
+                            <th>{{e.idempresa}}</th>
+                            <td>{{e.nombre}}</td>
+                            <td>{{e.telefono}}</td>
+                            <td>{{e.cuit}}</td>
+                            <td>{{e.direccion}}</td>
+                            <td><button class="btn btn-primary btn-sm" (click)="selectProveedor(e.idempresa)">Seleccionar</button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  
+                  <div class="d-flex justify-content-center">
+                     <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                  </div>
                </div>
-               
-               <div class="d-flex justify-content-center">
-                  <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+               <div class="row justify-content-center" *ngIf="proveedores.length == 0">
+                  <div class="col-md-6 text-center">
+                     <p>No se encontraron resultados ...</p>
+                  </div>
                </div>
                
              </div>

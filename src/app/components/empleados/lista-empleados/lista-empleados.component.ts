@@ -58,11 +58,15 @@ export class ListaEmpleadosComponent implements OnInit, OnDestroy {
     } else {
       this.suscripcion.add(
         this.srvUsuario.obtenerEmpleadosXNombre(this.formularioBusqueda.value.busqueda, this.empresa.idempresa).subscribe({
+          
           next:(empleados) =>{
             this.empleados = empleados
 
             this.obtenerArea(this.empleados)
           },
+          error: (err) => {
+            this.empleados = []
+          }
         })
       )
     }
@@ -78,6 +82,9 @@ export class ListaEmpleadosComponent implements OnInit, OnDestroy {
           
           this.obtenerArea(this.empleados)
 
+        },
+        error: (err) => {
+          this.empleados = []
         }
       })
     )

@@ -1,0 +1,82 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header mx-5 mt-3">
+               <div class="card'title">Registrar Producto:</div>
+            </div>
+             <div class="card-body mx-5">
+               <form [formGroup]="formularioAlta" class="row g-3 mt-4" novalidate>
+                  <div class="row">
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="codigo" class="form-label">Código</label>
+                           <input type="number" class="form-control" id="codigo" formControlName="codigo">
+                           <span *ngIf="formularioAlta.controls['codigo'].touched && formularioAlta.get('codigo')?.hasError('required')" style="color: red;" role="alert">
+                              Código es requerido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="nombreProducto" class="form-label">Nombre</label>
+                           <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto">
+                           <span *ngIf="formularioAlta.controls['nombreProducto'].touched && formularioAlta.get('nombreProducto')?.hasError('required')" style="color: red;" role="alert">
+                              Nombre es requerido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="descripcion" class="form-label">Descripción</label>
+                           <input type="text" class="form-control" id="descripcion" formControlName="descripcion">
+                           <span *ngIf="formularioAlta.controls['descripcion'].touched && formularioAlta.get('descripcion')?.hasError('required')" style="color: red;" role="alert">
+                              Descripción es requerido
+                          </span>
+                        </div>
+                     </div>
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="precioUnitario" class="form-label">Precio unitario</label>
+                           <input type="number" class="form-control" id="precioUnitario" formControlName="precioUnitario">
+                           <span *ngIf="formularioAlta.controls['precioUnitario'].touched && formularioAlta.get('precioUnitario')?.hasError('required')" style="color: red;" role="alert">
+                              Precio unitario es requerido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="cantidad" class="form-label">Cantidad</label>
+                           <input type="number" class="form-control" id="cantidad" formControlName="cantidad">
+                           <span *ngIf="formularioAlta.controls['cantidad'].touched && formularioAlta.get('cantidad')?.hasError('required')" style="color: red;" role="alert">
+                              Cantidad es requerido
+                          </span>
+                       </div>
+                     </div>
+                  </div>
+
+                  <div class="text-center">
+                     <p *ngFor="let err of mensajeErrores" id="msgError" class="form-text" style="color: tomato;">{{err}}</p>
+                  </div>
+
+                  <div class="text-center">
+                     <p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p>
+                  </div>
+                   
+                  <div class="row justify-content-center">
+                     <div class="text-center">
+                        <button class="btn btn-primary m-2" type="submit" (click)="guardar()">Crear producto</button>
+                        <button class="btn btn-dark m-2" type="submit" (click)="cancelar()">Cancelar</button>
+                     </div>
+                  </div>
+                 
+                   
+                </form>
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+
+

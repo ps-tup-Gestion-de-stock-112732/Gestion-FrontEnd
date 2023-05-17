@@ -60,11 +60,13 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
   obtenerEmpresasAll(){
     this.suscripcion.add(
       this.srvEmpresa.obtenerEmpresas(1).subscribe({
-        next: (empresas)=>{
+        next:(empresas) =>{
 
           this.obtenerDireccion(empresas)
           
-
+        },
+        error:(err) => {
+          this.empresas = []
         }
       })
     )
@@ -126,10 +128,13 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
       this.suscripcion.add(
         this.srvEmpresa.obtenerEmpresasXNombre(this.formularioBusqueda.value.busqueda, 1).subscribe({
           next:(empresas) =>{
-            this.empresas = empresas
 
-            this.obtenerDireccion(this.empresas)
+            this.obtenerDireccion(empresas)
+            
           },
+          error:(err) => {
+            this.empresas = []
+          }
         })
       )
     }
