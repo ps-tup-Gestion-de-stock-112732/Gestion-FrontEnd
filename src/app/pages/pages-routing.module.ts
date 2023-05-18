@@ -28,6 +28,7 @@ import { PagesContactComponent } from './pages-contact/pages-contact.component';
 import { PagesFaqComponent } from './pages-faq/pages-faq.component';
 import { UsersProfileComponent } from './users-profile/users-profile.component';
 import { MainComponent } from './main/main.component';
+import { PagesTycComponent } from './pages-tyc/pages-tyc.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
       { path: 'pages-blank', component: PagesBlankComponent },
       { path: 'pages-contact', component: PagesContactComponent },
       { path: 'pages-faq', component: PagesFaqComponent },
+      { path: 'pages-tyc', component: PagesTycComponent },
       { path: 'user-profile', component: UsersProfileComponent },
       { path: 'empresa', loadChildren: () => import('../components/empresa/empresa.module').then(x => x.EmpresaModule), canLoad: [AuthGuard] },
       { path: 'empleados', loadChildren: () => import('../components/empleados/empleados.module').then(x => x.EmpleadosModule), canLoad: [AuthGuard] },
