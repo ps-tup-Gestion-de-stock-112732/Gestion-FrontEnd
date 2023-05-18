@@ -25,7 +25,7 @@ export class ListaProductoComponent implements OnInit, OnDestroy {
   mensajeError: String = "";
 
   usuario: Usuario
-  productos: Producto[]
+  productos: Producto[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -75,7 +75,7 @@ export class ListaProductoComponent implements OnInit, OnDestroy {
     this.suscripcion.add(
       this.srvProducto.obtenerProductos(this.usuario.idempresa).subscribe({
         next: (productos)=>{
-
+          
           this.productos = productos
 
         },

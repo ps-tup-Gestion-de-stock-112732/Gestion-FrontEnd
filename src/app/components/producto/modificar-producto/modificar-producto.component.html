@@ -1,0 +1,71 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header mx-5 mt-3">
+               <div class="card'title" >Modificar Producto: {{codigo}}<button class="btn btn-danger btn-sm m-2" type="submit" (click)="eliminarProducto()">Eliminar</button></div>
+            </div>
+             <div class="card-body mx-5">
+               <form [formGroup]="formularioModificacion" class="row g-3 mt-4" novalidate>
+                <div class="row">
+                    <div class="col-md-4 mt-3">
+                       <div class="form-group">
+                          <label for="nombreProducto" class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto">
+                          <span *ngIf="formularioModificacion.controls['nombreProducto'].touched && formularioModificacion.get('nombreProducto')?.hasError('required')" style="color: red;" role="alert">
+                             Nombre es requerido
+                         </span>
+                      </div>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                       <div class="form-group">
+                          <label for="descripcion" class="form-label">Descripción</label>
+                          <input type="text" class="form-control" id="descripcion" formControlName="descripcion">
+                          <span *ngIf="formularioModificacion.controls['descripcion'].touched && formularioModificacion.get('descripcion')?.hasError('required')" style="color: red;" role="alert">
+                             Descripción es requerido
+                         </span>
+                       </div>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                       <div class="form-group">
+                          <label for="precioUnitario" class="form-label">Precio unitario</label>
+                          <input type="number" class="form-control" id="precioUnitario" formControlName="precioUnitario">
+                          <span *ngIf="formularioModificacion.controls['precioUnitario'].touched && formularioModificacion.get('precioUnitario')?.hasError('required')" style="color: red;" role="alert">
+                             Precio unitario es requerido
+                         </span>
+                      </div>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                       <div class="form-group">
+                          <label for="cantidad" class="form-label">Cantidad</label>
+                          <input type="number" class="form-control" id="cantidad" formControlName="cantidad">
+                          <span *ngIf="formularioModificacion.controls['cantidad'].touched && formularioModificacion.get('cantidad')?.hasError('required')" style="color: red;" role="alert">
+                             Cantidad es requerido
+                         </span>
+                      </div>
+                    </div>
+                 </div>
+
+
+                  <div class="text-center">
+                     <p *ngFor="let err of mensajeErrores" id="msgError" class="form-text" style="color: tomato;">{{err}}</p>
+                  </div>
+
+                  <div class="text-center">
+                     <p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p>
+                  </div>
+                   
+                  <div class="row justify-content-center">
+                     <div class="text-center">
+                        <button class="btn btn-primary m-2" type="submit" (click)="actualizar()">Actualizar</button>
+                        <button class="btn btn-dark m-2" type="submit" (click)="cancelar()">Cancelar</button>
+                     </div>
+                  </div>
+                   
+                </form>
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>

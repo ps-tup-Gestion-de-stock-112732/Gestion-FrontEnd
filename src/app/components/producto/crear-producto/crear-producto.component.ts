@@ -2,18 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Barrio } from 'src/app/interfaces/barrio';
-import { ResumeDireccion } from 'src/app/interfaces/direccion';
-import { ResumeEmpresa } from 'src/app/interfaces/empresa';
-import { Localidad } from 'src/app/interfaces/localidad';
-import { Pais } from 'src/app/interfaces/pais';
 import { Producto } from 'src/app/interfaces/producto';
-import { Provincia } from 'src/app/interfaces/provincia';
-import { Rol } from 'src/app/interfaces/rol';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AuthService } from 'src/app/services/auth.service';
-import { DireccionService } from 'src/app/services/direccion.service';
-import { EmpresaService } from 'src/app/services/empresa.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
@@ -32,17 +23,6 @@ export class CrearProductoComponent implements OnInit ,OnDestroy {
 
   public formularioAlta: FormGroup
 
-  roles: Rol[]
-  paises: Pais[]
-  provincias: Provincia[]
-  localidades: Localidad[]
-  barrios: Barrio[]
-
-  idpais: Number
-  idprovincia: Number
-  idlocalidad: Number
-  idbarrio: Number
-
   proveedor: Usuario = {} as Usuario
 
   constructor(
@@ -50,8 +30,6 @@ export class CrearProductoComponent implements OnInit ,OnDestroy {
     public fb: FormBuilder,
     private srv: AuthService,
     private srvUsuario: UsuarioService,
-    private srvProveedor: EmpresaService,
-    private srvDireccion: DireccionService,
     private srvProducto: ProductoService
   ) { 
     this.formularioAlta = this.fb.group(
@@ -106,7 +84,7 @@ export class CrearProductoComponent implements OnInit ,OnDestroy {
       'descripcion': this.formularioAlta.value.descripcion,
       'precioUnitario': this.formularioAlta.value.precioUnitario,
       'cantidad': this.formularioAlta.value.cantidad,
-      'idProveedor': this.proveedor.idusuario
+      'idProveedor': this.proveedor.idempresa
     }
 
     Swal.fire({
