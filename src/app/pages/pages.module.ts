@@ -34,6 +34,7 @@ import { PagesBlankComponent } from './pages-blank/pages-blank.component';
 import { PagesContactComponent } from './pages-contact/pages-contact.component';
 import { PagesFaqComponent } from './pages-faq/pages-faq.component';
 import { UsersProfileComponent } from './users-profile/users-profile.component';
+import { PagesTycComponent } from './pages-tyc/pages-tyc.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { UsersProfileComponent } from './users-profile/users-profile.component';
     UsersProfileComponent,
     PagesFaqComponent,
     PagesContactComponent,
-    PagesBlankComponent
+    PagesBlankComponent,
+    PagesTycComponent
   ],
   imports: [
     CommonModule,
