@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ListaProductoComponent } from './lista-producto/lista-producto.component';
 import { RedirectEmpresaComponent } from './redirect-empresa/redirect-empresa.component';
+import { ModificarProductoComponent } from './modificar-producto/modificar-producto.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { RedirectEmpresaComponent } from './redirect-empresa/redirect-empresa.co
     MainProductoComponent,
     CrearProductoComponent,
     ListaProductoComponent,
-    RedirectEmpresaComponent
+    RedirectEmpresaComponent,
+    ModificarProductoComponent
   ],
   imports: [
     CommonModule,

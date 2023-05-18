@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,9 @@ import Swal from 'sweetalert2';
   templateUrl: './modificar-proveedor.component.html',
   styleUrls: ['./modificar-proveedor.component.css']
 })
-export class ModificarProveedorComponent implements OnInit , OnDestroy {
+export class ModificarProveedorComponent implements OnInit, OnDestroy {
+
+  habilitar: boolean = false
 
   usuario: Usuario = {} as Usuario
   
@@ -77,7 +79,12 @@ export class ModificarProveedorComponent implements OnInit , OnDestroy {
             next:(empresa) => {
               this.empresa = empresa
     
-              if(this.usuario.idusuario != this.empresa.idadmin) this.formularioModificacion.disable();
+              if(this.usuario.idusuario != this.empresa.idadmin){
+                this.formularioModificacion.disable();
+                this.habilitar = false
+              }else{
+                this.habilitar = true
+              }
     
               this.srvDireccion.obtenerDireccion(empresa.iddireccion).subscribe({
                 next:(direccion) =>{

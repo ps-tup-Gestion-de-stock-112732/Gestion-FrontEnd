@@ -4,13 +4,15 @@ import { MainProductoComponent } from './main-producto/main-producto.component';
 import { CrearProductoComponent } from './crear-producto/crear-producto.component';
 import { ListaProductoComponent } from './lista-producto/lista-producto.component';
 import { RedirectEmpresaComponent } from '../empleados/redirect-empresa/redirect-empresa.component';
+import { ModificarProductoComponent } from './modificar-producto/modificar-producto.component';
 
 const routes: Routes = [
   {
     path: '', component: MainProductoComponent, children: [
       { path: 'crear', component: CrearProductoComponent },
       { path: 'lista', component: ListaProductoComponent },
-      { path: 'redirect', component: RedirectEmpresaComponent }
+      { path: 'redirect', component: RedirectEmpresaComponent },
+      { path: 'modificar/:id', component: ModificarProductoComponent }
     ]
   }
 ];

@@ -14,23 +14,37 @@ export class ProductoService {
   constructor(private http: HttpClient) { }
 
   obtenerProductos(idProveedor: number): Observable<any> {
-    return this.http.post<any>(this.url + 'producto/all',{
-      'idProveedor': idProveedor
+    return this.http.post<any>(this.url + 'productos/all',{
+      'idempresa': idProveedor
     })
   }
 
+  obtenerProducto(codigo: number): Observable<any> {
+    return this.http.get<any>(this.url + 'productos/' + codigo)
+  }
+
   obtenerProductosXNombre(nombreProducto: string, idProveedor: number): Observable<any> {
-    return this.http.post<any>(this.url + 'producto/nombre',{
+    return this.http.post<any>(this.url + 'productos/nombre',{
       'nombreProducto': nombreProducto,
-      'idProveedor': idProveedor
+      'idempresa': idProveedor
     })
   }
 
   registrarProducto(producto: Producto): Observable<any> {
-    return this.http.post<any>(this.url + 'producto/', producto)
+    return this.http.post<any>(this.url + 'productos/', producto)
   }
 
   bajaProducto(codigo: Number): Observable<any> {
-    return this.http.put<any>(this.url + 'producto/delete/' + codigo, {})
+    return this.http.put<any>(this.url + 'productos/delete/' + codigo, {})
+  }
+
+  actualizarProducto(producto: Producto): Observable<any> {
+    return this.http.patch<any>(this.url + 'productos/'+ producto.codigo, {
+      'idProveedor': producto.idProveedor,
+      'nombreProducto': producto.nombreProducto,
+      'descripcion': producto.descripcion,
+      'precioUnitario': producto.precioUnitario,
+      'cantidad': producto.cantidad
+    })
   }
 }
