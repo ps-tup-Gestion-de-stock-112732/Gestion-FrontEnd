@@ -17,7 +17,7 @@
                   <div class="col-md-6 mt-2 text-center">
                      <form [formGroup]="formulario" class="row g-3" novalidate>
                         <div class="form-group">
-                           <input type="file" class="form-control" id="archivo" formControlName="archivo" (change)="obtenerArchivo($event)">
+                           <input type="file" accept=".xlsx" class="form-control" id="archivo" formControlName="archivo" (change)="obtenerArchivo($event)">
                            <span *ngIf="formulario.controls['archivo'].touched && formulario.get('archivo')?.hasError('required')" style="color: red;" role="alert">
                               Archivo es requerido
                           </span>

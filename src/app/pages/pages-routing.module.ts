@@ -64,7 +64,16 @@ const routes: Routes = [
       { path: 'empleados', loadChildren: () => import('../components/empleados/empleados.module').then(x => x.EmpleadosModule), canLoad: [AuthGuard] },
       { path: 'proveedores', loadChildren: () => import('../components/proveedores/proveedores.module').then(x => x.ProveedoresModule), canLoad: [AuthGuard] },
       { path: 'proveedor', loadChildren: () => import('../components/proveedor/proveedor.module').then(x => x.ProveedorModule), canLoad: [AuthGuard] },
-      { path: 'producto', loadChildren: () => import('../components/producto/producto.module').then(x => x.ProductoModule), canLoad: [AuthGuard] }
+      { path: 'producto', loadChildren: () => import('../components/producto/producto.module').then(x => x.ProductoModule), canLoad: [AuthGuard] },
+      { path: 'autorizantes', loadChildren: () => import('../components/autorizantes/autorizantes.module').then(x => x.AutorizantesModule), canLoad: [AuthGuard] },
+      { path: 'solicitudes-proveedor', loadChildren: () => import('../components/solicitudes/solicitudes-proveedor/solicitudes-proveedor.module').then(x => x.SolicitudesProveedorModule), canLoad: [AuthGuard] },
+      { path: 'contrato', loadChildren: () => import('../components/contrato/contrato.module').then(x => x.ContratoModule), canLoad: [AuthGuard] },
+      { path: 'solicitudes-usr-empresa', loadChildren: () => import('../components/solicitudes/solicitudes-usr-empresa/solicitudes-usr-empresa.module').then(x => x.SolicitudesUsrEmpresaModule), canLoad: [AuthGuard] },
+      { path: 'solicitudes-usr-proveedor', loadChildren: () => import('../components/solicitudes/solicitudes-usr-proveedor/solicitudes-usr-proveedor.module').then(x => x.SolicitudesUsrProveedorModule), canLoad: [AuthGuard] },
+      { path: 'categoria', loadChildren: () => import('../components/categorias/categorias.module').then(x => x.CategoriasModule), canLoad: [AuthGuard] },
+      { path: 'pedidos', loadChildren: () => import('../components/pedidos/nuevo-pedido-empleado/nuevo-pedido-empleado.module').then(x => x.NuevoPedidoEmpleadoModule), canLoad: [AuthGuard] },
+      { path: 'pedidos-empleado', loadChildren: () => import('../components/pedidos/pedidos-empleado/pedidos-empleado.module').then(x => x.PedidosEmpleadoModule), canLoad: [AuthGuard] },
+      { path: 'pedidos-proveedor', loadChildren: () => import('../components/pedidos/pedidos-proveedor/pedidos-proveedor.module').then(x => x.PedidosProveedorModule), canLoad: [AuthGuard] }
     ]
   }
 ];

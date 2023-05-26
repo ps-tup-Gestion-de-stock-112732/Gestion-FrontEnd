@@ -8,6 +8,7 @@ import { Empresa } from 'src/app/interfaces/empresa';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { SolicitudService } from 'src/app/services/solicitud.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -38,7 +39,8 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
     private router: Router,
     private srvEmpresa: EmpresaService,
     private srvDireccion: DireccionService,
-    private srvUsuario: UsuarioService
+    private srvUsuario: UsuarioService,
+    private srvSolicitud: SolicitudService
   ) { 
     this.formularioBusqueda = this.fb.group({
       busqueda: ["", Validators.required]
@@ -153,35 +155,31 @@ export class ListaEmpresasComponent implements OnInit, OnDestroy {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.usuario.idempresa = idempresa
-
         this.suscripcion.add(
-          this.srvUsuario.updateUsuarioEmpresa(this.usuario).subscribe({
-            next:(usr) => {
-
-              if (usr) {
-                Swal.fire({
-                  title: 'Cuenta actualizada con éxito',
-                  icon: 'success',
-                  confirmButtonText: 'Aceptar',
-                  confirmButtonColor: '#007bff'
-                }).then((result) => {
-                  if (result.isConfirmed) {
-
-                    let currentUrl = this.router.url;
-                    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                      this.router.navigate([currentUrl]);
-                    });
-        
-                  }
-                })
-              }
-            },error: (err) => {
+          this.srvSolicitud.registrarSolicitudUsuarioEmpresa(this.usuario.idusuario, idempresa).subscribe({
+            next:(solicitud) => {
               Swal.fire({
-                title: '¡No se pudo actualizar la empresa!',
+                title: 'Solicitud enviada con éxito',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#007bff'
+              }).then((result) => {
+                if (result.isConfirmed) {
+
+                  let currentUrl = this.router.url;
+                  this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                    this.router.navigate([currentUrl]);
+                  });
+      
+                }
+              })
+            },
+            error:(err) => {
+              Swal.fire({
+                title: '¡No se pudo enviar la solicitud!',
                 icon: 'error'
               })
-            }
+            },
           })
         )
       }

@@ -11,6 +11,7 @@ import { EmpresaComponent } from './empresa.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ContenedorEmpresaComponent } from './contenedor-empresa/contenedor-empresa.component';
 import { AreasEmpresaComponent } from './areas-empresa/areas-empresa.component';
+import { EnEsperaComponent } from './en-espera/en-espera.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AreasEmpresaComponent } from './areas-empresa/areas-empresa.component';
     CrearEmpresaComponent,
     ModificarEmpresaComponent,
     ContenedorEmpresaComponent,
-    AreasEmpresaComponent
+    AreasEmpresaComponent,
+    EnEsperaComponent
   ],
   imports: [
     CommonModule,

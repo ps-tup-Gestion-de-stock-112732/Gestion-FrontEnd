@@ -52,10 +52,23 @@ export class EmpresaService {
     })
   }
 
+  obtenerProveedoresDisponibles(idempresa: Number): Observable<any> {
+    return this.http.post<any>(this.url + 'proveedores/disponibles', {
+      "idempresa": idempresa
+    })
+  }
+
   obtenerProveedoresXNombre(nombre: string, tipoempresa: Number): Observable<any> {
     return this.http.post<any>(this.url + 'proveedores/nombre',{
       'nombre': nombre,
       'tipoempresa': tipoempresa
+    })
+  }
+
+  obtenerProveedoresDisponiblesXNombre(nombre: string, idempresa: Number): Observable<any> {
+    return this.http.post<any>(this.url + 'proveedores/disponibles/nombre',{
+      'nombre': nombre,
+      'idempresa': idempresa
     })
   }
 

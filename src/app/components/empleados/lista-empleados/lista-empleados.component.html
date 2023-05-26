@@ -39,8 +39,8 @@
                             <td>{{e.telefono}}</td>
                             <td>{{e.area}}</td>
                             <td>
-                              <button class="btn btn-primary btn-sm mx-1" [routerLink]="['/pages/empleados/modificar', e.idusuario]"> <i class="bi bi-pencil-square"></i></button>
-                              <button class="btn btn-danger btn-sm mx-1" (click)="elimarEmpleado(e.idusuario)"> <i class="bi bi-trash"></i></button>
+                              <button class="btn btn-sm btn-primary mx-1" [routerLink]="['/pages/empleados/modificar', e.idusuario]"> <i class="bi bi-pencil-square"></i></button>
+                              <button class="btn btn-sm btn-danger mx-1" (click)="elimarEmpleado(e.idusuario)"> <i class="bi bi-trash"></i></button>
                            </td>
                           </tr>
                         </tbody>

@@ -1,0 +1,67 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+             <div class="card-body mx-5">
+               <div class="my-4">
+                  <button class="btn btn-primary" (click)="mostarForm()" type="button">Nuevo Autorizante</button>
+               </div>
+               
+               <form [formGroup]="formularioBusqueda" class="row g-3">
+                  <div class="input-group mb-3">
+                     <input type="search" class="form-control" placeholder="Búsqueda de autorizantes" formControlName="busqueda">
+                     <div class="input-group-append">
+                       <button class="btn btn-outline-secondary" type="button" id="buscar" (click)="buscar()">Buscar</button>
+                     </div>
+                  </div>
+               </form>
+               
+               <div class="text-center"><p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p></div>
+
+               <div *ngIf="usuarios.length != 0">
+                  <div class="form">
+                     <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Acción</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let e of usuarios | paginate: { itemsPerPage: 10, currentPage: p }">
+                            <td>{{e.nombre+ ' '+e.apellido}}</td>
+                            <td>{{e.nro_documento}}</td>
+                            <td>{{e.email}}</td>
+                            <td>{{e.telefono}}</td>
+                            <td>{{e.rol}}</td>
+                            <td>
+                              <button class="btn btn-primary btn-sm mx-1" [routerLink]="['/pages/autorizantes/modificar', e.idusuario]"> <i class="bi bi-pencil-square"></i></button>
+                              <button class="btn btn-danger btn-sm mx-1" (click)="elimarUsuario(e.idusuario)"> <i class="bi bi-trash"></i></button>
+                           </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  
+                  <div class="d-flex justify-content-center">
+                     <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                  </div>
+               </div>
+               
+               <div class="row justify-content-center" *ngIf="usuarios.length == 0">
+                  <div class="col-md-6 text-center">
+                     <p>No se encontraron resultados ...</p>
+                  </div>
+               </div>
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+
+

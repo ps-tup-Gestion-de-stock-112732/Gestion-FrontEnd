@@ -50,7 +50,7 @@ export class PagesRegisterComponent implements OnInit, OnDestroy{
 
     this.suscripcion.add(this.srvRol.obtenerRoles().subscribe({
       next: (roles: Rol[]) =>{
-        this.roles = roles.filter(r => r.idrol != 5)
+        this.roles = roles.filter(r => r.idrol == 1 || r.idrol == 4 )
       },
       error: (err) => {
         this.mostrarMsjError(err.error.message);

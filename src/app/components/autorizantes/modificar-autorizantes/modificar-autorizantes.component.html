@@ -1,0 +1,113 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex mx-5 mt-3">
+               <div class="card'title">Modificar Autorizante:</div>
+            </div>
+
+            <router-outlet class="card mb-0"></router-outlet>
+
+             <div class="card-body mx-5">
+               <form [formGroup]="formulario" class="row g-3 mt-4" novalidate>
+                  <div class="row">
+                    <span class="text-muted">* campos obligatorios</span>
+                    <br><br>
+
+                    <div class="col-md-6 mt-3">
+                        <div class="form-group">
+                           <label for="nombre" class="form-label">Nombre*</label>
+                           <input type="text" class="form-control" id="nombre" formControlName="nombre">
+                           <span *ngIf="formulario.controls['nombre'].touched && formulario.get('nombre')?.hasError('required')" style="color: red;" role="alert">
+                              Nombre es inválido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-6 mt-3">
+                        <div class="form-group">
+                           <label for="apellido" class="form-label">Apellido*</label>
+                           <input type="text" class="form-control" id="apellido" formControlName="apellido">
+                           <span *ngIf="formulario.controls['apellido'].touched && formulario.get('apellido')?.hasError('required')" style="color: red;" role="alert">
+                              Apellido es requerido
+                          </span>
+                        </div>
+                     </div>
+                     <div class="col-md-6 mt-3">
+                        <div class="form-group">
+                           <label for="telefono" class="form-label">Teléfono*</label>
+                           <input type="number" class="form-control" id="telefono" formControlName="telefono">
+                           <span *ngIf="formulario.controls['telefono'].touched && formulario.get('telefono')?.hasError('required')" style="color: red;" role="alert">
+                              Teléfono es requerido
+                          </span>
+                       </div>
+                     </div>
+                     <div class="col-md-6 mt-3">
+                        <div class="form-group">
+                           <label for="nro_documento" class="form-label">Número de documento*</label>
+                           <input type="number" class="form-control" id="nro_documento" formControlName="nro_documento">
+                           <span *ngIf="formulario.controls['nro_documento'].touched && formulario.get('nro_documento')?.hasError('required')" style="color: red;" role="alert">
+                              Número de documento es requerido
+                          </span>
+                        </div>
+                     </div>
+                     <div class="col-md-6 mt-3">
+                        <div class="form-group">
+                           <label for="idrol">Seleccione un rol*</label>
+                           <select class="form-control mt-2" formControlName="idrol">
+                              <option *ngFor="let rol of roles" [value]="rol.idrol">{{rol.nombre}}</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="credenciales">
+                     <div class="card-header mx-5">
+                        <div class="card'title">Credenciales del autorizante:</div>
+                     </div>
+                     <br>
+                     <div class="row mx-5">
+                        <div class="col-md-6 mt-2">
+                           <div class="form-group">
+                              <label for="email" class="form-label">Email*</label>
+                              <input type="email" class="form-control" id="email" formControlName="email">
+                              <span *ngIf="formulario.controls['email'].touched && formulario.get('email')?.hasError('required')" style="color: red;" role="alert">
+                                   Email es requerido
+                             </span>
+                           </div>
+                        </div>
+   
+                        <div class="col-md-6 mt-2">
+                           <div class="form-group">
+                              <label for="password" class="form-label">Contraseña</label>
+                              <input type="password" class="form-control" id="password" formControlName="password">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="text-center">
+                     <p *ngFor="let err of mensajeErrores" id="msgError" class="form-text" style="color: tomato;">{{err}}</p>
+                  </div>
+
+                  <div class="text-center">
+                     <p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p>
+                  </div>
+                   
+                  <div class="row justify-content-center">
+                     <div class="text-center">
+                        <button class="btn btn-primary m-2" type="submit" (click)="actualizar()">Actualizar autorizante</button>
+                        <button class="btn btn-dark m-2" type="submit" (click)="cancelar()">Cancelar</button>
+                     </div>
+                  </div>
+                 
+                   
+                </form>
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+
+
+

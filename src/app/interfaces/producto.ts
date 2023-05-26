@@ -1,3 +1,6 @@
+import { Categoria } from "./categoria";
+import { Empresa } from "./empresa";
+
 export interface Producto {
     codigo: number,
     nombreProducto: string,
@@ -5,4 +8,8 @@ export interface Producto {
     precioUnitario: number,
     cantidad: number,
     idProveedor: number,
+    idcategoria: number,
+    imagen: string,
+    datosProveedor: Empresa,
+    categoria: Categoria
 }

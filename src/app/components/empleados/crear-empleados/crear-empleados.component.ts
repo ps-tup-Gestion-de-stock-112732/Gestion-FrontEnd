@@ -67,8 +67,6 @@ export class CrearEmpleadosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.completarListas()
-
-    console.log(this.usuario.idempresa);
     
     this.suscripcion.add(
       this.srvArea.obtenerAreas(this.usuario.idempresa).subscribe({

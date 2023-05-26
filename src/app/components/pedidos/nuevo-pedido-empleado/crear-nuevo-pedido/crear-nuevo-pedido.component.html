@@ -1,0 +1,76 @@
+<section class="section profile">
+    <div class="row">
+       <div class="col-xl-12">
+          <div class="card">
+            <div class="card-body align-items-center">
+                <form [formGroup]="formularioBusqueda" class="row justify-content-center py-4 mx-2">
+
+                        <div class="col-md-3 pt-3">
+                            <div class="form-group mx-auto">
+                                <label for="nombre" class="form-label">Nombre:</label>
+                                <input type="search" class="form-control" placeholder="Buscar nombre..." formControlName="nombre">
+                             </div>
+                        </div>
+
+                        <div class="col-md-3 pt-3">
+                            <div class="form-group mx-auto">
+                                <label for="idempresa" class="form-label">Proveedores:</label>
+                                <select class="form-control" formControlName="idempresa">
+                                    <option *ngFor="let proveedor of proveedores" [value]="proveedor.idempresa" >{{proveedor.nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 pt-3">
+                            <div class="form-group mx-auto">
+                                <label for="idcategoria" class="form-label">Categorías:</label>
+                                <select class="form-control" formControlName="idcategoria">
+                                    <option *ngFor="let categoria of categorias" [value]="categoria.idcategoria" >{{categoria.descripcion}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 d-flex pt-5">
+                            <div class="mx-auto">
+                                <button class="btn btn-outline-secondary mx-1" type="button" (click)="buscar()">Buscar</button>
+                                <button class="btn btn-outline-secondary mx-1" type="button" (click)="limpiar()">Limpiar</button>
+                            </div>
+                        </div>
+                    
+                 </form>
+                 
+            </div>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-xl-12">
+          <div class="card">
+             <div class="card-body pt-4">
+                <div class="container py-4">
+                    <div class="row row-cols-1 row-cols-md-4">
+                        <div class="col mb-4" *ngFor="let producto of productos | paginate: { itemsPerPage: 12, currentPage: p }">
+                            <a class="card btn h-100" [routerLink]="['/pages/pedidos/producto/detalle/', producto.codigo]">
+                                <img src="{{producto.imagen}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">${{producto.precioUnitario}}</h5>
+                                    <p class="card-text">{{producto.nombreProducto}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Proveedor: {{producto.datosProveedor.nombre}}</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="text-center">
+                            <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                        </div>
+                    </div>
+
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
