@@ -8,6 +8,7 @@ import { MainProveedorComponent } from './main-proveedor/main-proveedor.componen
 import { ListaProveedorComponent } from './lista-proveedor/lista-proveedor.component';
 import { CrearProveedorComponent } from './crear-proveedor/crear-proveedor.component';
 import { ModificarProveedorComponent } from './modificar-proveedor/modificar-proveedor.component';
+import { EnEsperaComponent } from './en-espera/en-espera.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ModificarProveedorComponent } from './modificar-proveedor/modificar-pro
     MainProveedorComponent,
     ListaProveedorComponent,
     CrearProveedorComponent,
-    ModificarProveedorComponent
+    ModificarProveedorComponent,
+    EnEsperaComponent
   ],
   imports: [
     CommonModule,

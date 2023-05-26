@@ -2,8 +2,11 @@
     <div class="row justify-content-center">
        <div class="col-lg-12">
           <div class="card">
-            <div class="card-header mx-5 mt-3">
+            <div class="card-header d-flex  mx-5 mt-3">
                <div class="card'title">Registrar Producto:</div>
+               <div class="ms-auto">
+                  <button class="btn btn-sm btn-dark m-1" [routerLink]="['/pages/categoria/lista']">Administrar categorías</button>
+               </div>
             </div>
              <div class="card-body mx-5">
                <form [formGroup]="formularioAlta" class="row g-3 mt-4" novalidate>
@@ -52,6 +55,36 @@
                               Cantidad es requerido
                           </span>
                        </div>
+                     </div>
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="categoria" class="form-label">Categoría</label>
+                           <select class="form-control" id="categoria" formControlName="categoria">
+                              <option *ngFor="let cat of categorias" [value]="cat.idcategoria">{{cat.descripcion}}</option>
+                          </select>
+                           <span *ngIf="formularioAlta.controls['categoria'].touched && formularioAlta.get('categoria')?.hasError('required')" style="color: red;" role="alert">
+                              Categoría es requerida
+                          </span>
+                       </div>
+                     </div>
+                  </div>
+
+                  <div class="imagen">
+                     <div class="card-header mx-5">
+                        <div class="card'title">Seleccione una imagen para el producto:</div>
+                     </div>
+                     <br>
+                     <div class="row mx-5 justify-content-center">
+                        <div class="col-md-6 mt-2 text-center">
+                           <form [formGroup]="formularioAlta" class="row g-3" novalidate>
+                              <div class="form-group">
+                                 <input type="file" accept=".png, .jpg, .jpeg" class="form-control" id="imagen" formControlName="imagen" (change)="obtenerArchivo($event)">
+                                 <span *ngIf="formularioAlta.controls['imagen'].touched && formularioAlta.get('imagen')?.hasError('required')" style="color: red;" role="alert">
+                                    Imagen es requerida
+                                </span>
+                              </div>
+                           </form>
+                        </div>
                      </div>
                   </div>
 

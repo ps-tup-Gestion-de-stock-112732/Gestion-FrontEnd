@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import { SolicitudService } from 'src/app/services/solicitud.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class MainProveedorComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private srv: AuthService,
-    private srvUsuario: UsuarioService
+    private srvUsuario: UsuarioService,
+    private srvSolicitud: SolicitudService
   ) { }
   
 
@@ -34,7 +36,18 @@ export class MainProveedorComponent implements OnInit, OnDestroy {
           if (this.usuario.idempresa) {
             this.router.navigate(['pages/proveedor/modificar/', this.usuario.idempresa])
           }else{
-            this.router.navigate(['pages/proveedor/lista'])
+
+            this.srvSolicitud.solicitudPendientesUsuarioProveedor(this.usuario.idusuario).subscribe({
+              next:(value) => {
+
+                if (value.length) {
+                  this.router.navigate(['/pages/proveedor/en-espera'])
+                }else{
+                  this.router.navigate(['pages/proveedor/lista'])
+                }
+                
+              },
+            })
           }
         },
       })

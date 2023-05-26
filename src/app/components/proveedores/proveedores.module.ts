@@ -7,12 +7,16 @@ import { ContenedorProveedoresComponent } from './contenedor-proveedores/contene
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ListaPendientesComponent } from './lista-pendientes/lista-pendientes.component';
+import { ListaAsociadosComponent } from './lista-asociados/lista-asociados.component';
 
 
 @NgModule({
   declarations: [
     ListaProveedoresComponent,
-    ContenedorProveedoresComponent
+    ContenedorProveedoresComponent,
+    ListaPendientesComponent,
+    ListaAsociadosComponent
   ],
   imports: [
     CommonModule,

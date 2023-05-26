@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
   templateUrl: './modificar-empleados.component.html',
   styleUrls: ['./modificar-empleados.component.css']
 })
-export class ModificarEmpleadosComponent implements OnInit {
+export class ModificarEmpleadosComponent implements OnInit, OnDestroy {
 
   public formulario: FormGroup
 
@@ -28,7 +28,7 @@ export class ModificarEmpleadosComponent implements OnInit {
   mensajeErrores: String[]
   mensajeError: String = ""
 
-  empleado: Usuario
+  empleado: Usuario = {} as Usuario
 
   areas: Area[]
   paises: Pais[]
@@ -61,6 +61,9 @@ export class ModificarEmpleadosComponent implements OnInit {
         iddireccion: [""],
     })
   }
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe()
+  }
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id']
@@ -88,7 +91,6 @@ export class ModificarEmpleadosComponent implements OnInit {
                               this.formulario.patchValue(localidad);
                               this.formulario.patchValue(barrio);
 
-                              empleado.password = ''
                               this.formulario.patchValue(empleado);
 
                               this.suscripcion.add(
@@ -220,8 +222,6 @@ export class ModificarEmpleadosComponent implements OnInit {
     empleado.iddireccion = iddireccion
     empleado.idempresa = this.empleado.idempresa
 
-    console.log(empleado);
-
     this.srvUsuario.updateEmpleado(empleado).subscribe({
       next: (empleadoResponse) => {
 
@@ -244,16 +244,23 @@ export class ModificarEmpleadosComponent implements OnInit {
         }
       },
       error: (err) => {
-        Swal.fire({
-          title: '¡No se pudo actualizar el empleado!',
-          icon: 'error'
-        })
+        this.mostrarMsjErrores(err.error.errors);
       }
     })
   }
 
   cancelar(){
     this.router.navigate(['/pages/empleados/main'])
+  }
+
+  mostrarMsjErrores(errores: any[]) {
+    let mensajes : String[] = []
+
+    for (let i = 0; i < errores.length; i++) {
+      mensajes.push(errores[i].msg)
+    }
+    
+    this.mensajeErrores = mensajes;
   }
 
   mostrarMsjError(error: String) {

@@ -7,44 +7,70 @@
             </div>
              <div class="card-body mx-5">
                <form [formGroup]="formularioModificacion" class="row g-3 mt-4" novalidate>
-                <div class="row">
-                    <div class="col-md-4 mt-3">
-                       <div class="form-group">
-                          <label for="nombreProducto" class="form-label">Nombre</label>
-                          <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto">
-                          <span *ngIf="formularioModificacion.controls['nombreProducto'].touched && formularioModificacion.get('nombreProducto')?.hasError('required')" style="color: red;" role="alert">
-                             Nombre es requerido
-                         </span>
-                      </div>
-                    </div>
-                    <div class="col-md-4 mt-3">
-                       <div class="form-group">
-                          <label for="descripcion" class="form-label">Descripción</label>
-                          <input type="text" class="form-control" id="descripcion" formControlName="descripcion">
-                          <span *ngIf="formularioModificacion.controls['descripcion'].touched && formularioModificacion.get('descripcion')?.hasError('required')" style="color: red;" role="alert">
-                             Descripción es requerido
-                         </span>
-                       </div>
-                    </div>
-                    <div class="col-md-4 mt-3">
-                       <div class="form-group">
-                          <label for="precioUnitario" class="form-label">Precio unitario</label>
-                          <input type="number" class="form-control" id="precioUnitario" formControlName="precioUnitario">
-                          <span *ngIf="formularioModificacion.controls['precioUnitario'].touched && formularioModificacion.get('precioUnitario')?.hasError('required')" style="color: red;" role="alert">
-                             Precio unitario es requerido
-                         </span>
-                      </div>
-                    </div>
-                    <div class="col-md-4 mt-3">
-                       <div class="form-group">
-                          <label for="cantidad" class="form-label">Cantidad</label>
-                          <input type="number" class="form-control" id="cantidad" formControlName="cantidad">
-                          <span *ngIf="formularioModificacion.controls['cantidad'].touched && formularioModificacion.get('cantidad')?.hasError('required')" style="color: red;" role="alert">
-                             Cantidad es requerido
-                         </span>
-                      </div>
-                    </div>
-                 </div>
+                  <div class="row">
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="nombreProducto" class="form-label">Nombre</label>
+                           <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto">
+                           <span *ngIf="formularioModificacion.controls['nombreProducto'].touched && formularioModificacion.get('nombreProducto')?.hasError('required')" style="color: red;" role="alert">
+                              Nombre es requerido
+                           </span>
+                        </div>
+                     </div>
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="descripcion" class="form-label">Descripción</label>
+                           <input type="text" class="form-control" id="descripcion" formControlName="descripcion">
+                           <span *ngIf="formularioModificacion.controls['descripcion'].touched && formularioModificacion.get('descripcion')?.hasError('required')" style="color: red;" role="alert">
+                              Descripción es requerido
+                           </span>
+                        </div>
+                     </div>
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="precioUnitario" class="form-label">Precio unitario</label>
+                           <input type="number" class="form-control" id="precioUnitario" formControlName="precioUnitario">
+                           <span *ngIf="formularioModificacion.controls['precioUnitario'].touched && formularioModificacion.get('precioUnitario')?.hasError('required')" style="color: red;" role="alert">
+                              Precio unitario es requerido
+                           </span>
+                        </div>
+                     </div>
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="cantidad" class="form-label">Cantidad</label>
+                           <input type="number" class="form-control" id="cantidad" formControlName="cantidad">
+                           <span *ngIf="formularioModificacion.controls['cantidad'].touched && formularioModificacion.get('cantidad')?.hasError('required')" style="color: red;" role="alert">
+                              Cantidad es requerido
+                           </span>
+                        </div>
+                     </div>
+                     <div class="col-md-4 mt-3">
+                        <div class="form-group">
+                           <label for="idcategoria" class="form-label">Categoría</label>
+                           <select class="form-control" id="idcategoria" formControlName="idcategoria">
+                              <option *ngFor="let cat of categorias" [value]="cat.idcategoria">{{cat.descripcion}}</option>
+                           </select>
+                           <span *ngIf="formularioModificacion.controls['idcategoria'].touched && formularioModificacion.get('idcategoria')?.hasError('required')" style="color: red;" role="alert">
+                              Categoría es requerida
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="imagen">
+                     <div class="card-header mx-5">
+                        <div class="card'title">Seleccione una imagen para el producto:</div>
+                     </div>
+                     <br>
+                     <div class="row mx-5 justify-content-center">
+                        <div class="col-md-6 mt-2 text-center">
+                           <div class="form-group">
+                              <input type="file" accept=".png, .jpg, .jpeg" class="form-control" id="img" formControlName="img" (change)="obtenerArchivo($event)">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
 
 
                   <div class="text-center">

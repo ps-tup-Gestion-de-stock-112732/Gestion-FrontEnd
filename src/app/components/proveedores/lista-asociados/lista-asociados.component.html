@@ -1,0 +1,67 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex mx-5 mt-4">
+                <div class="card'title">Listado de contratos vigentes:</div>
+                <div class="ms-auto">
+                    <button class="btn btn-dark btn-sm m-1" type="submit" (click)="nuevo()">Nuevo contrato</button>
+                    <button class="btn btn-dark btn-sm m-1" type="submit" (click)="pendientes()">Solicitudes pendientes</button>
+                </div>
+            </div>
+            <div class="card-body mx-5 my-4">
+               
+               <form [formGroup]="formularioBusqueda" class="row g-3">
+                  <div class="input-group mb-4">
+                     <input type="search" class="form-control" placeholder="Búsqueda por nombre de proveedor" formControlName="busqueda">
+                     <div class="input-group-append">
+                       <button class="btn btn-outline-secondary" type="button" id="buscar" (click)="buscar()">Buscar</button>
+                     </div>
+                  </div>
+               </form>
+               
+               <div class="text-center"><p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p></div>
+
+               <div *ngIf="contratos.length != 0">
+                  <div class="form">
+                     <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">CUIT</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Acción</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let c of contratos | paginate: { itemsPerPage: 10, currentPage: p }">
+                            <th>{{c.datosProveedor.nombre}}</th>
+                            <td>{{c.datosProveedor.telefono}}</td>
+                            <td>{{c.datosProveedor.cuit}}</td>
+                            <td>{{c.datosProveedor.direccion}}</td>
+                            <td><button class="btn btn-sm btn-danger" (click)="bajaContrato(c.id)">Eliminar</button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+
+                  <div class="d-flex justify-content-center">
+                     <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                  </div>
+               </div>
+
+               <div class="row justify-content-center" *ngIf="contratos.length == 0">
+                  <div class="col-md-6 text-center">
+                     <p>No se encontraron resultados ...</p>
+                  </div>
+               </div>
+               
+               
+               
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+

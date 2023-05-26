@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ResumeUsuario, Usuario } from '../interfaces/usuario';
+import { PatchUsuario, ResumeUsuario, Usuario } from '../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,18 @@ export class UsuarioService {
     return this.http.get<any>(this.url + 'empleados/' + idempleado)
   }
 
+  obtenerAutorizante(idusuario: Number): Observable<any> {
+    return this.http.get<any>(this.url + 'autorizantes/' + idusuario)
+  }
+
   obtenerEmpleados(idempresa: Number): Observable<any> {
     return this.http.post<any>(this.url + 'empleados/all', {
+      'idempresa': idempresa
+    })
+  }
+
+  obtenerAutorizantes(idempresa: Number): Observable<any> {
+    return this.http.post<any>(this.url + 'autorizantes/all', {
       'idempresa': idempresa
     })
   }
@@ -34,7 +44,20 @@ export class UsuarioService {
     })
   }
 
+  obtenerAutorizantesXNombre(nombre: string, idempresa: Number): Observable<any> {
+    return this.http.post<any>(this.url + 'autorizantes/nombre', {
+      'nombre': nombre,
+      'idempresa': idempresa
+    })
+  }
+
   updateUsuarioEmpresa(usuario: Usuario): Observable<any> {
+    return this.http.patch<any>(this.url + 'usuarios/' + usuario.idusuario, {
+      idempresa: usuario.idempresa
+    })
+  }
+
+  updateUsuarioProveedor(usuario: Usuario): Observable<any> {
     return this.http.patch<any>(this.url + 'usuarios/' + usuario.idusuario, {
       idempresa: usuario.idempresa
     })
@@ -46,6 +69,10 @@ export class UsuarioService {
 
   updateEmpleado(usuario: ResumeUsuario): Observable<any> {
     return this.http.patch<any>(this.url + 'empleados/' + usuario.idusuario, usuario)
+  }
+
+  updateAutorizante(usuario: PatchUsuario): Observable<any> {
+    return this.http.patch<any>(this.url + 'autorizantes/' + usuario.idusuario, usuario)
   }
 
   updateUsuarioPassword(idusuario: Number, pass: string): Observable<any> {
@@ -69,11 +96,27 @@ export class UsuarioService {
     return this.http.put<any>(this.url + 'empleados/delete/' + idusuario, {})
   }
 
+  bajaAutorizante(idusuario: Number): Observable<any> {
+    return this.http.put<any>(this.url + 'autorizantes/delete/' + idusuario, {})
+  }
+
   sendFile(body: FormData): Observable<any> {
     return this.http.post<any>(this.url + 'empleados/upload', body)
   }
 
   desvincularProveedor(idusuario: Number): Observable<any> {
     return this.http.put<any>(this.url + 'proveedores/desvincular/' + idusuario, {})
+  }
+
+  registrarAutorizante(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(this.url + 'autorizantes', {
+      "nombre": usuario.nombre,
+      "apellido": usuario.apellido,
+      "nro_documento": usuario.nro_documento,
+      "email": usuario.email,
+      "password": usuario.password,
+      "telefono": usuario.telefono,
+      "idrol": usuario.idrol
+    })
   }
 }

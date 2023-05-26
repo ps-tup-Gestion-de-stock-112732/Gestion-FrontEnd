@@ -8,6 +8,17 @@ export interface ResumeUsuario {
   idarea: number
 }
 
+export interface PatchUsuario {
+  idusuario: number,
+  nombre: string,
+  apellido: string,
+  nro_documento: number,
+  email: string,
+  password: string,
+  telefono: number,
+  idrol: number
+}
+
 export interface Usuario {
   idusuario: number,
   nombre: string,
@@ -22,5 +33,6 @@ export interface Usuario {
   idarea: number,
   iddireccion: number,
   direccion: string,
-  area: string
+  area: string,
+  rol: string
 }

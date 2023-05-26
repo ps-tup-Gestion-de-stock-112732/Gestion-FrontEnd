@@ -30,7 +30,7 @@ export class ListaEmpleadosComponent implements OnInit, OnDestroy {
 
   mensajeError: String = "";
 
-  empleados: Usuario[]
+  empleados: Usuario[] = []
 
   constructor(
     private fb: FormBuilder,

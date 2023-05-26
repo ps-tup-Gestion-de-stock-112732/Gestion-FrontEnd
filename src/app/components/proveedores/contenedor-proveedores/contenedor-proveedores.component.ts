@@ -13,7 +13,7 @@ export class ContenedorProveedoresComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.router.navigate(['pages/proveedores/lista'])
+    this.router.navigate(['pages/proveedores/asociados'])
   }
 
 }

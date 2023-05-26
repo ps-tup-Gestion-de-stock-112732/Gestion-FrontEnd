@@ -2,10 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthEmpresa, ResumeAuthEmpresa } from 'src/app/interfaces/authEmpresa';
 import { Direccion } from 'src/app/interfaces/direccion';
 import { Empresa } from 'src/app/interfaces/empresa';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { AuthService } from 'src/app/services/auth.service';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { SolicitudService } from 'src/app/services/solicitud.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,13 +28,17 @@ export class ListaProveedoresComponent implements OnInit, OnDestroy {
 
   mensajeError: String = "";
 
-  proveedores: Empresa[]
+  proveedores: Empresa[] = []
+  usuario: Usuario = {} as Usuario
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private srv: AuthService,
+    private srvUsuario: UsuarioService,
     private srvProveedor: EmpresaService,
-    private srvDireccion: DireccionService
+    private srvDireccion: DireccionService,
+    private srvSolicitud: SolicitudService
   ) { 
     this.formularioBusqueda = this.fb.group({
       busqueda: ["", Validators.required]
@@ -38,7 +47,16 @@ export class ListaProveedoresComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.obtenerProveedoresAll()
+    let usr = this.srv.getUser()
+    this.suscripcion.add(
+      this.srvUsuario.obtenerUsuario(usr.idusuario).subscribe({
+        next:(usuario) => {
+          this.usuario = usuario
+
+          this.obtenerProveedoresAll()
+        }
+      })
+    )
 
   }
 
@@ -48,7 +66,7 @@ export class ListaProveedoresComponent implements OnInit, OnDestroy {
 
   obtenerProveedoresAll(){
     this.suscripcion.add(
-      this.srvProveedor.obtenerProveedores(2).subscribe({
+      this.srvProveedor.obtenerProveedoresDisponibles(this.usuario.idempresa).subscribe({
         next:(proveedores) =>{
 
           this.obtenerDireccion(proveedores)
@@ -110,7 +128,7 @@ export class ListaProveedoresComponent implements OnInit, OnDestroy {
       this.obtenerProveedoresAll()
     } else {
       this.suscripcion.add(
-        this.srvProveedor.obtenerProveedoresXNombre(this.formularioBusqueda.value.busqueda, 2).subscribe({
+        this.srvProveedor.obtenerProveedoresDisponiblesXNombre(this.formularioBusqueda.value.busqueda, this.usuario.idempresa).subscribe({
           next:(proveedores) =>{
 
             this.obtenerDireccion(proveedores)
@@ -124,10 +142,17 @@ export class ListaProveedoresComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectProveedor(idempresa: number){
+  selectProveedor(idempresaProveedor: number){
+
+    let authEmpresa: ResumeAuthEmpresa = {
+      'idempresa': this.usuario.idempresa,
+      'idProveedor': idempresaProveedor,
+      'idsolicitante': this.usuario.idusuario
+    }
     
     Swal.fire({
       title: '¿Desea asociar este proveedor a su cuenta?',
+      text: 'Se enviará una solicitud al porveedor seleccionado.',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -137,7 +162,29 @@ export class ListaProveedoresComponent implements OnInit, OnDestroy {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        
+        this.suscripcion.add(
+          this.srvSolicitud.registrarSolicitud(authEmpresa).subscribe({
+            next:(value) => {
+              Swal.fire({
+                title: 'Solicitud enviada con éxito',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#007bff'
+              }).then((result) => {
+                if (result.isConfirmed) {
+
+                  this.obtenerProveedoresAll()
+      
+                }
+              })
+            },error: (err) => {
+              Swal.fire({
+                title: '¡No se pudo enviar la solicitud!',
+                icon: 'error'
+              })
+            }
+          })
+        )
       }
     })
   }
