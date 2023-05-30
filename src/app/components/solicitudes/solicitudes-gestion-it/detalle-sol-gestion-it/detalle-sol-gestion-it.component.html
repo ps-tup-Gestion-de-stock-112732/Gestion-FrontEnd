@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-md-12">
+
+        <div class="card mb-3">
+            <div class="card-header d-flex mx-5 mt-3">
+                <div class="card'title">Detalle del pedido de: {{solicitud.pedido.datosEmpleado.nombre}} {{solicitud.pedido.datosEmpleado.apellido}}</div>
+                <div class="ms-auto">
+                    <button class="btn btn-sm btn-dark m-1" [routerLink]="['/pages/solicitudes-gestion-it/lista']">Perfil empleado</button>
+                   <button class="btn btn-sm btn-dark m-1" [routerLink]="['/pages/solicitudes-gestion-it/lista']">Volver</button>
+                </div>
+             </div>
+            <div class="row justify-content-center my-4">
+                <div class="col-md-8" >
+                    <div class="row no-gutters justify-content-center" *ngIf="solicitud">
+                        
+                        <div class="col-md-12 mt-5 text-center">
+                          <div class="card-body">
+                            
+                            <h5 class="card-title">{{solicitud.pedido.producto.nombreProducto}}</h5>
+                            <div class="mb-2">
+                                <img src="{{solicitud.pedido.producto.imagen}}" width="10%">
+                            </div>
+                            <p class="card-text"><small class="text-muted">Descripción: {{solicitud.pedido.producto.descripcion}}</small></p>
+                            <p class="card-text"><small class="text-muted">Cantidad: {{solicitud.pedido.producto.cantidad}}</small></p>
+                            <p class="card-text"><small class="text-muted">Precio por unidad: ${{solicitud.pedido.producto.precioUnitario}}</small></p>
+                            <p class="card-text"><small class="text-muted">Proveedor: {{solicitud.pedido.datosProveedor.nombre}}</small></p>
+
+                            <br>
+
+                            <p class="card-text"><small class="text-muted">Fecha del pedido: {{solicitud.pedido.fecha}}</small></p>
+                            <p class="card-text"><small class="text-muted">Estado: <span class="text-white badge" [ngClass]="{
+                                'bg-warning':solicitud.solicitud.estado.idestado == 1,
+                                'bg-success':solicitud.solicitud.estado.idestado == 2 || solicitud.solicitud.estado.idestado === 3,
+                                'bg-danger':solicitud.solicitud.estado.idestado == 4, 
+                                'bg-dark':solicitud.solicitud.estado.idestado == 5
+                            }">{{solicitud.solicitud.estado.descripcion}}</span></small></p>
+
+                            <div class="row my-5" *ngIf="solicitud.solicitud.estado.idestado == 1">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-primary" (click)="aprobar()">Aprobar</button>
+                                    <button type="button" class="btn btn-danger mx-1" (click)="rechazar()">Rechazar</button>
+                                </div>
+                             </div>
+            
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+

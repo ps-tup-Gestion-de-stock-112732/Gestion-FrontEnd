@@ -1,3 +1,7 @@
+import { Empresa } from "./empresa"
+import { Producto } from "./producto"
+import { Usuario } from "./usuario"
+
 export interface PedidoXDetalle {
     idpedido: number,
     idempleado: number,
@@ -7,7 +11,10 @@ export interface PedidoXDetalle {
     iddetallepedido: number,
     idproducto: number,
     cantidad: number,
-    precioUnitario: number
+    precioUnitario: number,
+    datosEmpleado: Usuario,
+    datosProveedor: Empresa,
+    producto: Producto
   }
 
 
