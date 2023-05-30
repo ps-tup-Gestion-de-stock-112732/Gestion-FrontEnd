@@ -73,7 +73,8 @@ const routes: Routes = [
       { path: 'categoria', loadChildren: () => import('../components/categorias/categorias.module').then(x => x.CategoriasModule), canLoad: [AuthGuard] },
       { path: 'pedidos', loadChildren: () => import('../components/pedidos/nuevo-pedido-empleado/nuevo-pedido-empleado.module').then(x => x.NuevoPedidoEmpleadoModule), canLoad: [AuthGuard] },
       { path: 'pedidos-empleado', loadChildren: () => import('../components/pedidos/pedidos-empleado/pedidos-empleado.module').then(x => x.PedidosEmpleadoModule), canLoad: [AuthGuard] },
-      { path: 'pedidos-proveedor', loadChildren: () => import('../components/pedidos/pedidos-proveedor/pedidos-proveedor.module').then(x => x.PedidosProveedorModule), canLoad: [AuthGuard] }
+      { path: 'pedidos-proveedor', loadChildren: () => import('../components/pedidos/pedidos-proveedor/pedidos-proveedor.module').then(x => x.PedidosProveedorModule), canLoad: [AuthGuard] },
+      { path: 'solicitudes-gestion-it', loadChildren: () => import('../components/solicitudes/solicitudes-gestion-it/solicitudes-gestion-it.module').then(x => x.SolicitudesGestionItModule), canLoad: [AuthGuard] }
     ]
   }
 ];

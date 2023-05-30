@@ -15,4 +15,8 @@ export class EstadoService {
   obtenerEstado(idestado: number): Observable<any> {
     return this.http.get<any>(this.url + 'estados/' + idestado)
   }
+
+  obtenerEstadosGestion(): Observable<any> {
+    return this.http.get<any>(this.url + 'estados/gestion/it')
+  }
 }
