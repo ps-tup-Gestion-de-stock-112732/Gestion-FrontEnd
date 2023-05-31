@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContenedorSolGestionItComponent } from './contenedor-sol-gestion-it/contenedor-sol-gestion-it.component';
 import { ListaSolGestionItComponent } from './lista-sol-gestion-it/lista-sol-gestion-it.component';
 import { DetalleSolGestionItComponent } from './detalle-sol-gestion-it/detalle-sol-gestion-it.component';
+import { PerfilEmpleadoComponent } from './perfil-empleado/perfil-empleado.component';
 
 const routes: Routes = [
   {
     path: '', component: ContenedorSolGestionItComponent, children: [
       { path: 'lista', component: ListaSolGestionItComponent },
-      { path: 'detalle/:id', component: DetalleSolGestionItComponent }
+      { path: 'detalle/:id', component: DetalleSolGestionItComponent },
+      { path: 'perfil', component: PerfilEmpleadoComponent }
     ]
   }
 ];

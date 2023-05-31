@@ -15,11 +15,11 @@ import { SolicitudGestionService } from 'src/app/services/solicitud-gestion.serv
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-lista-sol-gestion-it',
-  templateUrl: './lista-sol-gestion-it.component.html',
-  styleUrls: ['./lista-sol-gestion-it.component.css']
+  selector: 'app-lista-sol-ventas',
+  templateUrl: './lista-sol-ventas.component.html',
+  styleUrls: ['./lista-sol-ventas.component.css']
 })
-export class ListaSolGestionItComponent implements OnInit, OnDestroy {
+export class ListaSolVentasComponent implements OnInit, OnDestroy {
 
   p: number = 1;
 
@@ -205,3 +205,4 @@ export class ListaSolGestionItComponent implements OnInit, OnDestroy {
   }
 
 }
+

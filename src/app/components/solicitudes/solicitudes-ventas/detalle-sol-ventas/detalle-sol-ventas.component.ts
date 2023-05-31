@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PedidoXDetalle } from 'src/app/interfaces/pedido';
-import { Producto } from 'src/app/interfaces/producto';
 import { SolicitudGestion } from 'src/app/interfaces/solicitudGestion';
 import { SolicitudGestionXPedido } from 'src/app/interfaces/solicitudGestionXPedido';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -17,11 +16,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-detalle-sol-gestion-it',
-  templateUrl: './detalle-sol-gestion-it.component.html',
-  styleUrls: ['./detalle-sol-gestion-it.component.css']
+  selector: 'app-detalle-sol-ventas',
+  templateUrl: './detalle-sol-ventas.component.html',
+  styleUrls: ['./detalle-sol-ventas.component.css']
 })
-export class DetalleSolGestionItComponent implements OnInit, OnDestroy {
+export class DetalleSolVentasComponent implements OnInit, OnDestroy {
 
   private suscripcion = new Subscription();
 
@@ -137,7 +136,7 @@ export class DetalleSolGestionItComponent implements OnInit, OnDestroy {
           confirmButtonText: 'Aceptar'
         })
 
-        this.srvSolicitudGestion.aprobarSolicitud(this.idautorizacion, this.usuario.idusuario, comentarios).subscribe({
+        this.srvSolicitudGestion.aprobarSolicitudVentas(this.idautorizacion, this.usuario.idusuario, comentarios).subscribe({
           next:(solicitud) => {
 
             Swal.fire({
@@ -147,7 +146,7 @@ export class DetalleSolGestionItComponent implements OnInit, OnDestroy {
               confirmButtonText: 'Aceptar'
             })
 
-            this.router.navigate(['/pages/solicitudes-gestion-it/lista'])
+            this.router.navigate(['/pages/solicitudes-ventas/lista'])
             
           },
           error:(err) =>{
@@ -198,7 +197,7 @@ export class DetalleSolGestionItComponent implements OnInit, OnDestroy {
               confirmButtonText: 'Aceptar'
             })
 
-            this.router.navigate(['/pages/solicitudes-gestion-it/lista'])
+            this.router.navigate(['/pages/solicitudes-ventas/lista'])
             
           },
           error:(err) =>{
@@ -214,4 +213,3 @@ export class DetalleSolGestionItComponent implements OnInit, OnDestroy {
     })
   }
 }
-

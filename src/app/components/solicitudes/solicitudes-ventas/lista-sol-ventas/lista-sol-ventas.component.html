@@ -51,7 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="" *ngFor="let s of solicitudes | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/pages/solicitudes-gestion-it/detalle/'+s.solicitud.idautorizacion]">
+                                <tr class="" *ngFor="let s of solicitudes | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/pages/solicitudes-ventas/detalle/'+s.solicitud.idautorizacion]">
                                     <td class="center">{{s.pedido.datosEmpleado.nombre + ' ' + s.pedido.datosEmpleado.apellido}}</td>
                                     <td class="center">{{s.pedido.datosEmpleado.nro_documento}}</td>
                                     <td class="center">{{s.pedido.producto.nombreProducto | recortarStrings}}</td>
@@ -85,4 +85,5 @@
        </div>
     </div>
  </section>
+
 

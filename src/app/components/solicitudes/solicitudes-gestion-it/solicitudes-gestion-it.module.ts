@@ -9,6 +9,7 @@ import { ContenedorSolGestionItComponent } from './contenedor-sol-gestion-it/con
 import { ListaSolGestionItComponent } from './lista-sol-gestion-it/lista-sol-gestion-it.component';
 import { RecortarStringsPipe } from 'src/app/pipes/recortar-strings.pipe';
 import { DetalleSolGestionItComponent } from './detalle-sol-gestion-it/detalle-sol-gestion-it.component';
+import { PerfilEmpleadoComponent } from './perfil-empleado/perfil-empleado.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { DetalleSolGestionItComponent } from './detalle-sol-gestion-it/detalle-s
     ContenedorSolGestionItComponent,
     ListaSolGestionItComponent,
     RecortarStringsPipe,
-    DetalleSolGestionItComponent
+    DetalleSolGestionItComponent,
+    PerfilEmpleadoComponent
   ],
   imports: [
     CommonModule,
