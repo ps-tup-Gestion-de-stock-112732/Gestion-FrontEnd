@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Rol } from 'src/app/interfaces/rol';
 import { Usuario } from 'src/app/interfaces/usuario';
-import { RegistroService } from 'src/app/services/registro.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { RolService } from 'src/app/services/rol.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
@@ -32,6 +32,7 @@ export class CrearAutorizantesComponent implements OnInit, OnDestroy{
   constructor(
     private router: Router,
     public fb: FormBuilder,
+    private srv: AuthService,
     private srvAutorizante: UsuarioService,
     private srvRol: RolService) {
     this.formularioAlta = this.fb.group(
@@ -48,6 +49,15 @@ export class CrearAutorizantesComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+
+    let usr = this.srv.getUser()
+    this.suscripcion.add(
+      this.srvAutorizante.obtenerUsuario(usr.idusuario).subscribe({
+        next:async (usuario) => {
+          this.usuario = usuario
+        }
+      })
+    ) 
 
     this.suscripcion.add(this.srvRol.obtenerRoles().subscribe({
       next: (roles: Rol[]) =>{
@@ -84,7 +94,7 @@ export class CrearAutorizantesComponent implements OnInit, OnDestroy{
   }
 
   guardarUsuario(){
-    this.srvAutorizante.registrarAutorizante(this.formularioAlta.value).subscribe({
+    this.srvAutorizante.registrarAutorizante(this.formularioAlta.value, this.usuario.idempresa).subscribe({
       next: () => {
         Swal.fire({
           title: '¿Desea registrar este nuevo autorizante?',
@@ -102,6 +112,14 @@ export class CrearAutorizantesComponent implements OnInit, OnDestroy{
               icon: 'success',
               confirmButtonText: 'Aceptar',
               confirmButtonColor: '#007bff'
+            }).then((result) => {
+              if (result.isConfirmed) {
+  
+                let currentUrl = this.router.url;
+                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                  this.router.navigate([currentUrl]);
+                });
+              }
             })
             
           }

@@ -22,11 +22,14 @@ export class SolicitudGestionService {
     return this.http.get<any>(this.url + 'solicitud-gestion/'+ idautorizacion)
   }
 
-  obtenerSolicitudes(idempresa: number, idestado: number): Observable<any> {
+  obtenerSolicitudes(idempresa: number): Observable<any> {
     return this.http.post<any>(this.url + 'solicitud-gestion/all', {
-      'idempresa': idempresa,
-      'estado': idestado
+      'idempresa': idempresa
     })
+  }
+
+  obtenerSolicitudesXEmpleado(idempleado: number): Observable<any> {
+    return this.http.get<any>(this.url + 'solicitud-gestion/empleado/'+idempleado)
   }
 
   obtenerSolicitudesfiltro(nombre: string, idestado: number, idempresa: number): Observable<any> {
@@ -37,8 +40,22 @@ export class SolicitudGestionService {
     })
   }
 
+  aprobarSolicitud(idsolicitud: number, idautorizante: number, comentarios: string): Observable<any> {
+    return this.http.put<any>(this.url + 'solicitud-gestion/aprobar/'+ idsolicitud, {
+      'idautorizante': idautorizante,
+      'comentarios': comentarios
+    })
+  }
+
   rechazarSolicitud(idsolicitud: number, idautorizante: number, comentarios: string): Observable<any> {
     return this.http.put<any>(this.url + 'solicitud-gestion/rechazar/'+ idsolicitud, {
+      'idautorizante': idautorizante,
+      'comentarios': comentarios
+    })
+  }
+
+  aprobarSolicitudVentas(idsolicitud: number, idautorizante: number, comentarios: string): Observable<any> {
+    return this.http.put<any>(this.url + 'solicitud-gestion/ventas/aprobar/'+ idsolicitud, {
       'idautorizante': idautorizante,
       'comentarios': comentarios
     })

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Estado } from 'src/app/interfaces/estado';
 import { PedidoXDetalle } from 'src/app/interfaces/pedido';
@@ -15,11 +16,11 @@ import { SolicitudGestionService } from 'src/app/services/solicitud-gestion.serv
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-lista-sol-gestion-it',
-  templateUrl: './lista-sol-gestion-it.component.html',
-  styleUrls: ['./lista-sol-gestion-it.component.css']
+  selector: 'app-perfil-empleado',
+  templateUrl: './perfil-empleado.component.html',
+  styleUrls: ['./perfil-empleado.component.css']
 })
-export class ListaSolGestionItComponent implements OnInit, OnDestroy {
+export class PerfilEmpleadoComponent implements OnInit, OnDestroy {
 
   p: number = 1;
 
@@ -31,10 +32,18 @@ export class ListaSolGestionItComponent implements OnInit, OnDestroy {
 
   estados: Estado[] = []
   solicitudes: SolicitudGestionXPedido[] = []
-  usuario: Usuario = {} as Usuario
+  empleado: Usuario = {} as Usuario
+
+  idempleado: number
+  solicitudPrevia: number
+
+  cantidadProductos: number = 0
+  precioTotalProdcutos: number = 0
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private srv: AuthService,
     private srvUsuario: UsuarioService,
     private srvEmpresa: EmpresaService,
@@ -51,11 +60,17 @@ export class ListaSolGestionItComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    let usr = this.srv.getUser()
+    this.activatedRoute.queryParams.subscribe(
+      params => {
+        this.idempleado =  params['empleado'];
+        this.solicitudPrevia =params['solicitud'];
+      }
+    )
+
     this.suscripcion.add(
-      this.srvUsuario.obtenerUsuario(usr.idusuario).subscribe({
+      this.srvUsuario.obtenerUsuario(this.idempleado).subscribe({
         next:async (usuario) => {
-          this.usuario = usuario
+          this.empleado = usuario
           await this.obtenerSolicitudes()
           await this.completarListas()
           
@@ -75,47 +90,46 @@ export class ListaSolGestionItComponent implements OnInit, OnDestroy {
 
     this.solicitudes = []
     
-    this.srvSolicitud.obtenerSolicitudes(this.usuario.idempresa).subscribe({
+    this.srvSolicitud.obtenerSolicitudesXEmpleado(this.empleado.idusuario).subscribe({
       next:(solicitudes) => {
 
         for (let i = 0; i < solicitudes.length; i++) {
 
-          let solicitudGestion: SolicitudGestionXPedido = {} as SolicitudGestionXPedido
-          let pedido: PedidoXDetalle = {} as PedidoXDetalle
-          let solicitud: SolicitudGestion = {} as SolicitudGestion
-          solicitudGestion.pedido = pedido
-          solicitudGestion.solicitud = solicitud
+          if (solicitudes[i].idestado == 3) {
 
-          this.srvUsuario.obtenerEmpleado(solicitudes[i].idempleado).subscribe({
-            next:(empleado) => {
+            let solicitudGestion: SolicitudGestionXPedido = {} as SolicitudGestionXPedido
+            let pedido: PedidoXDetalle = {} as PedidoXDetalle
+            let solicitud: SolicitudGestion = {} as SolicitudGestion
+            solicitudGestion.pedido = pedido
+            solicitudGestion.solicitud = solicitud
+                
+            this.srvProducto.obtenerProducto(solicitudes[i].idproducto).subscribe({
+              next:(producto) => {
+                
+                this.cantidadProductos+= producto.cantidad
+                this.precioTotalProdcutos+= producto.cantidad * producto.precioUnitario
 
-              solicitudGestion.pedido.datosEmpleado = empleado
-              
-              this.srvProducto.obtenerProducto(solicitudes[i].idproducto).subscribe({
-                next:(producto) => {
-                  
-                  solicitudGestion.pedido.producto = producto
+                solicitudGestion.pedido.producto = producto
 
-                  this.srvEmpresa.obtenerEmpresa(solicitudes[i].idproveedor).subscribe({
-                    next:(proveedor) =>{
-        
-                      solicitudGestion.pedido.datosProveedor = proveedor
-        
-                      this.srvEstado.obtenerEstadoGestion(solicitudes[i].idestado).subscribe({
-                        next:(estado) => {
+                this.srvEmpresa.obtenerEmpresa(solicitudes[i].idproveedor).subscribe({
+                  next:(proveedor) =>{
+      
+                    solicitudGestion.pedido.datosProveedor = proveedor
+      
+                    this.srvEstado.obtenerEstadoGestion(solicitudes[i].idestado).subscribe({
+                      next:(estado) => {
 
-                          solicitudGestion.solicitud.idautorizacion = solicitudes[i].idautorizacion
-                          solicitudGestion.solicitud.estado = estado
+                        solicitudGestion.solicitud.idautorizacion = solicitudes[i].idautorizacion
+                        solicitudGestion.solicitud.estado = estado
 
-                          this.solicitudes.push(solicitudGestion)
-                        }
-                      })
-                    }
-                  })
-                },
-              })
-            },
-          })
+                        this.solicitudes.push(solicitudGestion)
+                      }
+                    })
+                  }
+                })
+              },
+            })
+          }
         }
       },
       error:(err) => {
@@ -150,7 +164,7 @@ export class ListaSolGestionItComponent implements OnInit, OnDestroy {
       this.obtenerSolicitudes()
     } else {
       this.suscripcion.add(
-        this.srvSolicitud.obtenerSolicitudesfiltro(this.formularioBusqueda.value.nombre, this.formularioBusqueda.value.idestado, this.usuario.idempresa).subscribe({
+        this.srvSolicitud.obtenerSolicitudesfiltro(this.formularioBusqueda.value.nombre, this.formularioBusqueda.value.idestado, this.empleado.idempresa).subscribe({
           next:(solicitudes) => {
 
             this.solicitudes = []

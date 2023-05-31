@@ -16,7 +16,11 @@ export class EstadoService {
     return this.http.get<any>(this.url + 'estados/' + idestado)
   }
 
+  obtenerEstadoGestion(idestado: number): Observable<any> {
+    return this.http.get<any>(this.url + 'estados/gestion/' + idestado)
+  }
+
   obtenerEstadosGestion(): Observable<any> {
-    return this.http.get<any>(this.url + 'estados/gestion/it')
+    return this.http.get<any>(this.url + 'estados/gestion/it/all')
   }
 }

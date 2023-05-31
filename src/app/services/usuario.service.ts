@@ -108,10 +108,11 @@ export class UsuarioService {
     return this.http.put<any>(this.url + 'proveedores/desvincular/' + idusuario, {})
   }
 
-  registrarAutorizante(usuario: Usuario): Observable<any> {
+  registrarAutorizante(usuario: Usuario, idempresa: number): Observable<any> {
     return this.http.post<any>(this.url + 'autorizantes', {
       "nombre": usuario.nombre,
       "apellido": usuario.apellido,
+      "idempresa": idempresa,
       "nro_documento": usuario.nro_documento,
       "email": usuario.email,
       "password": usuario.password,
