@@ -9,7 +9,7 @@ import { PerfilEmpleadoComponent } from './perfil-empleado/perfil-empleado.compo
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { RecortarStringsPipe } from 'src/app/pipes/recortar-strings.pipe';
+import { SolicitudesGestionItModule } from '../solicitudes-gestion-it/solicitudes-gestion-it.module';
 
 
 @NgModule({
@@ -17,15 +17,15 @@ import { RecortarStringsPipe } from 'src/app/pipes/recortar-strings.pipe';
     ContenedorSolVentasComponent,
     ListaSolVentasComponent,
     DetalleSolVentasComponent,
-    PerfilEmpleadoComponent,
-    RecortarStringsPipe
+    PerfilEmpleadoComponent
   ],
   imports: [
     CommonModule,
     SolicitudesVentasRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SolicitudesGestionItModule
   ]
 })
 export class SolicitudesVentasModule { }
