@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: "http://localhost:8080/",
+  baseUrlPayment: "http://localhost:3000/",
   firebaseConfig: {
     apiKey: "AIzaSyDi2Yx0Q5Rk4U_Gk0tvOswQsHDNgApakWA",
     authDomain: "programming-stuff-fbe0c.firebaseapp.com",

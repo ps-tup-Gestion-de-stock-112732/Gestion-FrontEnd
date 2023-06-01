@@ -6,10 +6,9 @@ import { SolicitudGestion } from 'src/app/interfaces/solicitudGestion';
 import { SolicitudGestionXPedido } from 'src/app/interfaces/solicitudGestionXPedido';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { AuthService } from 'src/app/services/auth.service';
-import { CategoriaService } from 'src/app/services/categoria.service';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { EstadoService } from 'src/app/services/estado.service';
-import { PedidoService } from 'src/app/services/pedido.service';
+import { PaymentService } from 'src/app/services/payment.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { SolicitudGestionService } from 'src/app/services/solicitud-gestion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -36,13 +35,11 @@ export class DetalleSolVentasComponent implements OnInit, OnDestroy {
     private srv: AuthService,
     private srvUsuario: UsuarioService,
     private srvProducto: ProductoService,
-    private srvProveedor: EmpresaService,
     private activatedRoute: ActivatedRoute,
-    private srvCategoria: CategoriaService,
-    private srvPedido: PedidoService,
     private srvSolicitudGestion: SolicitudGestionService,
     private srvEmpresa: EmpresaService,
-    private srvEstado: EstadoService
+    private srvEstado: EstadoService,
+    private srvPayment: PaymentService
   ) { }
 
   ngOnDestroy(): void {
@@ -136,7 +133,18 @@ export class DetalleSolVentasComponent implements OnInit, OnDestroy {
           confirmButtonText: 'Aceptar'
         })
 
-        this.srvSolicitudGestion.aprobarSolicitudVentas(this.idautorizacion, this.usuario.idusuario, comentarios).subscribe({
+        let porducto = this.solicitud.pedido.producto.nombreProducto
+        let precio = this.solicitud.pedido.producto.precioUnitario
+        let cantidad = this.solicitud.pedido.producto.cantidad
+        //payment
+        this.srvPayment.crearOrden(this.idautorizacion, porducto, precio, cantidad).subscribe({
+          next:(body) => {
+            console.log(body);
+            window.location.href=body.init_point
+          },
+        })
+
+        /* this.srvSolicitudGestion.aprobarSolicitudVentas(this.idautorizacion, this.usuario.idusuario, comentarios).subscribe({
           next:(solicitud) => {
 
             Swal.fire({
@@ -157,7 +165,7 @@ export class DetalleSolVentasComponent implements OnInit, OnDestroy {
               confirmButtonText: 'Aceptar'
             })
           }
-        })
+        }) */
       }
     })
   }

@@ -7,18 +7,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ContenedorSolGestionItComponent } from './contenedor-sol-gestion-it/contenedor-sol-gestion-it.component';
 import { ListaSolGestionItComponent } from './lista-sol-gestion-it/lista-sol-gestion-it.component';
-import { RecortarStringsPipe } from 'src/app/pipes/recortar-strings.pipe';
 import { DetalleSolGestionItComponent } from './detalle-sol-gestion-it/detalle-sol-gestion-it.component';
 import { PerfilEmpleadoComponent } from './perfil-empleado/perfil-empleado.component';
+import { RecortarStringsPipe } from 'src/app/pipes/recortar-strings.pipe';
 
 
 @NgModule({
   declarations: [
     ContenedorSolGestionItComponent,
     ListaSolGestionItComponent,
-    RecortarStringsPipe,
     DetalleSolGestionItComponent,
-    PerfilEmpleadoComponent
+    PerfilEmpleadoComponent,
+    RecortarStringsPipe
   ],
   imports: [
     CommonModule,
@@ -26,6 +26,9 @@ import { PerfilEmpleadoComponent } from './perfil-empleado/perfil-empleado.compo
     HttpClientModule,
     ReactiveFormsModule,
     NgxPaginationModule
+  ],
+  exports:[
+    RecortarStringsPipe
   ]
 })
 export class SolicitudesGestionItModule { }
