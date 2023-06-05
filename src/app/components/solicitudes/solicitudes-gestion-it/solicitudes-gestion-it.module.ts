@@ -10,6 +10,8 @@ import { ListaSolGestionItComponent } from './lista-sol-gestion-it/lista-sol-ges
 import { DetalleSolGestionItComponent } from './detalle-sol-gestion-it/detalle-sol-gestion-it.component';
 import { PerfilEmpleadoComponent } from './perfil-empleado/perfil-empleado.component';
 import { RecortarStringsPipe } from 'src/app/pipes/recortar-strings.pipe';
+import { NombreEstadosEmpleadoPipe } from 'src/app/pipes/nombre-estados-empleado.pipe';
+import { NombreEstadosPipe } from 'src/app/pipes/nombre-estados.pipe';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { RecortarStringsPipe } from 'src/app/pipes/recortar-strings.pipe';
     ListaSolGestionItComponent,
     DetalleSolGestionItComponent,
     PerfilEmpleadoComponent,
-    RecortarStringsPipe
+    RecortarStringsPipe,
+    NombreEstadosPipe,
+    NombreEstadosEmpleadoPipe
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,9 @@ import { RecortarStringsPipe } from 'src/app/pipes/recortar-strings.pipe';
     NgxPaginationModule
   ],
   exports:[
-    RecortarStringsPipe
+    RecortarStringsPipe,
+    NombreEstadosPipe,
+    NombreEstadosEmpleadoPipe
   ]
 })
 export class SolicitudesGestionItModule { }

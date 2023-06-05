@@ -6,18 +6,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ContenedorPedidosProveedorComponent } from './contenedor-pedidos-proveedor/contenedor-pedidos-proveedor.component';
+import { ListaPedidosProveedorComponent } from './lista-pedidos-proveedor/lista-pedidos-proveedor.component';
+import { SolicitudesGestionItModule } from '../../solicitudes/solicitudes-gestion-it/solicitudes-gestion-it.module';
+import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 
 
 @NgModule({
   declarations: [
-    ContenedorPedidosProveedorComponent
+    ContenedorPedidosProveedorComponent,
+    ListaPedidosProveedorComponent,
+    DetallePedidoComponent
   ],
   imports: [
     CommonModule,
     PedidosProveedorRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SolicitudesGestionItModule
   ]
 })
 export class PedidosProveedorModule { }

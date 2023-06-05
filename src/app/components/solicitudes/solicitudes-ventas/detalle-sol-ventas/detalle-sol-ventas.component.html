@@ -27,13 +27,14 @@
 
                             <br>
 
-                            <p class="card-text"><small class="text-muted">Fecha del pedido: {{solicitud.pedido.fecha}}</small></p>
+                            <p class="card-text"><small class="text-muted">Fecha del pedido: {{solicitud.pedido.fecha | date:'d/M/yy HH:mm:ss'}}</small></p>
                             <p class="card-text"><small class="text-muted">Estado: <span class="text-white badge" [ngClass]="{
-                                'bg-warning':solicitud.solicitud.estado.idestado == 1 || solicitud.solicitud.estado.idestado == 2,
-                                'bg-success':solicitud.solicitud.estado.idestado === 3,
-                                'bg-danger':solicitud.solicitud.estado.idestado == 4, 
+                                'bg-warning':solicitud.solicitud.estado.idestado == 1 || solicitud.solicitud.estado.idestado == 2 || solicitud.solicitud.estado.idestado == 3,
+                                'bg-success':solicitud.solicitud.estado.idestado == 7,
+                                'bg-info':solicitud.solicitud.estado.idestado == 6,
+                                'bg-danger':solicitud.solicitud.estado.idestado == 4 || solicitud.solicitud.estado.idestado == 8, 
                                 'bg-dark':solicitud.solicitud.estado.idestado == 5
-                            }">{{solicitud.solicitud.estado.descripcion}}</span></small></p>
+                            }">{{solicitud.solicitud.estado.descripcion | nombreEstadosEmpleado}}</span></small></p>
 
                             <div class="row my-5" *ngIf="solicitud.solicitud.estado.idestado == 2">
                                 <div class="col-md-12">

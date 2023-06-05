@@ -11,7 +11,7 @@
             <div class="row justify-content-center my-4">
                 <div class="col-md-12" >
                     <div class="row no-gutters justify-content-center" *ngIf="true">
-                        <div class="col-md-3">
+                        <div class="col-xxl-3">
 
                             <div class="card-body mx-5">
                                 <div class="card-title">Datos del empleado </div>
@@ -26,7 +26,7 @@
                             
 
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-xxl-9">
                             <div class="card-body mx-5">
                                 
                                 <div class="card-title text-center">
@@ -52,7 +52,6 @@
                                             </thead>
                                             <tbody>
                                                 <tr class="" *ngFor="let s of solicitudes | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/pages/solicitudes-gestion-it/detalle/'+s.solicitud.idautorizacion]">
-                                                    
                                                     <th scope="row"><img src="{{s.pedido.producto.imagen}}" width="60vh"></th>
                                                     <td class="center align-middle">{{s.pedido.producto.nombreProducto | recortarStrings}}</td>
                                                     <td class="center align-middle">{{s.pedido.producto.cantidad}}</td>

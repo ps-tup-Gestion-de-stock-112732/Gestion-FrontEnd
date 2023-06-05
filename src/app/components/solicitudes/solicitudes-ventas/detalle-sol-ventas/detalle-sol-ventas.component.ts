@@ -121,51 +121,15 @@ export class DetalleSolVentasComponent implements OnInit, OnDestroy {
     }).then(async (result) => {
       if (result.isConfirmed) {
 
-        const { value: comentarios } = await Swal.fire({
-          input: 'textarea',
-          inputLabel: 'Agregue un comentario',
-          inputPlaceholder: 'Escribe tu comentario aquí...',
-          inputAttributes: {
-            'aria-label': 'Escribe tu comentario aquí'
-          },
-          showCancelButton: false,
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Aceptar'
-        })
-
         let porducto = this.solicitud.pedido.producto.nombreProducto
         let precio = this.solicitud.pedido.producto.precioUnitario
         let cantidad = this.solicitud.pedido.producto.cantidad
         //payment
         this.srvPayment.crearOrden(this.idautorizacion, porducto, precio, cantidad).subscribe({
           next:(body) => {
-            console.log(body);
             window.location.href=body.init_point
           },
         })
-
-        /* this.srvSolicitudGestion.aprobarSolicitudVentas(this.idautorizacion, this.usuario.idusuario, comentarios).subscribe({
-          next:(solicitud) => {
-
-            Swal.fire({
-              title: 'Se ha aprobado la solicitud con éxito!',
-              icon: 'success',
-              confirmButtonColor: '#3085d6',
-              confirmButtonText: 'Aceptar'
-            })
-
-            this.router.navigate(['/pages/solicitudes-ventas/lista'])
-            
-          },
-          error:(err) =>{
-            Swal.fire({
-              title: 'No se pudo aprobar la solicitud',
-              icon: 'error',
-              confirmButtonColor: '#3085d6',
-              confirmButtonText: 'Aceptar'
-            })
-          }
-        }) */
       }
     })
   }

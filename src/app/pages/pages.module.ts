@@ -35,6 +35,8 @@ import { PagesContactComponent } from './pages-contact/pages-contact.component';
 import { PagesFaqComponent } from './pages-faq/pages-faq.component';
 import { UsersProfileComponent } from './users-profile/users-profile.component';
 import { PagesTycComponent } from './pages-tyc/pages-tyc.component';
+import { SuccessComponent } from '../components/success/success.component';
+import { FailureComponent } from '../components/failure/failure.component';
 
 
 @NgModule({
@@ -69,7 +71,9 @@ import { PagesTycComponent } from './pages-tyc/pages-tyc.component';
     PagesFaqComponent,
     PagesContactComponent,
     PagesBlankComponent,
-    PagesTycComponent
+    PagesTycComponent,
+    SuccessComponent,
+    FailureComponent
   ],
   imports: [
     CommonModule,

@@ -8,14 +8,14 @@
             <div class="card-body mx-5 mt-3">
                 <form [formGroup]="formularioBusqueda" class="row justify-content-center py-4 mx-2">
 
-                    <div class="col-md-3 pt-3">
+                    <div class="col-xl-4 pt-3">
                         <div class="form-group mx-auto">
                             <label for="nombre" class="form-label">Empleado:</label>
                             <input type="search" class="form-control" placeholder="Buscar empleado..." formControlName="nombre">
                          </div>
                     </div>
 
-                    <div class="col-md-3 pt-3">
+                    <div class="col-xl-4 pt-3">
                         <div class="form-group mx-auto">
                             <label for="idestado" class="form-label">Estado:</label>
                             <select class="form-control" formControlName="idestado">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 d-flex pt-5">
+                    <div class="col-xl-4 d-flex pt-5">
                         <div class="mx-auto">
                             <button class="btn btn-outline-secondary mx-1" type="button" (click)="buscar()">Buscar</button>
                             <button class="btn btn-outline-secondary mx-1" type="button" (click)="limpiar()">Limpiar</button>
@@ -58,11 +58,12 @@
                                     <td class="center">{{s.pedido.producto.cantidad}}</td>
                                     <td class="center">{{s.pedido.datosProveedor.nombre}}</td>
                                     <td class="center"><span class="text-white badge" [ngClass]="{
-                                        'bg-warning':s.solicitud.estado.idestado == 1 || s.solicitud.estado.idestado == 2,
-                                        'bg-success':s.solicitud.estado.idestado === 3,
-                                        'bg-danger':s.solicitud.estado.idestado == 4, 
+                                        'bg-warning':s.solicitud.estado.idestado == 1 || s.solicitud.estado.idestado == 2 || s.solicitud.estado.idestado == 3,
+                                        'bg-success':s.solicitud.estado.idestado == 7,
+                                        'bg-info':s.solicitud.estado.idestado == 6,
+                                        'bg-danger':s.solicitud.estado.idestado == 4 || s.solicitud.estado.idestado == 8, 
                                         'bg-dark':s.solicitud.estado.idestado == 5
-                                    }">{{s.solicitud.estado.descripcion}}</span></td>
+                                    }">{{s.solicitud.estado.descripcion | nombreEstadosEmpleado}}</span></td>
                                 </tr>
                             </tbody>
                         </table>
