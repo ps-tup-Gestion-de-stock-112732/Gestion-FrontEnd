@@ -14,6 +14,7 @@ export interface PedidoXDetalle {
     precioUnitario: number,
     datosEmpleado: Usuario,
     datosProveedor: Empresa,
+    datosEmpresa: Empresa,
     producto: Producto
   }
 

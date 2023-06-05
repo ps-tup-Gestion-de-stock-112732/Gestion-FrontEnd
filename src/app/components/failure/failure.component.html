@@ -1,0 +1,39 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Fallo en la compra</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a routerLink="/pages/dashboard">Home</a></li>
+             <li class="breadcrumb-item active">Fallo en la compra</li>
+          </ol>
+       </nav>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+    
+            <div class="card">
+                
+                <div class="card-body my-5">
+                    <div class="card-title text-center">
+                        La compra NO pudo realizarse
+                    </div>
+                    
+                    <div class="card-text text-center">
+                        <span>Intente nuevamente ...</span>
+                        <br><br>
+                        <a [routerLink]="['/pages/solicitudes-ventas/lista']">Volver a la lista de solicitudes</a>
+                    </div>
+                </div>
+                
+                
+            </div>
+    
+        </div>
+    </div>
+    
+    
+    
+    
+</main>
+
