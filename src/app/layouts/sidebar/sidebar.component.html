@@ -19,6 +19,7 @@
          <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"> <i class="bi bi-menu-button-wide"></i><span>Administrar</span><i class="bi bi-chevron-down ms-auto"></i> </a>
          <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li> <a routerLink="/pages/proveedores"> <i class="bi bi-circle"></i><span>Contratos</span> </a></li>
+            <li> <a routerLink="/pages/espacios-gestion"> <i class="bi bi-circle"></i><span>Espacios</span> </a></li>
          </ul>
       </li>
       <li class="nav-item" *ngIf="idrol == 2">
@@ -46,6 +47,13 @@
          <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li> <a routerLink="/pages/pedidos-proveedor"> <i class="bi bi-circle"></i><span>Pedidos</span> </a></li>
             <li> <a routerLink="/pages/solicitudes-usr-proveedor"> <i class="bi bi-circle"></i><span>Solicitudes</span> </a></li>
+         </ul>
+      </li>
+      <li class="nav-item" *ngIf="idrol == 5">
+         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"> <i class="bi bi-building"></i><span>Espacios de oficina</span><i class="bi bi-chevron-down ms-auto"></i> </a>
+         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li> <a routerLink="/pages/espacios-empleado"> <i class="bi bi-circle"></i><span>Reservar espacio</span> </a></li>
+            <li> <a routerLink="/pages/reservas-empleado"> <i class="bi bi-circle"></i><span>Mis reservas</span> </a></li>
          </ul>
       </li>
        <li class="nav-item" *ngIf="idrol == 5">

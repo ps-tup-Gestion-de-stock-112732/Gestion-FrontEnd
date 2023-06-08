@@ -1,0 +1,101 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex mx-5 mt-4">
+                <div class="card'title">Reservar espacio de oficina:</div>
+                <div class="ms-auto">
+                </div>
+            </div>
+            <div class="card-body">
+                
+                <div class="row justify-content-center mt-2 mx-2" *ngIf="oficina.nombreoficina">
+                    
+                    <div class="col-xxl-3 my-4">
+
+                        <div class="row justify-content-center mx-2">
+
+                            <div class="col-xs-6">
+                                <form [formGroup]="formulario">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group mx-auto">
+        
+                                            <label for="fecha" class="form-label">Seleccione una fecha:</label>
+                                            <input type="date" class="form-control" formControlName="fecha" min="{{fechaActual}}">
+                                            
+                                         </div>
+                                    </div>
+                                
+                                </form>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="col-xxl-9 my-4">
+
+                        <div class="row justify-content-center mb-4">
+                            <h4 class="text-center">Espacios de oficina: {{oficina.nombreoficina}}</h4>
+                            <small class="d-flex justify-content-center mt-2">
+                                Disponible: <div class="seat example"></div> Ocupado: <div class="seat reserved example"></div> Mis Reservas: <div class="seat selected example"></div>
+                            </small>
+                            
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+
+                                <div class="row justify-content-center align-middle" *ngFor="let fila of espacios">
+
+                                    <div (click)="reservar(columna)" class="seat btn" [ngClass]="{'reserved': columna.idestado === 1, 'reservedbyme': columna.idestado === 2}" *ngFor="let columna of fila">
+                                        {{columna.fila}}{{columna.columna}}
+                                    </div>
+        
+                                </div>
+
+                                <div class="row text-center my-5" *ngIf="espacios.length == 0">
+                                    <p class="text-muted">Debe seleccionar una fecha...</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-center mt-4">
+                    
+                    <div class="col-sm-10">
+
+                        <h4 class="text-center">Listado de oficinas: </h4>
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 py-4">
+                            <div class="col-12 mb-4" *ngFor="let oficina of oficinas | paginate: { itemsPerPage: 6, currentPage: p }">
+                                <a class="card btn h-60" (click)="seleccionarOficina(oficina)">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Oficina: {{oficina.nombreoficina}}</h5>
+                                        <p class="text-muted">Filas: {{oficina.cantidadfilas}}</p>
+                                        <p class="text-muted">Columnas: {{oficina.cantidadcolumnas}}</p>
+                                    </div>
+                                    <div class="card-footer" *ngIf="oficina.empresa">
+                                        <small class="card-text text-muted">Empresa: {{oficina.empresa.nombre}}</small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-2">
+                        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                     </div>
+                </div>
+
+            </div>
+          </div>
+       </div>
+    </div>
+</section>

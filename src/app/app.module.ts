@@ -21,7 +21,6 @@ import { EmpresaModule } from './components/empresa/empresa.module';
     PagesRegisterComponent,
     PagesLoginComponent,
     PagesError404Component
-    
   ],
   imports: [
     BrowserModule,

@@ -81,6 +81,9 @@ const routes: Routes = [
       { path: 'solicitudes-empleado', loadChildren: () => import('../components/solicitudes/solicitudes-empleado/solicitudes-empleado.module').then(x => x.SolicitudesEmpleadoModule), canLoad: [AuthGuard] },
       { path: ':id/success', component: SuccessComponent },
       { path: ':id/failure', component: FailureComponent },
+      { path: 'espacios-gestion', loadChildren: () => import('../pages/pages-espacios/espacios-gestion/espacios-gestion.module').then(x => x.EspaciosGestionModule), canLoad: [AuthGuard] },
+      { path: 'espacios-empleado', loadChildren: () => import('../pages/pages-espacios/espacios-empleado/espacios-empleado.module').then(x => x.EspaciosEmpleadoModule), canLoad: [AuthGuard] },
+      { path: 'reservas-empleado', loadChildren: () => import('../pages/pages-espacios/espacios-empleado/reservas-empleado/reservas-empleado.module').then(x => x.ReservasEmpleadoModule), canLoad: [AuthGuard] }
     ]
   }
 ];

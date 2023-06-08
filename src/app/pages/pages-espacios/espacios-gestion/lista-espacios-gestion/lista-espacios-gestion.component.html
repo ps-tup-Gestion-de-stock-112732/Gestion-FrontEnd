@@ -1,0 +1,19 @@
+<h4 class="text-center">Listado de oficinas: </h4>
+<div class="row row-cols-1 row-cols-xxl-3 pt-4">
+    <div class="col-12 mb-4" *ngFor="let oficina of oficinas | paginate: { itemsPerPage: 6, currentPage: p }">
+        <a class="card btn h-60" (click)="modificar(oficina.idoficina)">
+            <div class="card-body">
+                <h5 class="card-title">Oficina: {{oficina.nombreoficina}}</h5>
+                <p class="text-muted">Filas: {{oficina.cantidadfilas}}</p>
+                <p class="text-muted">Columnas: {{oficina.cantidadcolumnas}}</p>
+            </div>
+            <div class="card-footer" *ngIf="oficina.empresa">
+                <small class="card-text text-muted">Empresa: {{oficina.empresa.nombre}}</small>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center mt-2">
+    <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+ </div>

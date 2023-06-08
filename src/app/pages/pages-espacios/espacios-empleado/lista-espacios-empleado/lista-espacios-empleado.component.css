@@ -1,0 +1,37 @@
+.seat{
+    background-color:gainsboro;
+    height: 4vh;
+    width: 5vh;
+    margin: 4px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.seat.selected{
+    background-color:yellow;
+}
+
+.seat.reserved{
+    background-color:red;
+}
+
+.seat.reservedbyme{
+    background-color:yellow;
+}
+
+.seat.example{
+    background-color:gainsboro;
+    height: 1.5vh;
+    width: 3vh;
+    margin-right: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.seat.selected.example{
+    background-color:yellow;
+}
+
+.seat.reserved.example{
+    background-color:red;
+}

@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <h4 class="text-center">Editar oficina: </h4>
+    <form [formGroup]="formulario" class="row justify-content-center py-4 mx-2">
+
+        <div class="col-12">
+            <div class="form-group mx-auto">
+                <label for="nombreoficina" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" placeholder="Nombre de oficina..." formControlName="nombreoficina">
+                <span *ngIf="formulario.controls['nombreoficina'].touched && formulario.get('nombreoficina')?.hasError('required')" style="color: red;" role="alert">
+                    Nombre es inválido
+                </span>
+             </div>
+        </div>
+    
+        <div class="col-12 pt-3">
+            <div class="form-group mx-auto">
+                <label for="cantidadfilas" class="form-label">Filas:</label>
+                <input type="number" class="form-control" placeholder="Cantidad de filas..." formControlName="cantidadfilas">
+                <span *ngIf="formulario.controls['cantidadfilas'].touched && formulario.get('cantidadfilas')?.hasError('required')" style="color: red;" role="alert">
+                    Filas es inválido
+                </span>
+             </div>
+        </div>
+    
+        <div class="col-12 pt-3">
+            <div class="form-group mx-auto">
+                <label for="cantidadcolumnas" class="form-label">Columnas:</label>
+                <input type="number" class="form-control" placeholder="Cantidad de columnas..." formControlName="cantidadcolumnas">
+                <span *ngIf="formulario.controls['cantidadcolumnas'].touched && formulario.get('cantidadcolumnas')?.hasError('required')" style="color: red;" role="alert">
+                    Columnas es inválido
+                </span>
+             </div>
+        </div>
+
+        <div class="text-center">
+            <p *ngFor="let err of mensajeErrores" id="msgError" class="form-text" style="color: tomato;">{{err}}</p>
+         </div>
+
+        <div class="text-center pt-4">
+            <p id="msgError" class="form-text" *ngIf="mensajeError" style="color: tomato;">{{mensajeError}}</p>
+         </div>
+    
+        <div class="col-12 d-flex">
+            <div class="mx-auto">
+                <button class="btn btn-outline-secondary mx-1" type="button" (click)="actualizar()">Actualizar</button>
+                <button class="btn btn-outline-danger mx-1" type="button" (click)="eliminar()">Eliminar</button>
+            </div>
+        </div>
+    
+    </form>
+</div>

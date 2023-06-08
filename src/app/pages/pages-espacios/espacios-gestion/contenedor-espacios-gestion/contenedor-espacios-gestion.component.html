@@ -1,1 +1,46 @@
-<p>contenedor-espacios-gestion works!</p>
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Espacios</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a routerLink="/pages/dashboard">Home</a></li>
+             <li class="breadcrumb-item">Gestionar</li>
+             <li class="breadcrumb-item active">Espacios</li>
+          </ol>
+       </nav>
+    </div>
+
+
+    <section class="section">
+        <div class="row justify-content-center">
+           <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header d-flex mx-5 mt-4">
+                    <div class="card'title">Administrar espacios de oficinas:</div>
+                    <div class="ms-auto">
+                        <button class="btn btn-dark btn-sm m-1" type="submit" (click)="nuevo()">Nueva oficina</button>
+                    </div>
+                </div>
+                <div class="card-body mt-5">
+                    
+                    <div class="row">
+                        
+                        <div class="col-lg-4">
+                            <app-crear-espacios-gestion *ngIf="idoficina == 0"></app-crear-espacios-gestion>
+                            <app-modificar-espacios-gestion *ngIf="idoficina != 0" [ofi]="idoficina"></app-modificar-espacios-gestion>
+
+                        </div>
+    
+                        <div class="col-lg-8">
+                            <app-lista-espacios-gestion (modificarOficina)="cambiarOficina($event)"></app-lista-espacios-gestion>
+                        </div>
+                    </div>
+    
+                </div>
+              </div>
+           </div>
+        </div>
+    </section>
+    
+</main>
+
