@@ -1,0 +1,88 @@
+<section class="section">
+    <div class="row justify-content-center">
+       <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex mx-5 mt-4">
+                <div class="card'title">Listado de reservas:</div>
+                <div class="ms-auto">
+                </div>
+            </div>
+            <div class="card-body">
+                
+                <div class="row justify-content-center mt-2 mx-2">
+                    
+                    <div class="col-md-6 my-4">
+
+                        <div class="row justify-content-center mb-4">
+                            <h4 class="text-center">Espacios de oficina: </h4>
+                            <small class="d-flex justify-content-center mt-2">
+                                Mis Reservas: <div class="seat selected example"></div>
+                            </small>
+                            
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+
+                                <div class="row justify-content-center align-middle" *ngFor="let fila of espacios">
+
+                                    <div class="seat btn" [ngClass]="{'reserved': columna.idestado === 1, 'reservedbyme': columna.idestado === 2}" *ngFor="let columna of fila">
+                                        {{columna.fila}}{{columna.columna}}
+                                    </div>
+        
+                                </div>
+
+                                <div class="row text-center my-4" *ngIf="espacios.length == 0">
+                                    <p class="text-muted">Seleccionar una reserva...</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 my-4">
+
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-md-12 table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="center">Oficina</th>
+                                            <th class="center">Ubicación</th>
+                                            <th class="center">Fecha</th>
+                                            <th class="center">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="" *ngFor="let e of espaciosReservados | paginate: { itemsPerPage: 10, currentPage: p }">
+                                            <td class="center align-middle" *ngIf="e.oficina">{{e.oficina.nombreoficina}}</td>
+                                            <td class="center align-middle">{{e.fila}}{{e.columna}}</td>
+                                            <td class="center align-middle">{{e.fecha | date : 'dd/MM/yyyy'}}</td>
+                                            <td class="center align-middle">
+                                                <button class="btn btn-primary btn-sm mx-1" (click)="seleccionarEspacio(e)">Ver</button>
+                                                <button class="btn btn-danger btn-sm mx-1" (click)="cancelar(e)">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+        
+                            <div class="d-flex justify-content-center mt-4">
+                                <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                             </div>
+                        
+                         </div>
+
+                    </div>
+
+                </div>
+
+                
+
+            </div>
+          </div>
+       </div>
+    </div>
+</section>
+

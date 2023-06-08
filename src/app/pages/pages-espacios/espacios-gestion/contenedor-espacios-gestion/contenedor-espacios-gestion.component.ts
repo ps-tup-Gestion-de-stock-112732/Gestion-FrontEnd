@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contenedor-espacios-gestion',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContenedorEspaciosGestionComponent implements OnInit {
 
-  constructor() { }
+  idoficina: number = 0
+
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.router.navigate(['pages/espacios-gestion/crear'])
   }
+
+  nuevo(){
+    this.idoficina = 0
+  }
+
+  cambiarOficina(oficina: number){
+    
+    this.idoficina = oficina
+  }
+
 
 }
