@@ -35,7 +35,6 @@ import { FailureComponent } from '../components/failure/failure.component';
 const routes: Routes = [
   {
     path: '', component: MainComponent, children: [
-      { path: 'dashboard', component: DashboardComponent },
       { path: 'breadcrumbs', component: BreadcrumbsComponent },
       { path: 'buttons', component: ButtonsComponent },
       { path: 'cards', component: CardsComponent },
@@ -83,7 +82,8 @@ const routes: Routes = [
       { path: ':id/failure', component: FailureComponent },
       { path: 'espacios-gestion', loadChildren: () => import('../pages/pages-espacios/espacios-gestion/espacios-gestion.module').then(x => x.EspaciosGestionModule), canLoad: [AuthGuard] },
       { path: 'espacios-empleado', loadChildren: () => import('../pages/pages-espacios/espacios-empleado/espacios-empleado.module').then(x => x.EspaciosEmpleadoModule), canLoad: [AuthGuard] },
-      { path: 'reservas-empleado', loadChildren: () => import('../pages/pages-espacios/espacios-empleado/reservas-empleado/reservas-empleado.module').then(x => x.ReservasEmpleadoModule), canLoad: [AuthGuard] }
+      { path: 'reservas-empleado', loadChildren: () => import('../pages/pages-espacios/espacios-empleado/reservas-empleado/reservas-empleado.module').then(x => x.ReservasEmpleadoModule), canLoad: [AuthGuard] },
+      { path: 'dashboard', loadChildren: () => import('../pages/dashboard/dashboard.module').then(x => x.DashboardModule), canLoad: [AuthGuard] }
     ]
   }
 ];

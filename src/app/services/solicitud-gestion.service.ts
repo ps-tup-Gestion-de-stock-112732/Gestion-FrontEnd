@@ -49,12 +49,19 @@ export class SolicitudGestionService {
   }
 
 
-  obtenerSolicitudesfiltroXProveedor(nombre: string, idestado: number, idproveedor: number): Observable<any> {
+  obtenerSolicitudesfiltroXProveedor(nombre: string, idestado: number, idempresa: number, fecha: Date, idproveedor: number): Observable<any> {
     return this.http.post<any>(this.url + 'solicitud-gestion/proveedor/filtro', {
       'nombre': nombre,
       'estado': idestado,
+      'idempresa': idempresa,
+      'fecha': fecha,
       'idProveedor': idproveedor
     })
+  }
+
+
+  obtenerEmpresas(idproveedor: number): Observable<any> {
+    return this.http.get<any>(this.url + 'solicitud-gestion/proveedor/empresas/'+idproveedor)
   }
 
 

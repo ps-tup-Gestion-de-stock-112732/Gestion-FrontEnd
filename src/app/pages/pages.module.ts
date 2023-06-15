@@ -29,7 +29,6 @@ import { TooltipsComponent } from '../components/tooltips/tooltips.component';
 import { FooterComponent } from '../layouts/footer/footer.component';
 import { HeaderComponent } from '../layouts/header/header.component';
 import { SidebarComponent } from '../layouts/sidebar/sidebar.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesBlankComponent } from './pages-blank/pages-blank.component';
 import { PagesContactComponent } from './pages-contact/pages-contact.component';
 import { PagesFaqComponent } from './pages-faq/pages-faq.component';
@@ -45,7 +44,6 @@ import { FailureComponent } from '../components/failure/failure.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    DashboardComponent,
     BreadcrumbsComponent,
     ButtonsComponent,
     CardsComponent,

@@ -1,0 +1,24 @@
+<div class="row">
+   <div class="card top-selling overflow-auto">
+      <div class="card-body pb-0">
+         <h5 class="card-title">Productos bajos en stock </h5>
+         <table class="table table-borderless">
+            <thead>
+               <tr>
+                  <th scope="col">Imagen</th>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Cantidad</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let p of productos" >
+                  <th scope="row"><a href="#"><img src="{{p.imagen}}" alt=""></a></th>
+                  <td><a href="#" class="text-primary fw-bold">{{p.nombreProducto}}</a></td>
+                  <td class="fw-bold">{{p.cantidad}}</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+    

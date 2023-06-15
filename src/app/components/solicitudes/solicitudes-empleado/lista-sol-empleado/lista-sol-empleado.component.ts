@@ -104,6 +104,7 @@ export class ListaSolEmpleadoComponent implements OnInit, OnDestroy {
                         next:(estado) => {
 
                           solicitudGestion.solicitud.idautorizacion = solicitudes[i].idautorizacion
+                          solicitudGestion.solicitud.fecha = solicitudes[i].fecha
                           solicitudGestion.solicitud.estado = estado
 
                           this.solicitudes.push(solicitudGestion)
@@ -128,6 +129,12 @@ export class ListaSolEmpleadoComponent implements OnInit, OnDestroy {
     this.srvEstado.obtenerEstadosGestion().subscribe({
       next:(estados) => {
         this.estados = estados
+
+        this.estados.forEach(estado => {
+          if (estado.idestado == 3) {
+            estado.descripcion = 'Pendiente Proveedor'
+          }
+        });
 
         this.formularioBusqueda.controls['idestado'].valueChanges.subscribe({
           next:(idestado) =>{
@@ -163,6 +170,7 @@ export class ListaSolEmpleadoComponent implements OnInit, OnDestroy {
                                 next:(estado) => {
         
                                   solicitudGestion.solicitud.idautorizacion = solicitudes[i].idautorizacion
+                                  solicitudGestion.solicitud.fecha = solicitudes[i].fecha
                                   solicitudGestion.solicitud.estado = estado
         
                                   this.solicitudes.push(solicitudGestion)

@@ -7,5 +7,6 @@ export interface Oficina {
     cantidadfilas: number,
     cantidadcolumnas: number,
     idestado: number
-    empresa: Empresa
+    empresa: Empresa,
+    fechabaja: Date
 }

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Empresa, InfoEmpresa } from 'src/app/interfaces/empresa';
 import { Estado } from 'src/app/interfaces/estado';
 import { PedidoXDetalle } from 'src/app/interfaces/pedido';
 import { SolicitudGestion } from 'src/app/interfaces/solicitudGestion';
@@ -30,6 +31,7 @@ export class ListaPedidosProveedorComponent implements OnInit, OnDestroy {
   mensajeError: String = "";
 
   estados: Estado[] = []
+  empresas: InfoEmpresa[] = []
   solicitudes: SolicitudGestionXPedido[] = []
   usuario: Usuario = {} as Usuario
 
@@ -44,7 +46,9 @@ export class ListaPedidosProveedorComponent implements OnInit, OnDestroy {
   ) { 
     this.formularioBusqueda = this.fb.group({
       nombre: [""],
-      idestado: [""]
+      idestado: [""],
+      empresa: [""],
+      fecha: [""]
     })
   }
 
@@ -73,7 +77,6 @@ export class ListaPedidosProveedorComponent implements OnInit, OnDestroy {
   obtenerSolicitudes(){
 
     this.solicitudes = []
-    console.log(this.usuario);
     
     this.srvSolicitud.obtenerSolicitudesXProveedor(this.usuario.idempresa).subscribe({
       next:(solicitudes) => {
@@ -132,6 +135,23 @@ export class ListaPedidosProveedorComponent implements OnInit, OnDestroy {
       next:(estados: Estado[]) => {
         this.estados = estados
         this.estados = estados.filter(e => e.idestado == 3 || e.idestado == 6 || e.idestado == 7 || e.idestado == 8 )
+
+        this.estados.forEach(estado => {
+          if (estado.idestado == 3) {
+            estado.descripcion = 'Pendiente'
+          }
+
+          if (estado.idestado == 8) {
+            estado.descripcion = 'Rechazado'
+          }
+        });
+
+        this.srvSolicitud.obtenerEmpresas(this.usuario.idempresa).subscribe({
+          next:(empresas: InfoEmpresa[]) => {
+            this.empresas = empresas
+          },
+        })
+
       },
     })
   }
@@ -141,6 +161,8 @@ export class ListaPedidosProveedorComponent implements OnInit, OnDestroy {
     this.formularioBusqueda.setValue({
       nombre: "",
       idestado: "",
+      empresa: "",
+      fecha: ""
     })
   }
 
@@ -148,14 +170,15 @@ export class ListaPedidosProveedorComponent implements OnInit, OnDestroy {
 
     let empleado = this.formularioBusqueda.value.nombre
     let estado = this.formularioBusqueda.value.idestado
+    let empresa = this.formularioBusqueda.value.empresa
+    let fecha = this.formularioBusqueda.value.fecha
 
-    if (this.formularioBusqueda.invalid || (!empleado && !estado)) {
+    if (this.formularioBusqueda.invalid || (!empleado && !estado && !empresa && !fecha)) {
       this.obtenerSolicitudes()
     } else {
       this.suscripcion.add(
-        this.srvSolicitud.obtenerSolicitudesfiltroXProveedor(this.formularioBusqueda.value.nombre, this.formularioBusqueda.value.idestado, this.usuario.idempresa).subscribe({
+        this.srvSolicitud.obtenerSolicitudesfiltroXProveedor(empleado, estado, empresa, fecha,  this.usuario.idempresa).subscribe({
           next:(solicitudes) => {
-
             this.solicitudes = []
 
             for (let i = 0; i < solicitudes.length; i++) {
@@ -185,6 +208,7 @@ export class ListaPedidosProveedorComponent implements OnInit, OnDestroy {
                             next:(estado) => {
     
                               solicitudGestion.solicitud.idautorizacion = solicitudes[i].idautorizacion
+                              solicitudGestion.solicitud.fecha = solicitudes[i].fecha
                               solicitudGestion.solicitud.estado = estado
     
                               this.solicitudes.push(solicitudGestion)

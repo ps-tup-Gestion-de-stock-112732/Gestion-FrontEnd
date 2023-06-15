@@ -7,7 +7,7 @@
                 <div class="ms-auto">
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" *ngIf="espaciosReservados.length">
                 
                 <div class="row justify-content-center mt-2 mx-2">
                     
@@ -81,8 +81,21 @@
                 
 
             </div>
+
+            <div class="card-body" *ngIf="!espaciosReservados.length">
+                <div class="row justify-content-center my-5" *ngIf="!oficinas.length">
+
+                    <div class="text-center">
+                        <p class="text-muted">No existen reservas...</p>
+                    </div>
+    
+                </div>
+            </div>
+            
           </div>
        </div>
     </div>
+
+
 </section>
 
