@@ -172,47 +172,58 @@ export class ListaEspaciosEmpleadoComponent implements OnInit, OnDestroy {
 
   reservar(espacio: Espacio){
 
-    Swal.fire({
-      title: '¿Desea reservar este espacio?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#000',
-      confirmButtonText: 'Aceptar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        
-        this.subs.add(
-          this.srvEspacios.reservarEspacio(this.oficina.idoficina, this.usuario.idusuario, espacio.fila, espacio.columna, this.formulario.value.fecha).subscribe({
-            next:(espacio) => {
+    if (espacio.idestado == 1 || espacio.idestado == 2) {
 
-              Swal.fire({
-                title: 'Reserva creada con éxito',
-                icon: 'success',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#007bff'
-              }).then((result) => {
-                if (result.isConfirmed) {
-  
-                  let currentUrl = this.router.url;
-                  this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                    this.router.navigate([currentUrl]);
-                  });
+      Swal.fire({
+        title: 'Este espacio ya se encuentra reservado!',
+        icon: 'info',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#007bff'
+      })
       
-                }
-              })
-
-            },error: (err) => {
-              Swal.fire({
-                title: '¡No se pudo completar la reserva!',
-                icon: 'error'
-              })
-            }
-
-          })
-        )
-      }
-    })
+    }else{
+      Swal.fire({
+        title: '¿Desea reservar este espacio?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#000',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          
+          this.subs.add(
+            this.srvEspacios.reservarEspacio(this.oficina.idoficina, this.usuario.idusuario, espacio.fila, espacio.columna, this.formulario.value.fecha).subscribe({
+              next:(espacio) => {
+  
+                Swal.fire({
+                  title: 'Reserva creada con éxito',
+                  icon: 'success',
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: '#007bff'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+    
+                    let currentUrl = this.router.url;
+                    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                      this.router.navigate([currentUrl]);
+                    });
+        
+                  }
+                })
+  
+              },error: (err) => {
+                Swal.fire({
+                  title: '¡No se pudo completar la reserva!',
+                  icon: 'error'
+                })
+              }
+  
+            })
+          )
+        }
+      })
+    }
   }
 }

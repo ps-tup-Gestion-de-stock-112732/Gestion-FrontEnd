@@ -1,0 +1,38 @@
+<section class="section dashboard">
+    <div class="row justify-content-center">
+      <div class="card col-xxl-12">
+
+         <div class="card-body">
+
+            <div class="row my-5 justify-content-center" *ngIf="usuario.idempresa">
+
+               <div class="col-xl-8">
+
+                  <app-banners-gestion [usuario]="usuario"></app-banners-gestion>
+                  <div class="card">
+                    <div class="card-body">
+                       <div class="d-flex">
+                         <h5 class="card-title">Gastos <span>  (año {{formulario.value.year}})</span></h5>
+                         <form [formGroup]="formulario" class="ms-auto">
+                             <select class="form-control mt-3" formControlName="year">
+                                 <option *ngFor="let year of years" [value]="year.year" >{{year.year}}</option>
+                             </select>
+                         </form>
+                       </div>
+                       <canvas *ngIf="datasets.length" baseChart [data]="datos" [type]="'line'" [options]="opciones"></canvas>
+                    </div>
+                 </div>
+
+               </div>
+
+               <div class="col-xl-4">
+                    <app-espacios-gestion></app-espacios-gestion>
+               </div>
+
+            </div>
+
+         </div>
+
+      </div>
+    </div>
+ </section>

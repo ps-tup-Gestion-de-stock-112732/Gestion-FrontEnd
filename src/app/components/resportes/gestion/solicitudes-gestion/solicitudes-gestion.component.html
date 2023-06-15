@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="card-body" *ngIf="bandera">
+       <div class="d-flex">
+         <h5 class="card-title">Espacios <span>  (año {{formulario.value.year}})</span></h5>
+         <form [formGroup]="formulario" class="ms-auto">
+
+            <select class="form-control mt-2" formControlName="year">
+                <option *ngFor="let year of years" [value]="year.year" >{{year.year}}</option>
+            </select>
+            
+         </form>
+       </div>
+       <canvas baseChart [data]="datos" [type]="'doughnut'" [options]="opciones"></canvas>
+    </div>
+ </div>

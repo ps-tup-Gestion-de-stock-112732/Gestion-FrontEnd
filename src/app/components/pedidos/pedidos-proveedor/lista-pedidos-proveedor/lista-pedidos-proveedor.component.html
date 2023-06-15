@@ -8,19 +8,35 @@
             <div class="card-body mx-5 mt-3">
                 <form [formGroup]="formularioBusqueda" class="row justify-content-center py-4 mx-2">
 
-                    <div class="col-xl-4 pt-3">
+                    <div class="col-md-4 pt-3">
                         <div class="form-group mx-auto">
                             <label for="nombre" class="form-label">Empleado:</label>
                             <input type="search" class="form-control" placeholder="Buscar empleado..." formControlName="nombre">
                          </div>
                     </div>
 
-                    <div class="col-xl-4 pt-3">
+                    <div class="col-md-4 pt-3">
                         <div class="form-group mx-auto">
                             <label for="idestado" class="form-label">Estado:</label>
                             <select class="form-control" formControlName="idestado">
                                 <option *ngFor="let estado of estados" [value]="estado.idestado" >{{estado.descripcion}}</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 pt-3">
+                        <div class="form-group mx-auto">
+                            <label for="empresa" class="form-label">Empresa:</label>
+                            <select class="form-control" formControlName="empresa">
+                                <option *ngFor="let empresa of empresas" [value]="empresa.idempresa" >{{empresa.empresa}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 pt-3">
+                        <div class="form-group mx-auto">
+                            <label for="fecha" class="form-label">Seleccione una fecha:</label>
+                            <input type="date" class="form-control" formControlName="fecha">
                         </div>
                     </div>
 

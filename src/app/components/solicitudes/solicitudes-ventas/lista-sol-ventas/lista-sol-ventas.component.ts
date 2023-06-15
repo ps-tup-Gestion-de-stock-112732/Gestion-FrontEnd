@@ -105,6 +105,7 @@ export class ListaSolVentasComponent implements OnInit, OnDestroy {
                         next:(estado) => {
 
                           solicitudGestion.solicitud.idautorizacion = solicitudes[i].idautorizacion
+                          solicitudGestion.solicitud.fecha = solicitudes[i].fecha
                           solicitudGestion.solicitud.estado = estado
 
                           this.solicitudes.push(solicitudGestion)
@@ -129,6 +130,12 @@ export class ListaSolVentasComponent implements OnInit, OnDestroy {
     this.srvEstado.obtenerEstadosGestion().subscribe({
       next:(estados) => {
         this.estados = estados
+
+        this.estados.forEach(estado => {
+          if (estado.idestado == 3) {
+            estado.descripcion = 'Pendiente Proveedor'
+          }
+        });
       },
     })
   }
@@ -182,6 +189,7 @@ export class ListaSolVentasComponent implements OnInit, OnDestroy {
                             next:(estado) => {
     
                               solicitudGestion.solicitud.idautorizacion = solicitudes[i].idautorizacion
+                              solicitudGestion.solicitud.fecha = solicitudes[i].fecha
                               solicitudGestion.solicitud.estado = estado
     
                               this.solicitudes.push(solicitudGestion)

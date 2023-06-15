@@ -47,6 +47,7 @@
                                     <th class="center">Producto</th>
                                     <th class="center">Cantidad</th>
                                     <th class="center">Proveedor</th>
+                                    <th class="text-center">Fecha</th>
                                     <th class="center">Estado</th>
                                 </tr>
                             </thead>
@@ -57,6 +58,7 @@
                                     <td class="center">{{s.pedido.producto.nombreProducto | recortarStrings}}</td>
                                     <td class="center">{{s.pedido.producto.cantidad}}</td>
                                     <td class="center">{{s.pedido.datosProveedor.nombre}}</td>
+                                    <td class="text-center align-middle">{{s.solicitud.fecha | date:'d/M/yy HH:mm:ss'}}</td>
                                     <td class="center"><span class="text-white badge" [ngClass]="{
                                         'bg-warning':s.solicitud.estado.idestado == 1 || s.solicitud.estado.idestado == 2 || s.solicitud.estado.idestado == 3,
                                         'bg-success':s.solicitud.estado.idestado == 7,

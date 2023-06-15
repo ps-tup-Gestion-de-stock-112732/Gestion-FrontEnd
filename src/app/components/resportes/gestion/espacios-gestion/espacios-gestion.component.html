@@ -1,0 +1,29 @@
+<div class="row justify-content-center">
+    <div class="col-sm-6 col-xl-12" *ngIf="usuario.idrol == 2">
+        <div class="card">
+            <div class="card-body" *ngIf="bandera">
+               <div class="d-flex">
+                 <h5 class="card-title">Espacios <span>  (al {{formulario.value.month}}/{{formulario.value.year}})</span></h5>
+                 <form [formGroup]="formulario" class="ms-auto">
+    
+                    <select class="form-control mt-2" formControlName="year">
+                        <option *ngFor="let year of years" [value]="year.year" >{{year.year}}</option>
+                    </select>
+                    <select class="form-control mt-2" formControlName="month">
+                        <option *ngFor="let month of months" [value]="month.month" >{{month.month}}</option>
+                    </select>
+                    
+                 </form>
+               </div>
+               <canvas baseChart [data]="datos" [type]="'doughnut'" [options]="opciones"></canvas>
+            </div>
+         </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-12">
+
+        <app-solicitudes-gestion></app-solicitudes-gestion>
+        
+    </div>
+    
+</div>

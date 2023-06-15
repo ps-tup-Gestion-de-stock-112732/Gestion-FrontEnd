@@ -10,10 +10,6 @@ export class NombreEstadosEmpleadoPipe implements PipeTransform {
       return 'Pendiente Proveedor'
     }
 
-    if (value == 'Rechazado Proveedor') {
-      return 'Rechazado'
-    }
-
     return value;
   }
 
